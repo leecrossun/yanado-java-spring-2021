@@ -1,0 +1,35 @@
+package controller.user;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import persistence.dao.UserDAO;
+import service.dto.UserDTO;
+
+// �ش� ȸ�� ���̵�� ���� �����ͼ� ������������ �̵�
+@WebServlet("/user/mypage")
+public class MypageController extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
+       
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
+		HttpSession session = request.getSession();
+		String userId = (String) session.getAttribute("userIid");
+		
+		UserDTO dto = UserDAO.getInstance().getUserByUserId(userId);
+		
+		request.setAttribute("dto", dto);
+		
+		RequestDispatcher disp = request.getRequestDispatcher("/user/user_mypage.jsp");
+		disp.forward(request, response);
+	}
+}
