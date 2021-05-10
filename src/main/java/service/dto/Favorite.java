@@ -1,4 +1,4 @@
-package dto;
+package service.dto;
 
 import javax.validation.constraints.NotNull;
 

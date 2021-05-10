@@ -1,10 +1,10 @@
-package dao;
+package persistence.dao;
 
 import java.util.List;
 
-import dto.Favorite;
-import dto.Product;
-import dto.User;
+import service.dto.Favorite;
+import service.dto.Product;
+import service.dto.User;
 
 public interface FavoriteDao {
 

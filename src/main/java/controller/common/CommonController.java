@@ -1,4 +1,4 @@
-package controller;
+package controller.common;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import dao.CommonDao;
-import dto.Common;
+import persistence.dao.CommonDao;
+import service.dto.Common;
 
 @RequestMapping("/common/*")
 @Controller

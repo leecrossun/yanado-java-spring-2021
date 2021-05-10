@@ -1,8 +1,9 @@
-package dao;
+package persistence.dao;
 
 import java.util.List;
 
-import dto.Alarm;
+import service.dto.Alarm;
+
 
 public interface AlarmDao {
 

@@ -1,9 +1,10 @@
-package dao;
+package persistence.dao;
 
 import java.util.List;
 
-import dto.Common;
-import dto.CommonJoin;
+import service.dto.Common;
+import service.dto.CommonJoin;
+
 
 public interface CommonDao {
 

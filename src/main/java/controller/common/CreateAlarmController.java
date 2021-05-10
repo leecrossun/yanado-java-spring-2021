@@ -1,4 +1,4 @@
-package controller;
+package controller.common;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import dao.AlarmDao;
-import dto.Alarm;
+import persistence.dao.AlarmDao;
+import service.dto.Alarm;
 
 @Controller
 @SessionAttributes("alarm")

@@ -1,4 +1,4 @@
-package controller;
+package controller.common;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import dao.CommonDao;
-import dto.Common;
-import dto.CommonJoin;
+import persistence.dao.CommonDao;
+import service.dto.Common;
+import service.dto.CommonJoin;
 
 @Controller
 @SessionAttributes("common")

@@ -1,6 +1,6 @@
-package dto;
+package service.dto;
 
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 
 public class CommonJoin {
 	@NotNull

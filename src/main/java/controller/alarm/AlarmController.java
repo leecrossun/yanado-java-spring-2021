@@ -1,4 +1,4 @@
-package controller;
+package controller.alarm;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import dao.AlarmDao;
-import dto.Alarm;
+import persistence.dao.AlarmDao;
+import service.dto.Alarm;
 
 @RequestMapping("/alarm/*")
 @Controller

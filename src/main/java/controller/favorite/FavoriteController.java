@@ -1,4 +1,4 @@
-package controller;
+package controller.favorite;
 
 import java.util.List;
 
@@ -7,8 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import dao.FavoriteDao;
-import dto.Favorite;
+import persistence.dao.FavoriteDao;
+import service.dto.Favorite;
+
 
 @Controller
 @RequestMapping("/favorite")

@@ -1,4 +1,4 @@
-package dto;
+package service.dto;
 public class Product {
 	String productId;
 
