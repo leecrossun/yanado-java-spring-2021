@@ -15,7 +15,9 @@ public class LoginToMainController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		
 		RequestDispatcher disp = request.getRequestDispatcher("/main/mainPage.jsp");
 		disp.forward(request, response);
 	}

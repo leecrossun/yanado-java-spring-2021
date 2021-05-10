@@ -19,7 +19,9 @@ public class UserUpdateController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		
 		request.setCharacterEncoding("utf-8");
 		
 		String updateCode = request.getParameter("updateCode");
@@ -45,7 +47,7 @@ public class UserUpdateController extends HttpServlet {
 			String userMembership = request.getParameter("userMembership");
 			
 			UserDTO dto = new UserDTO(userId, userMembership);
-			int resultCode = UserDAO.getInstance().updateManager(dto);	// 1�̸� ����, 0�̸� ����
+			int resultCode = UserDAO.getInstance().updateManager(dto);	// 1이면 성공, 0이면 실패
 			System.out.println("resultCode: " + resultCode);
 			
 			//json 반환
