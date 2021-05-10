@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
 			HttpSession session = request.getSession();
 
 			session.setAttribute(UserSessionUtils.USER_SESSION_KEY, userId);
-// ����� �߰���
+// 멤버십 추가됨
 			session.setAttribute("membership", dto.getUserMembership());
 		}
 

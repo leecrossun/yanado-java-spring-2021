@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import persistence.dao.UserDAO;
 import service.dto.UserDTO;
 
-// �ش� ȸ�� ���̵�� ���� �����ͼ� ������������ �̵�
+// 해당 회원 아이디로 정보 가져와서 마이페이지로 이동
 @WebServlet("/user/mypage")
 public class MypageController extends HttpServlet {
 	
