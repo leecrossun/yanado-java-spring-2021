@@ -131,4 +131,5 @@ public class UserDTO {
 	public void setUserMembership(String userMembership) {
 		this.userMembership = userMembership;
 	}
+	
 }

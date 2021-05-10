@@ -17,7 +17,8 @@ public class LoginController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
 
@@ -26,8 +27,8 @@ public class LoginController extends HttpServlet {
 
 		UserDTO dto = UserDAO.getInstance().getUserByUserId(userId);
 		
-		String param = ""; // param�� ��
-		String resultStr = ""; // ���۵� json ���ڿ�
+		String param = ""; // param의 값
+		String resultStr = ""; // 전송될 json 문자열
 		
 
 		if (dto == null || dto.getUserId().equals(userId) == false) {
@@ -43,7 +44,8 @@ public class LoginController extends HttpServlet {
 			HttpSession session = request.getSession();
 
 			session.setAttribute(UserSessionUtils.USER_SESSION_KEY, userId);
-// 멤버십 추가됨
+			
+			// 멤버십 추가됨
 			session.setAttribute("membership", dto.getUserMembership());
 		}
 
