@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import persistence.dao.UserDAO;
 
-// ȸ�� ���� �۾�
+//회원 삭제 작업
 @WebServlet("/user/delete")
 public class UserDeleteController extends HttpServlet {
 	
@@ -23,7 +23,7 @@ public class UserDeleteController extends HttpServlet {
 		int deleteCode = UserDAO.getInstance().deleteUser(userId);	// 1�̸� ����, 0�̸� ����
 		System.out.println("deleteCode: " + deleteCode);
 
-		//json ��ȯ
+		//json 반환
 		String result = String.format("[{'res' : '%d'}, {'id' : '%s'}]", deleteCode, userId);
 		response.getWriter().println(result);
 	}

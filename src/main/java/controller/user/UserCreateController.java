@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-// ȸ�� �߰� �۾� - �Ķ���� �޾Ƽ� ȸ�� ����Ʈ�� �ѱ�
+//회원 추가 작업 - 파라미터 받아서 회원 리스트로 넘김
 @WebServlet("/user/insert")
 public class UserCreateController extends HttpServlet {
 	

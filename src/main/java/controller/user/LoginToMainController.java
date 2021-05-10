@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-// �α��� ���� �� ���� �������� �̵�
+//로그인 성공 후 메인 페이지로 이동
 @WebServlet("/user/login/result")	
 public class LoginToMainController extends HttpServlet {
 	

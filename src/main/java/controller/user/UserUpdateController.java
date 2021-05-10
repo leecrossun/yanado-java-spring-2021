@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import persistence.dao.UserDAO;
 import service.dto.UserDTO;
 
-// ȸ�� ���� ������Ʈ
+//회원 정보 업데이트
 @WebServlet("/user/update")
 public class UserUpdateController extends HttpServlet {
 	
@@ -25,7 +25,7 @@ public class UserUpdateController extends HttpServlet {
 		String updateCode = request.getParameter("updateCode");
 		System.out.println("updateCode : " + updateCode);
 		
-		// ����ȸ���� ȸ������ ������ ���
+		// 개인회원이 회원정보 수정할 경우
 		if (updateCode.equals("individual")) {
 			String userId = request.getParameter("userId");
 			String userNewPassword = request.getParameter("userNewPassword");
@@ -39,7 +39,7 @@ public class UserUpdateController extends HttpServlet {
 			disp.forward(request, response);
 		}
 		
-		// �����ڰ� ȸ����Ͽ��� ��� ������ ���
+		// 관리자가 회원목록에서 등급 수정할 경우
 		else if (updateCode.equals("manager")) { 
 			String userId = request.getParameter("userId");
 			String userMembership = request.getParameter("userMembership");
@@ -48,7 +48,7 @@ public class UserUpdateController extends HttpServlet {
 			int resultCode = UserDAO.getInstance().updateManager(dto);	// 1�̸� ����, 0�̸� ����
 			System.out.println("resultCode: " + resultCode);
 			
-			//json ��ȯ
+			//json 반환
 			String result = String.format("[{'res' : '%d'}, {'id' : '%s'}]", resultCode, userId);
 			response.getWriter().println(result);
 		}
