@@ -89,11 +89,11 @@ public class Common {
 		this.userId = userId;
 	}
 
-	public String getProduct() {
+	public String getProductId() {
 		return productId;
 	}
 
-	public void setProduct(String productId) {
+	public void setProductId(String productId) {
 		this.productId = productId;
 	}
 
