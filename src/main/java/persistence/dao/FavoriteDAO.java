@@ -6,7 +6,7 @@ import service.dto.Favorite;
 import service.dto.Product;
 import service.dto.UserDTO;
 
-public interface FavoriteDao {
+public interface FavoriteDAO {
 
 	void createFavorite(Favorite favorite);
 
