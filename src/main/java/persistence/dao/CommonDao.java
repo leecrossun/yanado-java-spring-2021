@@ -5,22 +5,21 @@ import java.util.List;
 import service.dto.Common;
 import service.dto.CommonJoin;
 
-
 public interface CommonDao {
 
 	// Common CRUD
 
-	public void createCommon(Common common);
+	public String createCommon(Common common);
 
-	public void updateCommon(Common common);
+	public int updateCommon(Common common);
 
-	public void deleteCommonByCommonId(String commonId);
+	public int deleteCommonByCommonId(String commonId);
 
 	// List<Common> findAllCommon() {}
 
-	public List<Common> findAllCommon(int page, int size);
+	public List<Common> findAllCommon(int start, int end);
 
-	public List<Common> findCommonBySearch(String condition, String search, int page, int size);
+	public List<Common> findCommonBySearch(String condition, String search, int start, int end);
 
 	public Common findCommonByCommonId(String commonId);
 
@@ -28,11 +27,11 @@ public interface CommonDao {
 	
 	
 	// CommonJoin
-	public void updateCommonStatus(String commonId, int status);
+	public int updateCommonStatus(String commonId, int status);
 
-	public Common joinCommon(CommonJoin commonJoin);
+	public String joinCommon(CommonJoin commonJoin);
 
-	public void cancelCommon(String commonId, String userId);
+	public int cancelCommon(String commonId, String userId);
 
 	public List<CommonJoin> findAllCommonJoinByCommonId(String commonId);
 
