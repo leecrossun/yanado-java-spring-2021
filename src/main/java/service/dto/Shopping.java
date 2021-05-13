@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Shopping {
 	String shoppingId;
-	String productId;
+	Product product;
 	String detailCategory;
 	String status;
 	Date published;
@@ -15,10 +15,10 @@ public class Shopping {
 		super();
 	}
 
-	public Shopping(String shoppingId, String productId, String detailCategory, String status, Date published) {
+	public Shopping(String shoppingId, Product product, String detailCategory, String status, Date published) {
 		super();
 		this.shoppingId = shoppingId;
-		this.productId = productId;
+		this.product = product;
 		this.detailCategory = detailCategory;
 		this.status = status;
 		this.published = published;
@@ -28,8 +28,8 @@ public class Shopping {
 	public String getShoppingId() {
 		return shoppingId;
 	}
-	public String getProductId() {
-		return productId;
+	public Product getProduct() {
+		return product;
 	}
 	public String getDetailCategory() {
 		return detailCategory;
@@ -43,8 +43,8 @@ public class Shopping {
 	public void setShoppingId(String shoppingId) {
 		this.shoppingId = shoppingId;
 	}
-	public void setProductId(String productId) {
-		this.productId = productId;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 	public void setDetailCategory(String detailCategory) {
 		this.detailCategory = detailCategory;
