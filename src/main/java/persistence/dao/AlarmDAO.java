@@ -5,7 +5,7 @@ import java.util.List;
 import service.dto.Alarm;
 
 
-public interface AlarmDao {
+public interface AlarmDAO {
 
 	// Alarm CRUD
 	void createAlarm(Alarm alarm);

@@ -8,45 +8,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import persistence.dao.AlarmDao;
+import persistence.dao.AlarmDAO;
 import service.dto.Alarm;
 
-@RequestMapping("/alarm/*")
 @Controller
-public class AlarmController {
+public class GetAlarmListController {
 	@Autowired
-	private AlarmDao alarmDao;
+	private AlarmDAO alarmDao;
 
-	// 알람 리스트
-	@RequestMapping("common/list")
+	// common에서 알람 리스트
+	@RequestMapping("/common/alarm")
 	public ModelAndView getCommonList(@RequestParam String commonId) {
 		List<Alarm> alarmList = alarmDao.findAlarmByCommonId(commonId);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("common/alarmList");
+		mav.setViewName("/common/alarm/list");
 		mav.addObject("alarmList", alarmList);
 
 		return mav;
 	}
 
-	// 알람 리스트
-	@RequestMapping("auction/list")
+	// auction에서 알람 리스트
+	@RequestMapping("/auction/alarm")
 	public ModelAndView getAuctionList(@RequestParam String autionId) {
 		List<Alarm> alarmList = alarmDao.findAlarmByCommonId(autionId);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("auction/alarmList");
+		mav.setViewName("/auction/alarm/list");
 		mav.addObject("alarmList", alarmList);
 
 		return mav;
 	}
 
-	// 알람상세보기
-	@RequestMapping("read")
-	public ModelAndView read(@RequestParam String alarmId) {
-		Alarm alarm = alarmDao.findAlarmByAlarmId(alarmId);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("readAlarm");
-		mav.addObject("alarm", alarm);
-
-		return mav;
-	}
 }

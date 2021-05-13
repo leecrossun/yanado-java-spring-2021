@@ -1,4 +1,4 @@
-package controller.common;
+package controller.alarm;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -12,15 +12,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import persistence.dao.AlarmDao;
+import persistence.dao.AlarmDAO;
 import service.dto.Alarm;
+
 
 @Controller
 @SessionAttributes("alarm")
 @RequestMapping("alarm/create")
 public class CreateAlarmController {
 	@Autowired
-	private AlarmDao alarmDao;
+	private AlarmDAO alarmDao;
 	
 	// 알람 생성 폼으로 가기
 	@ModelAttribute("alarm")

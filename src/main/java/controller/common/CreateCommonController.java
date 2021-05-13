@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import persistence.dao.CommonDao;
+import persistence.dao.CommonDAO;
+import persistence.dao.ProductDAO;
 import service.dto.Common;
 
 
@@ -22,7 +23,10 @@ import service.dto.Common;
 public class CreateCommonController {
 	
 	@Autowired
-	private CommonDao commonDao;
+	private CommonDAO commonDao;
+	
+	@Autowired
+	private ProductDAO proudcutDAO;
 	
 	// 공동구매 생성 폼으로 가기
 	@ModelAttribute("common")

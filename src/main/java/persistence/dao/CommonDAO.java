@@ -5,7 +5,10 @@ import java.util.List;
 import service.dto.Common;
 import service.dto.CommonJoin;
 
-public interface CommonDao {
+
+public interface CommonDAO {
+	
+	public int getCount();
 
 	// Common CRUD
 
