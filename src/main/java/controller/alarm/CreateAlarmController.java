@@ -45,7 +45,7 @@ public class CreateAlarmController {
 		}
 
 		status.setComplete();
-		alarmDao.createAlarm(newalarm);
+		alarmDao.insertAlarm(newalarm);
 		return "alarm/list";
 	}
 }

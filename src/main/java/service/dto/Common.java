@@ -8,8 +8,10 @@ import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.validator.constraints.Range;
 
-public class Common {
+import lombok.Getter;
 
+@Getter
+public class Common {
 	String commonId;
 
 	@NotNull
@@ -21,8 +23,8 @@ public class Common {
 	int participants;
 	@Positive
 	int min;
-	
-	@Range(min= 0, max=5)
+
+	@Range(min = 0, max = 5)
 	int status; // 0 : 진행 전, 1 : 진행, 2 : 정원 미달, 3 : 최소인원 넘음, 4 : 파기, 5: 성공 (및 종료)
 
 	Date regDate;

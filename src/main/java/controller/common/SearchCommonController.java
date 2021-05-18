@@ -10,21 +10,28 @@ import org.springframework.web.servlet.ModelAndView;
 
 import persistence.dao.CommonDAO;
 import service.dto.Common;
+import service.dto.Criteria;
+import service.dto.Search;
 
 @Controller
 @RequestMapping("/common/search")
 public class SearchCommonController {
-	@Autowired	
+	@Autowired
 	private CommonDAO commonDao;
-	
+
 	// 공동구매 찾기
 	public ModelAndView searchList(@RequestParam int page, @RequestParam String condition,
 			@RequestParam String searchKey) {
-		List<Common> commonList = commonDao.findCommonBySearch(condition, searchKey, page, 10);
+		
+		int totalcount = commonDao.getCount();
+		Criteria c = new Criteria(page, totalcount);
+		Search search = new Search(condition, searchKey, c.getStartIndex(), c.getEndIndex());
+
+		List<Common> commonList = commonDao.findCommonBySearch(search);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/list");
 		mav.addObject("commonList", commonList);
+		
 		return mav;
 	}
-
 }

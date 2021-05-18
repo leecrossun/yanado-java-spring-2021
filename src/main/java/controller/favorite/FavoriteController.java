@@ -22,7 +22,7 @@ public class FavoriteController {
 	public String add(@RequestParam String productId) {
 		String userId = null;
 		Favorite favorite = new Favorite(userId, productId);
-		favoriteDao.createFavorite(favorite);
+		favoriteDao.insertFavorite(favorite);
 		return null;
 	}
 	
