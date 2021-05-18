@@ -51,7 +51,7 @@ public class CreateCommonController {
 		}
 
 		status.setComplete();
-		commonDao.createCommon(newCommon);
+		commonDao.insertCommon(newCommon);
 		return "common/list";
 	}
 

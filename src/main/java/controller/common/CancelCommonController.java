@@ -8,13 +8,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import persistence.dao.CommonDAO;
 import service.dto.Common;
+import service.dto.CommonJoin;
+import persistence.dao.CommonDAO;
 
 
 @RequestMapping("/common/cancel")
 @Controller
 public class CancelCommonController {
+	
 	@Autowired
 	private CommonDAO commonDao;
 	
@@ -24,12 +26,13 @@ public class CancelCommonController {
 		String commonId = common.getCommonId();
 		String userId = null;
 		
-		common.setParticipants(common.getParticipants()-1);
-		commonDao.updateCommon(common);
-		commonDao.cancelCommon(commonId, userId);
+		//common.setParticipants(common.getParticipants()-1);
+		commonDao.decreaseJoin(commonId);
+		CommonJoin join = new CommonJoin(common.getCommonId(), userId, 0);
+		commonDao.cancelCommon(join);
 		
 		if(common.getMin() < common.getParticipants() - 1) {
-			commonDao.updateCommonStatus(commonId, 2);
+			commonDao.changeStatus(commonId, 2);
 		}
 		
 		ModelAndView mav = new ModelAndView();

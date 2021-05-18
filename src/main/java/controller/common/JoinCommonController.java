@@ -24,13 +24,13 @@ public class JoinCommonController {
 		String commonId = common.getCommonId();
 		String userId = null;
 		
-		common.setParticipants(common.getParticipants()+1);
-		commonDao.updateCommon(common);
+		//common.setParticipants(common.getParticipants()+1);
+		commonDao.increaseJoin(commonId);
 		CommonJoin join = new CommonJoin(commonId, userId, 0);
 		commonDao.joinCommon(join);
 		
 		if(common.getMin() <= common.getParticipants() + 1) {
-			commonDao.updateCommonStatus(commonId, 3);
+			commonDao.changeStatus(commonId, 3);
 		}
 		
 		ModelAndView mav = new ModelAndView();
