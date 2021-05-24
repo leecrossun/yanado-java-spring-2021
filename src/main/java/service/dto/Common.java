@@ -10,12 +10,8 @@ import org.hibernate.validator.constraints.Range;
 
 import lombok.Getter;
 
-@Getter
 public class Common {
 	String commonId;
-
-	@NotNull
-	String userId; // 게시자
 
 	@NotNull
 	String productId;
@@ -39,10 +35,9 @@ public class Common {
 	public Common() {
 	}
 
-	public Common(String commonId, String userId, String productId, int participants, int min, int status, Date regDate,
+	public Common(String commonId, String productId, int participants, int min, int status, Date regDate,
 			Date startDate, Date endDate, Date deadline) {
 		this.commonId = commonId;
-		this.userId = userId;
 		this.productId = productId;
 		this.participants = participants;
 		this.min = min;
@@ -53,9 +48,8 @@ public class Common {
 		this.deadline = deadline;
 	}
 
-	public Common(String userId, String productId, int participants, int min, int status, Date regDate, Date startDate,
+	public Common(String productId, int participants, int min, int status, Date regDate, Date startDate,
 			Date endDate, Date deadline) {
-		this.userId = userId;
 		this.productId = productId;
 		this.participants = participants;
 		this.min = min;
@@ -81,14 +75,6 @@ public class Common {
 
 	public void setCommonId(String commonId) {
 		this.commonId = commonId;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 
 	public String getProductId() {

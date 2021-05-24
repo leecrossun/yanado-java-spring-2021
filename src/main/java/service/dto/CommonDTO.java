@@ -7,21 +7,30 @@ public class CommonDTO {
 
 	@NotNull
 	Common common;
-	
+
+	String userId;
+
 	@NotNull
 	Product product;
-	
+
 	List<CommonJoin> joinList;
 
 	public CommonDTO() {
 	}
-	
-	public CommonDTO(Common common, Product product) {
+
+	public CommonDTO(Common common, String userId, Product product) {
+		this.userId = userId;
 		this.common = common;
 		this.product = product;
 	}
-	
-	
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
 	public Common getCommon() {
 		return common;
@@ -46,6 +55,5 @@ public class CommonDTO {
 	public void setJoinList(List<CommonJoin> joinList) {
 		this.joinList = joinList;
 	};
-	
-	
+
 }
