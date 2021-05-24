@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import controller.user.UserSessionUtils;
 import persistence.dao.CommonDAO;
 import service.dto.Common;
 import service.dto.CommonJoin;
@@ -22,7 +22,8 @@ public class JoinCommonController {
 	public ModelAndView join(HttpServletRequest request, @ModelAttribute("common") Common common)
 			throws Exception {
 		String commonId = common.getCommonId();
-		String userId = null;
+		UserSessionUtils uSession = new UserSessionUtils();
+		String userId = uSession.getLoginUserId(request.getSession());
 		
 		//common.setParticipants(common.getParticipants()+1);
 		commonDao.increaseJoin(commonId);

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import controller.user.UserSessionUtils;
 import service.dto.Common;
 import service.dto.CommonJoin;
 import persistence.dao.CommonDAO;
@@ -24,7 +25,8 @@ public class CancelCommonController {
 	public ModelAndView cancel(HttpServletRequest request, @ModelAttribute("common") Common common)
 			throws Exception {
 		String commonId = common.getCommonId();
-		String userId = null;
+		UserSessionUtils uSession = new UserSessionUtils();
+		String userId = uSession.getLoginUserId(request.getSession());
 		
 		//common.setParticipants(common.getParticipants()-1);
 		commonDao.decreaseJoin(commonId);
