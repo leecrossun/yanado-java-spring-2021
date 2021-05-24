@@ -4,7 +4,6 @@
 
 	<sql id="commonColumns">
 		commonId,
-		userId,
 		productId,
 		participants,
 		min,
