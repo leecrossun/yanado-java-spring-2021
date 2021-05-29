@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Common</title>
@@ -51,7 +51,7 @@
 <body class="animsition">
 
 	<!-- Header -->
-	<header class="header-v4">
+	<header th:fragment="fragment-header" class="header-v4">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<div class="wrap-menu-desktop how-shadow1">
