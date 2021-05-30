@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mapper namsepace="persistence.dao.FavoriteDAO">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanado.dao.FavoritDAO">
 	<!-- favorite table -->
 
 	<sql id="favoriteColumns">
@@ -8,23 +9,23 @@
 	</sql>
 
 	<!-- favorite 생성 -->
-	<insert id="insertFavorite" parmeterType="service.dto.Favorite">
+	<insert id="insertFavorite" parameterType="com.yanado.dto.Favorite">
 		INSERT INTO favorite(
 		<include refid="favoriteColumns" />
 		) VALUES ( #{userId}, #{productId} )
 	</insert>
 	
-	<delete id="deleteFavorite" parmeterType="service.dto.Favorite">
+	<delete id="deleteFavorite" parameterType="com.yanado.dto.Favorite">
 		delete from favorite where userId = #{userId} and productId = #{productId}
 	</delete>
 	
 	<!-- 유저가 누른 좋아요 목록  -->
-	<select id="findUserIdListByFavorite" parmeterType="service.dto.Favorite" resultType="service.dto.Favorite" >
+	<select id="findUserIdListByFavorite" parameterType="com.yanado.dto.Favorite" resultType="com.yanado.dto.Favorite" >
 		select * from favorite where userId = #{userId]
 	</select>
 
 	<!-- 해당 유저와 비슷한 유저 찾기 -->	
-	<select id="findSimilarListByUser" parmeterType="service.dto.UserDTO" resultType="service.dto.UserDTO" >
+	<select id="findSimilarListByUser" parameterType="com.yanado.dto.UserDTO" resultType="com.yanado.dto.UserDTO" >
 		select * from user where gender = #{gender} and 
 	</select>
 	
