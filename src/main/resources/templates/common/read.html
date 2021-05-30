@@ -49,7 +49,7 @@
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
-<div th:replace="/menu :: header"></div>
+	<div th:replace="/menu :: header"></div>
 	<!-- Product Detail -->
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
@@ -61,8 +61,7 @@
 
 								<div class="item-slick3">
 									<div class="wrap-pic-w pos-relative">
-										<img src="../../static/images/test.png"
-											alt="IMG-PRODUCT">
+										<img src="../../static/images/test.png" alt="IMG-PRODUCT">
 									</div>
 								</div>
 							</div>
@@ -78,7 +77,7 @@
 						<span class="mtext-106 cl2" th:text="${common.product.price}">
 						</span>
 
-						<p class="stext-102 cl3 p-t-23">D -</p>
+						<p class="stext-102 cl3 p-t-23" id="dday">D -</p>
 						<!--  -->
 						<div class="p-t-33">
 							<div class="flex-w flex-r-m p-b-10">
@@ -88,10 +87,9 @@
 									<div class="rs1-select2 bor8 bg0">
 										<p style="margin: 1em;" align='center'
 											th:switch="${common.common.status}">
-											 <span th:case="1">Before</span>
-											<span th:case="2">Under</span>
+											<span th:case="1">Before</span> <span th:case="2">Under</span>
 											<span th:case="3">Over</span>
-											</p>
+										</p>
 									</div>
 								</div>
 							</div>
@@ -123,7 +121,8 @@
 							</div>
 
 							<div class="flex-w flex-r-m p-b-10"
-								style='padding-left: 20%; margin-top: 3%'>
+								style='padding-left: 20%; margin-top: 3%'
+								th:if="${common.common.status} != 1">
 								<div class="size-204 flex-w flex-m respon6-next">
 									<div class="wrap-num-product flex-w m-r-20 m-tb-10"
 										style="display: none"></div>
@@ -167,13 +166,17 @@
 			<div>
 				<div class="flex-w flex-c-m m-tb-10">
 					<!-- th:if="${common.common.userId} == ${session.userId}" -->
-					<button class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
+					<button
+						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
 						style="margin: 3%">
-						<a style="color:black;" th:href='@{/common/update(commonId=${common.common.commonId})}'>수정</a>
+						<a style="color: black;"
+							th:href='@{/common/update(commonId=${common.common.commonId})}'>수정</a>
 					</button>
-					<button class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
+					<button
+						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
 						style="margin: 3%">
-						<a style="color:black;" th:href='@{/common/delete(commonId=${common.common.commonId})}'>삭제</a>
+						<a style="color: black;"
+							th:href='@{/common/delete(commonId=${common.common.commonId})}'>삭제</a>
 					</button>
 				</div>
 			</div>
@@ -332,6 +335,5 @@
 	</script>
 	<!--===============================================================================================-->
 	<script src="../../static/js/main.js"></script>
-
 </body>
 </html>
