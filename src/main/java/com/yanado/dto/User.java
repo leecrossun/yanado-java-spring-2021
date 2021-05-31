@@ -1,6 +1,6 @@
 package com.yanado.dto;
 
-public class UserDTO {
+public class User {
 
 	private String userId;		//아이디
 	private String password;	// 비밀번호
@@ -16,19 +16,19 @@ public class UserDTO {
 	private String userMembership;
 	private String inputStr;
 
-	public UserDTO() {
+	public User() {
 		super();
 	}
 	
 	// 회원등급 변경 시 사용
-		public UserDTO(String userId, String inputStr) {
+		public User(String userId, String inputStr) {
 			super();
 			this.userId = userId;
 			this.inputStr = inputStr;
 		}
 		
 	// 마이페이지에서 정보 수정 시 사용
-	public UserDTO(String userId, String password, String phoneNumber, String email) {
+	public User(String userId, String password, String phoneNumber, String email) {
 		super();
 		
 		this.userId = userId;
@@ -38,7 +38,7 @@ public class UserDTO {
 	}
 	
 	// 회원 가입 시 사용
-	public UserDTO(String userId, String password, String userName, 
+	public User(String userId, String password, String userName, 
 			String gender, String birth, String address, String phoneNumber, String email) {
 		super();
 		

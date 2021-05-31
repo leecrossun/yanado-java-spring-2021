@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.yanado.dao.UserDAO;
-import com.yanado.dto.UserDTO;
+import com.yanado.dto.User;
 
 //회원 정보 업데이트
 @WebServlet("/user/update")
@@ -34,7 +34,7 @@ public class UserUpdateController extends HttpServlet {
 			String phoneNumber = request.getParameter("phoneNumber");
 			String email = request.getParameter("email");
 			
-			UserDTO dto = new UserDTO(userId, userNewPassword, phoneNumber, email);
+			User dto = new User(userId, userNewPassword, phoneNumber, email);
 			UserDAO.getInstance().updateUser(dto);
 			
 			RequestDispatcher disp = request.getRequestDispatcher("/main/mainPage.jsp");
@@ -46,7 +46,7 @@ public class UserUpdateController extends HttpServlet {
 			String userId = request.getParameter("userId");
 			String userMembership = request.getParameter("userMembership");
 			
-			UserDTO dto = new UserDTO(userId, userMembership);
+			User dto = new User(userId, userMembership);
 			int resultCode = UserDAO.getInstance().updateManager(dto);	// 1이면 성공, 0이면 실패
 			System.out.println("resultCode: " + resultCode);
 			

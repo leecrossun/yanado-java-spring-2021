@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.yanado.dto.Favorite;
 import com.yanado.dto.Product;
-import com.yanado.dto.UserDTO;
+import com.yanado.dto.User;
 
 @Mapper
 public interface FavoriteDAO {
@@ -17,6 +17,6 @@ public interface FavoriteDAO {
 
 	List<Favorite> findUserIdListByFavorite(Favorite favorite);
 	
-	List<UserDTO> findSimilarListByUser(UserDTO user);
+	List<User> findSimilarListByUser(User user);
 	
 }
