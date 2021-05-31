@@ -1,7 +1,7 @@
 package service.dto;
 
 public class User {
-
+  
 	private String userId;		//아이디
 	private String password;	// 비밀번호
 	private String userName;	// 이름
@@ -15,7 +15,6 @@ public class User {
 	// 등급 추가...?
 	private String userMembership;
 	private String inputStr;
-
 	
 	public User() {
 		super();
@@ -31,7 +30,6 @@ public class User {
 	// 마이페이지에서 정보 수정 시 사용
 	public User(String userId, String password, String phoneNumber, String email) {
 		super();
-		
 		this.userId = userId;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
@@ -132,7 +130,7 @@ public class User {
 	public void setUserMembership(String userMembership) {
 		this.userMembership = userMembership;
 	}
-	
+
 	public String getInputStr() {
 		return inputStr;
 	}

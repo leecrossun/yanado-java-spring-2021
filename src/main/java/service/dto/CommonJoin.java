@@ -2,14 +2,18 @@ package service.dto;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Range;
+
 public class CommonJoin {
 	@NotNull
 	String commonId;
 	@NotNull
 	String userId;
+	
+	@Range(min= 0, max=1)
 	int payment;
 
-	public CommonJoin(String commonId, String userId, int payment) {
+	public CommonJoin(@NotNull String commonId, @NotNull String userId, int payment) {
 		this.commonId = commonId;
 		this.userId = userId;
 		this.payment = payment;

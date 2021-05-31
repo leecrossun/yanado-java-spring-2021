@@ -8,12 +8,10 @@ import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.validator.constraints.Range;
 
+import lombok.Getter;
+
 public class Common {
-
 	String commonId;
-
-	@NotNull
-	String userId; // 게시자
 
 	@NotNull
 	String productId;
@@ -21,8 +19,8 @@ public class Common {
 	int participants;
 	@Positive
 	int min;
-	
-	@Range(min= 0, max=5)
+
+	@Range(min = 0, max = 5)
 	int status; // 0 : 진행 전, 1 : 진행, 2 : 정원 미달, 3 : 최소인원 넘음, 4 : 파기, 5: 성공 (및 종료)
 
 	Date regDate;
@@ -37,10 +35,9 @@ public class Common {
 	public Common() {
 	}
 
-	public Common(String commonId, String userId, String productId, int participants, int min, int status, Date regDate,
+	public Common(String commonId, String productId, int participants, int min, int status, Date regDate,
 			Date startDate, Date endDate, Date deadline) {
 		this.commonId = commonId;
-		this.userId = userId;
 		this.productId = productId;
 		this.participants = participants;
 		this.min = min;
@@ -51,9 +48,8 @@ public class Common {
 		this.deadline = deadline;
 	}
 
-	public Common(String userId, String productId, int participants, int min, int status, Date regDate, Date startDate,
+	public Common(String productId, int participants, int min, int status, Date regDate, Date startDate,
 			Date endDate, Date deadline) {
-		this.userId = userId;
 		this.productId = productId;
 		this.participants = participants;
 		this.min = min;
@@ -81,19 +77,11 @@ public class Common {
 		this.commonId = commonId;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getProduct() {
+	public String getProductId() {
 		return productId;
 	}
 
-	public void setProduct(String productId) {
+	public void setProductId(String productId) {
 		this.productId = productId;
 	}
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import persistence.dao.FavoriteDao;
+import persistence.dao.FavoriteDAO;
 import service.dto.Favorite;
 
 
@@ -16,13 +16,13 @@ import service.dto.Favorite;
 public class FavoriteController {
 	
 	@Autowired
-	private FavoriteDao favoriteDao;
+	private FavoriteDAO favoriteDao;
 	
 	@RequestMapping("/add")
 	public String add(@RequestParam String productId) {
 		String userId = null;
 		Favorite favorite = new Favorite(userId, productId);
-		favoriteDao.createFavorite(favorite);
+		favoriteDao.insertFavorite(favorite);
 		return null;
 	}
 	

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namsepace="persistence.dao.CommonDAO">
+	<!-- common table -->
+
+	<sql id="commonColumns">
+		commonId,
+		userId,
+		productId,
+		participants,
+		min,
+		status,
+		regDate,
+		startDate,
+		endDate,
+		deadline
+	</sql>
+
+	<!-- sequence 이름 common_seq -->
+	<!-- common 생성 -->
+	<insert id="insertCommon" parmeterType="service.dto.Common">
+		<selectKey keyProperty="id" resultClass="String"
+			order="BEFORE">
+			SELECT
+			common_seq.nextval From DUAL
+		</selectKey>
+
+		INSERT INTO common(
+		<include refid="commonColumns" />
+		) VALUES ( #{id}, #{userId}, #{productId}, 0, #{min}, #{status},
+		now(),
+		#{startDate}, #{endDate},
+		#{deadline}
+		)
+	</insert>
+
+	<!-- common 수정 -->
+	<update id="updateCommon" parmeterType="service.dto.Common">
+		UPDATE common SET
+		participants = #{participants}, min = #{min}, status = #{status},
+		startDate = #{startDate}, endDate = #{endDate}, deadline = #{deadline}
+		WHERE commonId = #{commonId}
+	</update>
+
+	<!-- common 삭제 -->
+	<delete id="deleteCommon" parmeterType="String">
+		DELETE FROM common WHERE
+		commonId = #{commomId}
+	</delete>
+
+	<select id="findAllCommon" parmeterType="int"
+		resultType="service.dto.Common">
+		select * from (select ROWNUM as RNUM, A.* FROM (select *
+		from common order by regDate desc ) A
+		where ROWNUM <= #{end}) where
+		RNUM >= #{start}
+	</select>
+
+	<select id="findCommonBySearch"
+		parameterType="service.dto.Search" resultType="service.dto.Common">
+		select * from (select
+		ROWNUM as
+		RNUM, A.* from (select * from common where #{condition} like
+		‘%#{search}%’ order by regDate desc ) A
+		where ROWNUM <= #{end}) where
+		RNUM >= #{start}
+	</select>
+
+	<!-- common 읽기 -->
+	<select id="findCommonByCommonId" parameterType="String"
+		resultType="service.dto.Common ">
+		select * from common
+		where
+		commonId = #{commonId}
+	</select>
+
+	<select id="getCount" resultType="int">
+		select count(*) from
+		common
+	</select>
+
+	<update id="increaseJoin" parameterType="String">
+		update common set
+		participants = participants + 1 where commonId = #{commonId}
+	</update>
+
+	<update id="decreaseJoin" parameterType="String">
+		update common set
+		participants = participants - 1 where commonId = #{commonId}
+	</update>
+
+	<update id="changeStatus">
+		update common set status = #{status} where commonId =
+		#{commonId}
+	</update>
+
+	<!-- commonJoin table -->
+
+	<sql id="commonJoinColumns">
+		commonId,
+		userId,
+		payment
+	</sql>
+
+	<insert id="joinCommon" parameterType="service.dto.CommonJoin">
+		insert into commonJoin(
+		<include refid="commonJoinColumns" />
+		) values ( #{commonId}, #{userId}, 0 )
+	</insert>
+
+	<delete id="cancelCommon" parameterType="service.dto.CommonJoin">
+		delete from commonJoin
+		where commonId = #{commonId} and userId = #{userId}
+	</delete>
+
+	<select id="findAllCommonJoinByCommonId" paramterType="String"
+		resultType="service.dto.CommonJoin">
+		select * from commonJoin where commonId = #{commonId}
+	</select>
+
+	<select id="notPayment" paramterType="String"
+		resultType="service.dto.CommonJoin">
+		select * from commonJoin where commonId = #{commonId} and
+		payment = 0;
+	</select>
+	
+	<!-- MyPage 관련 -->
+	<select id="findCommonByUserId" paramterType="String"
+		resultType="service.dto.Common">
+		select c.* from common c, commonJoin j where
+		c.commonId=j.commonId and j.userId = #{userId}
+	</select>
+
+</mapper>

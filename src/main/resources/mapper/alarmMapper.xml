@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namsepace="persistence.dao.AlarmDAO">
+	<!-- alarm table -->
+
+	<sql id="alarmColumns">
+		alarmId,
+		userId,
+		typeId,
+		type,
+		price,
+		message,
+		sendDate,
+		deadline
+	</sql>
+
+	<!-- sequence 이름 alarm_seq -->
+	<!-- alarm 생성 -->
+	<insert id="insertAlarm" parmeterType="service.dto.Alarm">
+		<selectKey keyProperty="id" resultClass="String"
+			order="BEFORE">
+			SELECT
+			alarm_seq.nextval From DUAL
+		</selectKey>
+
+		INSERT INTO alarm(
+		<include refid="alarmColumns" />
+		) VALUES ( #{id}, #{typeId}, #{type}, #{price}, #{message},
+		#{sendDate}, #{deadline}
+		)
+	</insert>
+
+	<!-- alarm 읽기 -->
+	<select id="findAlarmByAlarmId" parmeterType="String"
+		resultType="service.dto.Alarm">
+		select * from alarm where alarmId = #{alarmId}
+	</select>
+
+	<!-- common alarm 찾기 -->
+	<select id="findAlarmByCommonId" parmeterType="String"
+		resultType="service.dto.Alarm">
+		select * from alarm where typeId = #{typeId} and type
+		between 1 and 3
+	</select>
+
+	<!-- auction alarm 찾기 -->
+	<select id="findAlarmByAuctionId" parmeterType="String"
+		resultType="service.dto.Alarm">
+		select * from alarm where typeId = #{typeId} and type
+		between 4 and 6
+	</select>
+
+	<!-- MyPage 관련 alarm -->
+	<select id="findAllAlarmByUserId" parmeterType="String"
+		resultType="service.dto.Alarm">
+		select * from ( select * from alarm c where typeId in
+		(select commonId from commonJoin where userId = 'userId') UNION
+		select
+		* from alarm a where typeId in (select aucId from aucJoin where userId
+		= 'userId') ) order by a.sendDate, b.sendDate
+	</select>
+
+</mapper>

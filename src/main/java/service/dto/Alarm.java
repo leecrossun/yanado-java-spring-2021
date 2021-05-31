@@ -12,8 +12,8 @@ public class Alarm {
 	@NotNull
 	String typeId; // typeId = commonId or AuctionId
 	@Range(min= 0, max=7)
-	int type; // 0 : common, 1 : common result, 2 : common notice, 3 : common etc
-			  // 4 : auction, 5 : auction result, 6 : auction notice, 7 : auction etc
+	int type; // 1 : common result, 2 : common notice, 3 : common etc
+			  // 4 : auction result, 5 : auction notice, 6 : auction etc
 	@PositiveOrZero
 	int price;
 	String message;
