@@ -1,7 +1,7 @@
 package service.dto;
 
-public class UserDTO {
-
+public class User {
+  
 	private String userId;		//아이디
 	private String password;	// 비밀번호
 	private String userName;	// 이름
@@ -15,22 +15,21 @@ public class UserDTO {
 	// 등급 추가...?
 	private String userMembership;
 	private String inputStr;
-
-	public UserDTO() {
+	
+	public User() {
 		super();
 	}
 	
 	// 회원등급 변경 시 사용
-		public UserDTO(String userId, String inputStr) {
+		public User(String userId, String inputStr) {
 			super();
 			this.userId = userId;
 			this.inputStr = inputStr;
 		}
 		
 	// 마이페이지에서 정보 수정 시 사용
-	public UserDTO(String userId, String password, String phoneNumber, String email) {
+	public User(String userId, String password, String phoneNumber, String email) {
 		super();
-		
 		this.userId = userId;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
@@ -38,7 +37,7 @@ public class UserDTO {
 	}
 	
 	// 회원 가입 시 사용
-	public UserDTO(String userId, String password, String userName, 
+	public User(String userId, String password, String userName, 
 			String gender, String birth, String address, String phoneNumber, String email) {
 		super();
 		
@@ -100,11 +99,11 @@ public class UserDTO {
 		this.address = address;
 	}
 
-	public String getNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setNumber(String phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -131,5 +130,13 @@ public class UserDTO {
 	public void setUserMembership(String userMembership) {
 		this.userMembership = userMembership;
 	}
-	
+
+	public String getInputStr() {
+		return inputStr;
+	}
+
+	public void setInputStr(String inputStr) {
+		this.inputStr = inputStr;
+	}
+
 }
