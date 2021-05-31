@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import persistence.dao.UserDAO;
-import service.dto.User;
+import service.dto.UserDTO;
 
 @WebServlet("/user/login")
 public class LoginController extends HttpServlet {
@@ -25,7 +25,7 @@ public class LoginController extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 
-		User dto = UserDAO.getInstance().getUserByUserId(userId);
+		UserDTO dto = UserDAO.getInstance().getUserByUserId(userId);
 		
 		String param = ""; // param의 값
 		String resultStr = ""; // 전송될 json 문자열

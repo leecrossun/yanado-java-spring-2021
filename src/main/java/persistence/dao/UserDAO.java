@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import service.dto.User;
+import service.dto.UserDTO;
 
 public class UserDAO {
 
@@ -27,8 +27,8 @@ public class UserDAO {
 	}
 
 	// 회원 목록 조회 시 사용
-	public List<User> selectList() {
-		List<User> list = null;
+	public List<UserDTO> selectList() {
+		List<UserDTO> list = null;
 
 		SqlSession sqlSession = factory.openSession();
 		list = sqlSession.selectList("user.user_list");
@@ -38,7 +38,7 @@ public class UserDAO {
 		return list;
 	}
 
-	public int createUser(User dto) {
+	public int createUser(UserDTO dto) {
 		int result = 0;
 
 		SqlSession sqlSession = factory.openSession();
@@ -51,7 +51,7 @@ public class UserDAO {
 		return result;
 	}
 
-	public int updateUser(User dto) {
+	public int updateUser(UserDTO dto) {
 		int result = 0;
 
 		SqlSession sqlSession = factory.openSession();
@@ -77,7 +77,7 @@ public class UserDAO {
 		return result;
 	}
 	
-	public int updateManager(User dto) {
+	public int updateManager(UserDTO dto) {
 		int result = 0;
 
 		SqlSession sqlSession = factory.openSession();
@@ -91,8 +91,8 @@ public class UserDAO {
 	}
 	
 	// 아이디로 개인정보 가져오기
-	public User getUserByUserId(String userId) {
-		User dto = null;
+	public UserDTO getUserByUserId(String userId) {
+		UserDTO dto = null;
 
 		SqlSession sqlSession = factory.openSession();
 		// selectList()와는 다르게 하나의 객체만을 반환받는 메서드

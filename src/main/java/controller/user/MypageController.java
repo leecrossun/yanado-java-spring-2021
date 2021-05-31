@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import persistence.dao.UserDAO;
-import service.dto.User;
+import service.dto.UserDTO;
 
 // 해당 회원 아이디로 정보 가져와서 마이페이지로 이동
 @WebServlet("/user/mypage")
@@ -27,7 +27,7 @@ public class MypageController extends HttpServlet {
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("userIid");
 		
-		User dto = UserDAO.getInstance().getUserByUserId(userId);
+		UserDTO dto = UserDAO.getInstance().getUserByUserId(userId);
 		
 		request.setAttribute("dto", dto);
 		
