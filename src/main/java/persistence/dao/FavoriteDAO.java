@@ -4,7 +4,7 @@ import java.util.List;
 
 import service.dto.Favorite;
 import service.dto.Product;
-import service.dto.UserDTO;
+import service.dto.User;
 
 public interface FavoriteDAO {
 
@@ -14,5 +14,5 @@ public interface FavoriteDAO {
 
 	List<Favorite> findUserIdListByFavorite(Favorite favorite);
 	
-	List<UserDTO> findSimilarListByUser(UserDTO user);
+	List<User> findSimilarListByUser(User user);
 }
