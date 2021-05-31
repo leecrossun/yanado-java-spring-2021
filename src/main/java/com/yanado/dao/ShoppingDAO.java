@@ -6,9 +6,11 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Service;
 
 import com.yanado.dto.Shopping;
 
+@Service
 public class ShoppingDAO {
 	
 	//private static JDBCUtil jdbcUtil = null;
@@ -16,7 +18,7 @@ public class ShoppingDAO {
 		
 	String namespace = ""; // xml 작성 시 추가할 것
 
-	public ShoppingDAO() {
+	public ShoppingDAO() {/*
 		String resource = "mybatis-config.xml";
 		InputStream inputStream;
 		try {
@@ -24,7 +26,7 @@ public class ShoppingDAO {
 		} catch (IOException e) {
 			throw new IllegalArgumentException(e);
 		}
-		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);*/
 	}
 	
 	public int createShopping(Shopping shopping) {

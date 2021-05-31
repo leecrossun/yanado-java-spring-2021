@@ -9,9 +9,10 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Service;
 
 import com.yanado.dto.Review;
-
+@Service
 public class ReviewDAO {
 	
 	//private static JDBCUtil jdbcUtil = null;
@@ -19,7 +20,7 @@ public class ReviewDAO {
 	
 	String namespace = ""; // xml 작성 시 추가할 것
 
-	public ReviewDAO() {
+	public ReviewDAO() {/*
 		String resource = "mybatis-config.xml";
 		InputStream inputStream;
 		try {
@@ -27,7 +28,7 @@ public class ReviewDAO {
 		} catch (IOException e) {
 			throw new IllegalArgumentException(e);
 		}
-		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);*/
 	}
 	
 	public List<Review> getReviewByShoppingId (String reviewId) {
