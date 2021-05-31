@@ -51,6 +51,8 @@ public interface CommonDAO {
 
 	public List<CommonJoin> findAllCommonJoinByCommonId(String commonId);
 	
+	public int deleteAllCommonJoin(String commonId);
+	
 	public int findCommonJoin(CommonJoin commonJoin);
 	
 	public List<CommonJoin> notPayment(String commonId);

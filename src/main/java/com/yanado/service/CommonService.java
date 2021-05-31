@@ -56,6 +56,10 @@ public class CommonService {
 	public Common findCommonByCommonId(String commonId) {
 		return dao.findCommonByCommonId(commonId);
 	}
+	
+	public int deleteAllCommonJoin(String commonId) {
+		return dao.deleteAllCommonJoin(commonId);
+	}
 
 
 	// 필드 한개만 변경될 시
