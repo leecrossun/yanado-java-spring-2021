@@ -1,7 +1,12 @@
 package com.yanado.dto;
 
-public class User {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class User {
+	
+	@Id
 	private String userId;		//아이디
 	private String password;	// 비밀번호
 	private String userName;	// 이름
