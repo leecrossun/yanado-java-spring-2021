@@ -36,7 +36,7 @@ public class Review implements Serializable{
 	Shopping shopping;
 	
 	@OneToOne
-	@PrimaryKeyJoinColumn(name="userId")
+	@JoinColumn(name="userId")
 	User user;
 	String content;
 	int rating;

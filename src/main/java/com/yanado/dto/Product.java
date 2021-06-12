@@ -1,8 +1,11 @@
 package com.yanado.dto;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-
+@Entity
 public class Product {
+	@Id
 	@NotNull
 	String productId;
 
