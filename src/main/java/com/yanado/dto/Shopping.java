@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 @SuppressWarnings("serial")
 @Entity
