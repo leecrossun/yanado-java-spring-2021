@@ -87,12 +87,8 @@
 	<select id="findCommonBySort"
 		parameterType="com.yanado.dto.Search"
 		resultType="com.yanado.dto.Common">
-		select * from (select ROWNUM as RNUM, A.* FROM (select *
-		from common
-		order by #{search}) A where ROWNUM <![CDATA[ <=  ]]>
-		#{end})
-		where RNUM <![CDATA[ >=  ]]>
-		#{start}
+		
+		select * from (select ROWNUM as RNUM, c.* FROM common c where ROWNUM <![CDATA[ <=  ]]> #{end} order by ${search} desc)	where RNUM <![CDATA[ >=  ]]> #{start}
 	</select>
 	
 	<select id="findCommonByFilter1"

@@ -27,6 +27,7 @@ public class SortCommonController {
 
 		List<Common> common = commonService.findCommonBySort(sort);
 		List<CommonDTO> commonList = new ArrayList<CommonDTO>();
+	
 
 		for (Common com : common) {
 			String productId = com.getProductId();
@@ -44,6 +45,7 @@ public class SortCommonController {
 
 		mav.addObject("total", total);
 		mav.addObject("s", sort);
+		
 
 		return mav;
 	}

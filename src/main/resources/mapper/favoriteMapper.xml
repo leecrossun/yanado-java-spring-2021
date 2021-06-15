@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yanado.dao.FavoritDAO">
+<mapper namespace="com.yanado.dao.FavoriteDAO">
 	<!-- favorite table -->
 
 	<sql id="favoriteColumns">
@@ -9,24 +9,53 @@
 	</sql>
 
 	<!-- favorite 생성 -->
-	<insert id="insertFavorite" parameterType="com.yanado.dto.Favorite">
+	<insert id="insertFavorite"
+		parameterType="com.yanado.dto.Favorite">
 		INSERT INTO favorite(
 		<include refid="favoriteColumns" />
 		) VALUES ( #{userId}, #{productId} )
 	</insert>
-	
-	<delete id="deleteFavorite" parameterType="com.yanado.dto.Favorite">
-		delete from favorite where userId = #{userId} and productId = #{productId}
+
+	<delete id="deleteFavorite"
+		parameterType="com.yanado.dto.Favorite">
+		delete from favorite where userId = #{userId} and
+		productId = #{productId}
 	</delete>
-	
-	<!-- 유저가 누른 좋아요 목록  -->
-	<select id="findUserIdListByFavorite" parameterType="com.yanado.dto.Favorite" resultType="com.yanado.dto.Favorite" >
-		select * from favorite where userId = #{userId]
+
+	<!-- 사용자가 졸아요를 누른 목록 목록 -->
+	<select id="findFavoriteByUserId" parameterType="String"
+		resultType="com.yanado.dto.Favorite">
+		select * from favorite where
+		userId = #{userId}
 	</select>
 
-	<!-- 해당 유저와 비슷한 유저 찾기 -->	
-	<select id="findSimilarListByUser" parameterType="com.yanado.dto.User" resultType="com.yanado.dto.User" >
-		select * from user where gender = #{gender} and 
+	<!-- 해당 유저와 비슷한 유저 찾기 -->
+	<select id="findSimilarListByUser"
+		parameterType="com.yanado.dto.User"
+		resultType="com.yanado.dto.User">
+		select * from user where gender =
+		#{gender} and
 	</select>
-	
+
+	<!-- 해당 상품에 좋아요를 누른 사람 -->
+	<select id="findUserByFavorite" parameterType="String"
+		resultType="com.yanado.dto.Favorite">
+		select * from favorite where
+		productId = #{productId}
+	</select>
+
+	<select id="findFavorite"
+		parameterType="com.yanado.dto.Favorite"
+		resultType="com.yanado.dto.Favorite">
+		select * from favorite where
+		userId = #{userId} and
+		productId = #{productId}
+	</select>
+
+	<select id="findFavoriteByTop" resultType="com.yanado.dto.Product">
+		select * from product
+		where productId in ( SELECT productId FROM (select productId, count(*)
+		as count FROM favorite
+		GROUP BY productId order by count) WHERE rownum <![CDATA[ <=  ]]> 10)
+	</select>
 </mapper>
