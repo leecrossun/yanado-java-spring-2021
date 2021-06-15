@@ -77,7 +77,7 @@
 						<span class="mtext-106 cl2" th:text="${common.product.price}">
 						</span>
 
-						<p class="stext-102 cl3 p-t-23" id="dday">D -</p>
+						<p class="stext-102 cl3 p-t-23" id="dday"></p>
 						<!--  -->
 						<div class="p-t-33">
 							<div class="flex-w flex-r-m p-b-10">
@@ -179,6 +179,27 @@
 							th:href='@{/common/delete(commonId=${common.common.commonId})}'>삭제</a>
 					</button>
 				</div>
+				<!-- 여기서 부터 알람!!  -->
+				<!-- 바꿔야 할것 flag = 2로, commonId를 aucId로  -->
+				<div class="flex-w flex-c-m m-tb-10">
+					<button
+						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
+						style="margin: 3%">
+						<a style="color: black;"
+							th:href='@{/alarm/create(commonId=${common.common.commonId}, flag=1)}' onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;">알람
+							생성</a>
+					</button>
+
+					<button
+						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
+						style="margin: 3%">
+						<a style="color: black;"
+							th:href='@{alarm/list(commonId=${common.common.commonId}, flag=1)}' onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;">알람
+							목록</a>
+					</button>
+				</div>
+				
+				<!-- 여기서까지 알람  -->
 			</div>
 		</div>
 	</section>

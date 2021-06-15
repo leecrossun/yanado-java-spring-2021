@@ -1,30 +1,36 @@
 package com.yanado.dto;
+
 import java.sql.Date;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.validator.constraints.Range;
 
 public class Alarm {
-	
+
 	String alarmId;
-	@NotNull
-	String typeId; // typeId = commonId or AuctionId
-	@Range(min= 0, max=7)
-	int type; // 1 : common result, 2 : common notice, 3 : common etc
-			  // 4 : auction result, 5 : auction notice, 6 : auction etc
+	String userId;
+	String commonId = null;
+	String aucId = null;
+
+	@Range(min = 1, max = 3)
+	int type; // 1 : result, 2 : notice, 3 : etc
 	@PositiveOrZero
 	int price;
 	String message;
 	Date sendDate;
 	Date deadline;
-	
-	public Alarm() {}
 
-	public Alarm(String alarmId, String typeId, int type, int price, String message, Date sendDate, Date deadline) {
+	public Alarm() {
+	}
+
+	public Alarm(String alarmId, String userId, String commonId, String aucId, int type, int price, String message,
+			Date sendDate, Date deadline) {
+
 		this.alarmId = alarmId;
-		this.typeId = typeId;
+		this.userId = userId;
+		this.commonId = commonId;
+		this.aucId = aucId;
 		this.type = type;
 		this.price = price;
 		this.message = message;
@@ -32,8 +38,12 @@ public class Alarm {
 		this.deadline = deadline;
 	}
 
-	public Alarm(String typeId, int type, int price, String message, Date sendDate, Date deadline) {
-		this.typeId = typeId;
+	public Alarm(String userId, String commonId, String aucId, int type, int price, String message, Date sendDate,
+			Date deadline) {
+
+		this.userId = userId;
+		this.commonId = commonId;
+		this.aucId = aucId;
 		this.type = type;
 		this.price = price;
 		this.message = message;
@@ -49,12 +59,28 @@ public class Alarm {
 		this.alarmId = alarmId;
 	}
 
-	public String getTypeId() {
-		return typeId;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setTypeId(String typeId) {
-		this.typeId = typeId;
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getCommonId() {
+		return commonId;
+	}
+
+	public void setCommonId(String commonId) {
+		this.commonId = commonId;
+	}
+
+	public String getAucId() {
+		return aucId;
+	}
+
+	public void setAucId(String aucId) {
+		this.aucId = aucId;
 	}
 
 	public int getType() {
