@@ -7,7 +7,8 @@
 	<sql id="alarmColumns">
 		alarmId,
 		userId,
-		typeId,
+		commonId,
+		aucId,
 		type,
 		price,
 		message,
@@ -18,15 +19,14 @@
 	<!-- sequence 이름 alarm_seq -->
 	<!-- alarm 생성 -->
 	<insert id="insertAlarm" parameterType="com.yanado.dto.Alarm">
-		<selectKey keyProperty="id" resultType="String"
-			order="BEFORE">
+		<selectKey keyProperty="alarmId" resultType="java.lang.String" order="BEFORE">
 			SELECT
 			alarm_seq.nextval From DUAL
 		</selectKey>
 
 		INSERT INTO alarm(
 		<include refid="alarmColumns" />
-		) VALUES ( #{id}, #{typeId}, #{type}, #{price}, #{message},
+		) VALUES ( #{alarmId}, #{userId}, #{commonId, jdbcType=VARCHAR}, #{aucId, jdbcType=VARCHAR}, #{type}, #{price}, #{message},
 		SYSDATE, #{deadline}
 		)
 	</insert>
@@ -40,25 +40,22 @@
 	<!-- common alarm 찾기 -->
 	<select id="findAlarmByCommonId" parameterType="String"
 		resultType="com.yanado.dto.Alarm">
-		select * from alarm where typeId = #{typeId} and type
-		between 1 and 3
+		select * from alarm where commonId = #{commonId}
 	</select>
 
 	<!-- auction alarm 찾기 -->
 	<select id="findAlarmByAuctionId" parameterType="String"
 		resultType="com.yanado.dto.Alarm">
-		select * from alarm where typeId = #{typeId} and type
-		between 4 and 6
+		select * from alarm where alarmId = #{alarmId}
 	</select>
 
-	<!-- MyPage 관련 alarm -->
+	 <!-- MyPage 관련 alarm -->
 	<select id="findAllAlarmByUserId" parameterType="String"
 		resultType="com.yanado.dto.Alarm">
-		select * from ( select * from alarm c where typeId in
+		select * from ( select * from alarm c where commonId in
 		(select commonId from commonJoin where userId = 'userId') UNION
 		select
-		* from alarm a where typeId in (select aucId from aucJoin where userId
+		* from alarm a where aucId in (select aucId from aucJoin where userId
 		= 'userId') ) order by a.sendDate, b.sendDate
 	</select>
-
 </mapper>
