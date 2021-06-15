@@ -17,6 +17,12 @@ public interface CommonDAO {
 	public Product findProduct(String productId);
 
 	public int getCount();
+	
+	public int getSearchCount(String search);
+	
+	public int getFilterCount1(int filter);
+	
+	public int getFilterCount2();
 
 	// Common CRUD
 
@@ -26,12 +32,18 @@ public interface CommonDAO {
 
 	public int deleteCommonByCommonId(String commonId);
 
-	// List<Common> findAllCommon() {}
+	public List<Common> findAll();
 
-	public List<Common> findAllCommon(int start);
+	public List<Common> findAllCommon(Search page);
 
 	public List<Common> findCommonBySearch(Search search);
-
+	
+	public List<Common> findCommonBySort(Search sort);
+	
+	public List<Common> findCommonByFilter1(Search filter);
+	
+	public List<Common> findCommonByFilter2(Search filter);
+ 
 	public Common findCommonByCommonId(String commonId);
 
 

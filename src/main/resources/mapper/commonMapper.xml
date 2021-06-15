@@ -54,30 +54,67 @@
 
 	<!-- common 삭제 -->
 	<delete id="deleteCommonByCommonId" parameterType="String">
-		DELETE FROM common WHERE
+		DELETE FROM
+		common WHERE
 		commonId = #{commomId}
 	</delete>
 
+	<select id="findAll" resultType="com.yanado.dto.Common">
+		select * from common
+	</select>
 
-	<select id="findAllCommon" parameterType="int"
+	<select id="findAllCommon" parameterType="com.yanado.dto.Search"
 		resultType="com.yanado.dto.Common">
-		<!-- select * from (select ROWNUM as RNUM, A.* FROM (select * from common 
-			order by regDate desc ) A where ROWNUM <= (#{start} + 9) ) where RNUM >= 
-			#{start} -->
-		select * from common order by regDate desc
+		select * from (select ROWNUM as RNUM, A.* FROM (select * from common
+		order by regDate) A where ROWNUM <![CDATA[ <=  ]]>
+		#{end} ) where RNUM  <![CDATA[ >=  ]]>
+		#{start}
 	</select>
 
 	<select id="findCommonBySearch"
 		parameterType="com.yanado.dto.Search"
 		resultType="com.yanado.dto.Common">
-		<!-- select * from (select ROWNUM as RNUM, A.* from (select * from common 
-			where #{condition} like ‘%#{search}%’ order by regDate desc ) A where ROWNUM 
-			<= #{end}) where RNUM >= #{start} -->
-
-		select * from common order by regDate desc where where #{condition}
-		like ‘%#{search}%’
+		select * from (select ROWNUM as RNUM, A.* from (select c.* from common
+		c, product p
+		where c.productId = p.productId and p.productName like '%'
+		|| #{search} || '%' order
+		by regDate desc ) A where ROWNUM
+		<![CDATA[ <=  ]]>
+		#{end}) where RNUM <![CDATA[ >= ]]>
+		#{start}
 	</select>
 
+	<select id="findCommonBySort"
+		parameterType="com.yanado.dto.Search"
+		resultType="com.yanado.dto.Common">
+		select * from (select ROWNUM as RNUM, A.* FROM (select *
+		from common
+		order by #{search}) A where ROWNUM <![CDATA[ <=  ]]>
+		#{end})
+		where RNUM <![CDATA[ >=  ]]>
+		#{start}
+	</select>
+	
+	<select id="findCommonByFilter1"
+		parameterType="com.yanado.dto.Search"
+		resultType="com.yanado.dto.Common">
+		select * from (select ROWNUM as RNUM, A.* FROM (select *
+		from common where status = #{searchInt}) A where ROWNUM <![CDATA[ <=  ]]>
+		#{end})
+		where RNUM <![CDATA[ >=  ]]>
+		#{start}
+	</select>
+	
+	<select id="findCommonByFilter2"
+		parameterType="com.yanado.dto.Search"
+		resultType="com.yanado.dto.Common">
+		select * from (select ROWNUM as RNUM, A.* FROM (select *
+		from common where status = 2 or status = 3) A where ROWNUM <![CDATA[ <=  ]]>
+		#{end})
+		where RNUM <![CDATA[ >=  ]]>
+		#{start}
+	</select>
+	
 	<!-- common 읽기 -->
 	<select id="findCommonByCommonId" parameterType="String"
 		resultType="com.yanado.dto.Common">
@@ -89,6 +126,18 @@
 	<select id="getCount" resultType="int">
 		select count(*) from
 		common
+	</select>
+
+	<select id="getSearchCount" parameterType="String" resultType="int">
+		select count(*) from common c, product p where c.productId = p.productId and p.productName like '%' || #{search} || '%'
+	</select>
+	
+	<select id="getFilterCount1" parameterType="int" resultType="int">
+		select count(*) from common where status = #{filter}
+	</select>
+	
+	<select id="getFilterCount2" resultType="int">
+		select count(*) from common where status = 2 or status = 3
 	</select>
 
 	<update id="increaseJoin" parameterType="String">
@@ -130,7 +179,8 @@
 
 	<select id="findCommonJoin"
 		parameterType="com.yanado.dto.CommonJoin" resultType="int">
-		select count(*) from commonJoin where commonId = #{commonId} and userId = #{userId}
+		select count(*)
+		from commonJoin where commonId = #{commonId} and userId = #{userId}
 	</select>
 
 	<select id="findAllCommonJoinByCommonId" parameterType="String"
@@ -143,9 +193,10 @@
 		select * from commonJoin where commonId = #{commonId} and
 		payment = 0
 	</select>
-	
+
 	<delete id="deleteAllCommonJoin" parameterType="String">
-		delete from commonJoin where commonId=#{commonId}
+		delete from
+		commonJoin where commonId=#{commonId}
 	</delete>
 
 	<!-- MyPage 관련 -->
