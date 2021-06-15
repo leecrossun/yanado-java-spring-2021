@@ -10,18 +10,16 @@ import com.yanado.dao.ShoppingDAO;
 import com.yanado.dto.Shopping;
 
 @Controller
-@SessionAttributes("shopping")
-@RequestMapping("shopping/delete")
 public class DeleteShoppingController {
 	
 	@Autowired	
 	private ShoppingDAO shoppingDAO;
 	
 	// 공동구매 파기하기
-	
-	public String delete(@RequestParam Shopping shopping) {
-		shoppingDAO.deleteShopping(shopping);
-		return "shopping/list";
+	@RequestMapping("shopping/delete")
+	public String delete(@RequestParam String shoppingId) {
+		shoppingDAO.deleteShopping(shoppingId);
+		return "redirect:/shopping/view/all";
 
 	}
 

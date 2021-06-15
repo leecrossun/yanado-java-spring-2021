@@ -35,8 +35,10 @@ public class ViewShoppingController {
 	// 쇼핑 상품 상세보기
 	@RequestMapping("/detail")
 	public ModelAndView viewShoppingDetail(@RequestParam String shoppingId){
+		System.out.println(shoppingId);
 		ModelAndView mav = new ModelAndView();
 		Shopping shopping = shoppingDAO.getShoppingByshoppingId(shoppingId);
+		System.out.println(shopping.getProduct().getProductId());
 		mav.setViewName("shopping/shoppingDetail");
 		mav.addObject("shopping", shopping);
 		return mav;
