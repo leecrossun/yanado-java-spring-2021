@@ -140,6 +140,10 @@ public class Shopping implements Serializable {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+	
+	public void setStock(String stock) {
+		this.stock = Integer.parseInt(stock);
+	}
 
 	public void setPublished(Date published) {
 		this.published = published;

@@ -14,6 +14,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.yanado.dao.ShoppingDAO;
 import com.yanado.dto.Shopping;
+import com.yanado.service.ShoppingService;
 
 
 @Controller
@@ -22,7 +23,7 @@ import com.yanado.dto.Shopping;
 public class CreateShoppingController {
 	
 	@Autowired
-	private ShoppingDAO shoppingDAO;
+	private ShoppingService service;
 	
 	@ModelAttribute("shopping")
 	public Shopping formBacking(HttpServletRequest request) {
@@ -30,13 +31,13 @@ public class CreateShoppingController {
 		return shopping;
 	}
 
-	@RequestMapping(value = "create", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public String form() {
 		return "shopping/form";
 	}
 
 
-	@RequestMapping(value = "create", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public String createShopping(@Valid @ModelAttribute("shopping") Shopping shopping, BindingResult result,
 			SessionStatus status) {
 
@@ -44,9 +45,9 @@ public class CreateShoppingController {
 			return "shopping/form";
 		}
 
-		status.setComplete();
-		shoppingDAO.createShopping(shopping);
-		return "shopping/list";
+		//status.setComplete();
+		service.createShopping(shopping);
+		return "shopping/view/all";
 	}
 
 }
