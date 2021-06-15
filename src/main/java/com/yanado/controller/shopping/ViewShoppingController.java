@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping("shopping/view")
+@RequestMapping("/shopping/view")
 public class ViewShoppingController {
 	
 	@Autowired
@@ -25,7 +25,21 @@ public class ViewShoppingController {
 	public ModelAndView viewShoppingList(){
 		
 		List<Shopping> shopping = shoppingDAO.getShoppingList();
-		ModelAndView mav = new ModelAndView("shoppingList");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("shopping/shoppingList");
+		mav.addObject("shoppingList", shopping);
+		return mav;
+		
+	}
+	
+	// 쇼핑 상품 상세보기
+	@RequestMapping("/detail")
+	public ModelAndView viewShoppingDetail(@RequestParam String shoppingId){
+		System.out.println(shoppingId);
+		ModelAndView mav = new ModelAndView();
+		Shopping shopping = shoppingDAO.getShoppingByshoppingId(shoppingId);
+		System.out.println(shopping.getProduct().getProductId());
+		mav.setViewName("shopping/shoppingDetail");
 		mav.addObject("shopping", shopping);
 		return mav;
 		
@@ -35,7 +49,8 @@ public class ViewShoppingController {
 	@RequestMapping("/category")
 	public ModelAndView viewShoppingByCategory(@RequestParam("category") String category){
 		List<Shopping> shopping = shoppingDAO.getShoppingByCategory(category);
-		ModelAndView mav = new ModelAndView("shoppingList");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("shopping/shoppingList");
 		mav.addObject("shopping", shopping);
 		return mav;
 		

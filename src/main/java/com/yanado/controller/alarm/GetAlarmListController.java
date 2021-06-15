@@ -17,22 +17,25 @@ public class GetAlarmListController {
 	private AlarmDAO alarmDao;
 
 	// common에서 알람 리스트
-	@RequestMapping("/common/alarm")
+	@RequestMapping("/common/alarm/list")
 	public ModelAndView getCommonList(@RequestParam String commonId) {
+		
+		System.out.println(commonId);
+		
 		List<Alarm> alarmList = alarmDao.findAlarmByCommonId(commonId);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/common/alarm/list");
+		mav.setViewName("alarm/alarmList");
 		mav.addObject("alarmList", alarmList);
 
 		return mav;
 	}
 
 	// auction에서 알람 리스트
-	@RequestMapping("/auction/alarm")
-	public ModelAndView getAuctionList(@RequestParam String autionId) {
-		List<Alarm> alarmList = alarmDao.findAlarmByCommonId(autionId);
+	@RequestMapping("/auction/alarm/list")
+	public ModelAndView getAuctionList(@RequestParam String aucId) {
+		List<Alarm> alarmList = alarmDao.findAlarmByCommonId(aucId);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/auction/alarm/list");
+		mav.setViewName("alarm/alarmList");
 		mav.addObject("alarmList", alarmList);
 
 		return mav;

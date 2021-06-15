@@ -9,17 +9,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.yanado.dao.AlarmDAO;
 import com.yanado.dto.Alarm;
 
-@RequestMapping("/alarm/read")
+
 @Controller
 public class ReadAlarmController {
 	@Autowired
 	private AlarmDAO alarmDao;
 
 	// 알람상세보기
+	@RequestMapping("/alarm/read")
 	public ModelAndView read(@RequestParam String alarmId) {
 		Alarm alarm = alarmDao.findAlarmByAlarmId(alarmId);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("readAlarm");
+		mav.setViewName("alarm/alarmRead");
 		mav.addObject("alarm", alarm);
 
 		return mav;
