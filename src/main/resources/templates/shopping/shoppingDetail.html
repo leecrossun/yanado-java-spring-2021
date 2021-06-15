@@ -94,7 +94,7 @@
 							</div>
 						</div>
 						
-												<div class="p-t-33">
+						<div class="p-t-33">
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-203 flex-c-m respon6">Stock</div>
 
@@ -102,6 +102,20 @@
 									<div class="rs1-select2 bor8 bg0">
 										<p style="margin: 1em;" align='center'>
 											<span th:text="${shopping.stock}">0</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="p-t-33">
+							<div class="flex-w flex-r-m p-b-10">
+								<div class="size-203 flex-c-m respon6">Seller</div>
+
+								<div class="size-204 respon6-next">
+									<div class="rs1-select2 bor8 bg0">
+										<p style="margin: 1em;" align='center'>
+											<span th:text="${shopping.product.supplierId}">판매자없음</span>
 										</p>
 									</div>
 								</div>
@@ -126,7 +140,7 @@
 						<div class="tab-pane fade show active" id="description"
 							role="tabpanel">
 							<div class="how-pos2 p-lr-15-md" align="center">
-								<p class="stext-102 cl6" th:text="${common.product.content}"></p>
+								<p class="stext-102 cl6" th:text="${shopping.product.content}"></p>
 							</div>
 						</div>
 					</div>
@@ -139,13 +153,13 @@
 						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
 						style="margin: 3%">
 						<a style="color: black;"
-							th:href='@{/shopping/update(shoppingId=${shopping.commonId})}'>수정</a>
+							th:href='@{/shopping/update(shoppingId=${shopping.shoppingId})}'>수정</a>
 					</button>
 					<button
 						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
 						style="margin: 3%">
 						<a style="color: black;"
-							th:href='@{/shopping/delete(shoppingId=${shopping.commonId})}'>삭제</a>
+							th:href='@{/shopping/delete(shoppingId=${shopping.shoppingId})}'>삭제</a>
 					</button>
 				</div>
 			</div>
@@ -242,7 +256,7 @@
 
 		/*---------------------------------------------*/
 
-		$('.js-join-common')
+		$('.js-join-shopping')
 				.each(
 						function() {
 
@@ -255,15 +269,15 @@
 											function() {
 
 												swal(nameProduct,
-														"is joined common !",
+														"is joined shopping !",
 														"success");
 
-												location.href = "[[@{/common/join(commonId=${common.common.commonId})}]]";
+												location.href = "[[@{/shopping/join(shoppingId=${shopping.shoppingId})}]]";
 
 											});
 						});
 
-		$('.js-cancel-common')
+		$('.js-cancel-shopping')
 				.each(
 						function() {
 
@@ -276,10 +290,10 @@
 											function() {
 
 												swal(nameProduct,
-														"is canceled common !",
+														"is canceled shopping !",
 														"success");
 
-												location.href = "[[@{/common/cancel(commonId=${common.common.commonId})}]]";
+												location.href = "[[@{/shopping/cancel(shoppingId=${shopping.shoppingId})}]]";
 
 											});
 						});

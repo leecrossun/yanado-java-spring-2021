@@ -41,9 +41,18 @@ public class ShoppingDAO {
 	
 	// Shopping 삭제 (cascade Product)
 	@Transactional
-	public void deleteShopping(Shopping shopping) throws DataAccessException 
+	public void deleteShopping(String shoppingId) throws DataAccessException 
 	{
-		em.remove(shopping);
+		Shopping result;
+		TypedQuery<Shopping> query;
+		try {
+			query = em.createNamedQuery("getShoppingByshoppingId", Shopping.class);
+			query.setParameter("id", shoppingId);
+			result = (Shopping) query.getSingleResult();
+			em.remove(result);
+		} catch (NoResultException ex) {
+			System.out.println("fail getShopping");
+		}
 	}
 	
 	// 모든 Shopping 가져오기 
