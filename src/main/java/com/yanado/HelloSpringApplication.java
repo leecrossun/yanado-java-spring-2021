@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @RestController
 @MapperScan
+@EnableScheduling
 public class HelloSpringApplication {
 
 	@GetMapping("/")
