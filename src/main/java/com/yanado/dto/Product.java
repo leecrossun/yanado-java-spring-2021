@@ -1,5 +1,6 @@
 package com.yanado.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -7,14 +8,17 @@ import javax.validation.constraints.NotNull;
 public class Product {
 	@Id
 	@NotNull
+	@Column(name="PRODUCTID")
 	String productId;
 
 	@NotNull
+	@Column(name="PRODUCTNAME")
 	String productName;
 
 	@NotNull
 	String category;
-
+	
+	@Column(name="DETAILCATEGORY")
 	String detailCategory;
 	String image;
 	String attribute1;
@@ -28,6 +32,7 @@ public class Product {
 	int delivery;
 
 	@NotNull
+	@Column(name="SUPPLIERID")
 	String supplierId;
 
 
