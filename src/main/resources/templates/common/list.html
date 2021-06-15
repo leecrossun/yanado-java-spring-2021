@@ -83,14 +83,34 @@
 				<!-- Search product -->
 				<div class="dis-none panel-search w-full p-t-10 p-b-15">
 					<div class="bor8 dis-flex p-l-15">
-						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04"
+							id="search">
 							<i class="zmdi zmdi-search"></i>
 						</button>
 
 						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text"
-							name="search-product" placeholder="Search">
+							id="search-product" name="search-product" placeholder="Search"
+							 onkeyup="if(window.event.keyCode==13){ search_onclick_submit( this.value, 0) }">
 					</div>
 				</div>
+
+				<script type="text/javascript">
+					function search_onclick_submit(searchKey, flag) {
+						
+						var p = 1;
+						
+						if(searchKey == ''){
+							searchKey = '[[${s.search}]]';
+						}
+						
+						if(flag == 1){
+							p =  [[ ${s.page} ]] + 1;
+						} 
+						
+						var url = "/common/search?page="+p+"&searchKey="+searchKey;
+						location.href = url;
+					}
+				</script>
 
 				<!-- Filter -->
 				<div class="dis-none panel-filter w-full p-t-10">
@@ -100,20 +120,17 @@
 							<div class="mtext-102 cl2 p-b-15">Sort By</div>
 							<!-- class 마지막에 filter-link-active 문자열 삽입 -->
 							<ul>
-								<li class="p-b-6"><a href="#"
-									class="filter-link stext-106 trans-04 filter-link-active">
+								<li class="p-b-6"><a th:href="@{/common/sort(page=1, sortKey='regDate')}"
+									class="filter-link stext-106 trans-04">
 										Newness </a></li>
 
-								<li class="p-b-6"><a href="#"
+								<li class="p-b-6"><a th:href="@{/common/sort(page=1, sortKey='startDate')}"
 									class="filter-link stext-106 trans-04"> startDate </a></li>
 
-								<li class="p-b-6"><a href="#"
+								<li class="p-b-6"><a th:href="@{/common/sort(page=1, sortKey='endDate')}"
 									class="filter-link stext-106 trans-04"> EndDate </a></li>
 
-								<li class="p-b-6"><a href="#"
-									class="filter-link stext-106 trans-04"> Name </a></li>
-
-								<li class="p-b-6"><a href="#"
+								<li class="p-b-6"><a th:href="@{/common/sort(page=1, sortKey='participants')}"
 									class="filter-link stext-106 trans-04"> Join </a></li>
 
 							</ul>
@@ -123,11 +140,11 @@
 							<div class="mtext-102 cl2 p-b-15">Progress</div>
 
 							<ul>
-								<li class="p-b-6"><a href="#"
-									class="filter-link stext-106 trans-04 filter-link-active">
+								<li class="p-b-6"><a th:href="@{/common/filter(page=1, filterKey='2')}"
+									class="filter-link stext-106 trans-04">
 										Less Than </a></li>
 
-								<li class="p-b-6"><a href="#"
+								<li class="p-b-6"><a th:href="@{/common/filter(page=1, filterKey='3')}"
 									class="filter-link stext-106 trans-04"> Over Than </a></li>
 
 							</ul>
@@ -138,14 +155,14 @@
 							<div class="mtext-102 cl2 p-b-15">Status</div>
 
 							<ul>
-								<li class="p-b-6"><a href="#"
-									class="filter-link stext-106 trans-04 filter-link-active">
+								<li class="p-b-6"><a th:href="@{/common/filter(page=1, filterKey='1')}"
+									class="filter-link stext-106 trans-04">
 										Before </a></li>
 
-								<li class="p-b-6"><a href="#"
+								<li class="p-b-6"><a th:href="@{/common/filter(page=1, filterKey='0')}"
 									class="filter-link stext-106 trans-04"> Ing </a></li>
 
-								<li class="p-b-6"><a href="#"
+								<li class="p-b-6"><a th:href="@{/common/filter(page=1, filterKey='5')}"
 									class="filter-link stext-106 trans-04"> End </a></li>
 
 							</ul>
@@ -154,14 +171,14 @@
 				</div>
 			</div>
 			<div class="row isotope-grid">
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women" th:if="${not #lists.isEmpty(commonList) && commonList != null }"
-				th:each="common, index : ${commonList}">
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women"
+					th:if="${not #lists.isEmpty(commonList) && commonList != null }"
+					th:each="common, index : ${commonList}">
 					<!-- Block2 -->
-					<div class="block2" >
+					<div class="block2">
 
 						<div class="block2-pic hov-img0">
-							 <img src="../../static/images/test.png"
-								alt="IMG-PRODUCT">
+							<img src="../../static/images/test.png" alt="IMG-PRODUCT">
 							<a th:href="@{/common/read(commonId=${common.common.commonId})}"
 								class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 								Quick View </a>
@@ -193,11 +210,23 @@
 			</div>
 
 			<!-- Load more -->
-			<div class="flex-c-m flex-w w-full p-t-45">
-				<a href="#"
+			<div class="flex-c-m flex-w w-full p-t-45" th:if="${total - (12 * s.page) > 0}" th:switch="${flag}" >
+				 <span th:case="0"> <a th:href="@{/common/list(page=${s.page}+1)}"
 					class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-					Load More </a>
-			</div>
+					Load More </a> </span>
+					
+					 <span th:case="1"> <a href="javascript:search_onclick_submit('', 1);"
+					class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+					Load More </a> </span>
+					
+					 <span th:case="2"> <a th:href="@{/common/sort(page=${s.page+1}, sortKey=${s.search})}"
+					class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+					Load More </a> </span>
+					
+					 <span th:case="3"> <a th:href="@{/common/list(page=${s.page}+1)}"
+					class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+					Load More </a> </span>
+			</div> 
 		</div>
 	</div>
 
