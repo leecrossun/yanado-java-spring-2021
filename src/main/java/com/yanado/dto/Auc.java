@@ -21,6 +21,9 @@ public class Auc {
 	
 	Product product;
 	
+	public Auc() {
+	}
+	
 	public Auc(String aucNo, String userId, int highestPrice,Date startDate, Date endDate) {
 		this.aucNo = aucNo;
 		this.userId = userId;

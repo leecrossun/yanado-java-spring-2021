@@ -1,5 +1,7 @@
 package com.yanado.controller.auc;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @SessionAtrributes("auc")
 public class RegisterAucController {
@@ -9,6 +11,7 @@ public class RegisterAucController {
 	@ModelAttribute("auc")
 	public Auc formBacking(HttpServletRequest request) {
 		Auc auc = new Auc();
+
 		return auc;
 	}
 	@RequestMapping(value='auc/register',method=RequestMethod.GET)
