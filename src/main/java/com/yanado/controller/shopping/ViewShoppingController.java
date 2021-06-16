@@ -58,10 +58,11 @@ public class ViewShoppingController {
 	
 	// 내가 올린 쇼핑 리스트
 	@RequestMapping("/my")
-	public ModelAndView viewShoppingByUserId(@RequestParam("userId") String userId){
+	public ModelAndView viewShoppingByUserId(@RequestParam String userId){
 		List<Shopping> shopping = shoppingDAO.getShoppingByUserId(userId);
 		ModelAndView mav = new ModelAndView("shoppingList");
-		mav.addObject("shopping", shopping);
+		mav.setViewName("shopping/myList");
+		mav.addObject("shoppingList", shopping);
 		return mav;
 		
 	}
