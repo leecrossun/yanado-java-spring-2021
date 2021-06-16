@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.yanado.dao.ShoppingDAO;
 import com.yanado.dto.Shopping;
@@ -32,8 +33,11 @@ public class CreateShoppingController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String form() {
-		return "shopping/form";
+	public ModelAndView form() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("shopping/form");
+		mav.addObject("formtype", "update");
+		return mav;
 	}
 
 
@@ -47,7 +51,7 @@ public class CreateShoppingController {
 
 		//status.setComplete();
 		service.createShopping(shopping);
-		return "shopping/view/all";
+		return "redirect:/shopping/view/all";
 	}
 
 }
