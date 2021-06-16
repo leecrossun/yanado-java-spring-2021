@@ -9,12 +9,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.yanado.dao.ShoppingDAO;
 import com.yanado.dto.Product;
 import com.yanado.dto.Shopping;
+import com.yanado.service.ShoppingService;
 
 @Controller
 @SessionAttributes("shopping")
@@ -23,6 +26,9 @@ public class UpdateShoppingController {
 	
 	@Autowired
 	private ShoppingDAO shoppingDAO;
+	
+	@Autowired
+	private ShoppingService service;
 	
 	@ModelAttribute("shopping")
 	public Shopping formBacking(HttpServletRequest request) {
@@ -33,14 +39,22 @@ public class UpdateShoppingController {
 		return shopping;
 	}
 
-	@RequestMapping(value = "update", method = RequestMethod.GET)
-	public String form() {
-		return "shopping/form";
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView form(@RequestParam String shoppingId) {
+		System.out.println(shoppingId);
+		ModelAndView mav = new ModelAndView();
+		Shopping shopping = shoppingDAO.getShoppingByshoppingId(shoppingId);
+		System.out.println(shopping.getProduct().getProductId());
+		mav.setViewName("shopping/form");
+		mav.addObject("shopping", shopping);
+		mav.addObject("formtype", "update");
+		
+		return mav;
 	}
 
 
-	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String createShopping(@Valid @ModelAttribute("shopping") Shopping shopping, BindingResult result,
+	@RequestMapping(method = RequestMethod.POST)
+	public String updateShopping(@Valid @ModelAttribute("shopping") Shopping shopping, BindingResult result,
 			SessionStatus status) {
 
 		if (result.hasErrors()) {
@@ -48,8 +62,8 @@ public class UpdateShoppingController {
 		}
 
 		status.setComplete();
-		shoppingDAO.updateShopping(shopping);
-		return "shopping/list";
+		service.updateShopping(shopping);
+		return "redirect:/shopping/view/detail?shoppingId=" + shopping.getShoppingId();
 	}
 
 }

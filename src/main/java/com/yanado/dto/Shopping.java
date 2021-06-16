@@ -7,26 +7,26 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 
-//,
-//@NamedQuery
-//(
-//		name = "getShoppingList",
-//		query = "SELECT s FROM Shopping s"
-//)
 @SuppressWarnings("serial")
 @Entity
 @NamedQueries({
@@ -52,20 +52,16 @@ import javax.persistence.NamedNativeQuery;
 	)
 	
 })
-/*
- * @NamedNativeQueries({
- * 
- * @NamedNativeQuery( name = "getShoppingList", query =
- * "SELECT shoppingid, productid, stock, status, published FROM shopping",
- * resultClass=Shopping.class ) })
- */
+
 public class Shopping implements Serializable {
 	@Id
 	@Column(name="SHOPPINGID")
+	@GeneratedValue(generator = "SHOPPING_GEN")
+	@GenericGenerator(name = "SHOPPING_GEN", strategy = "uuid")
 	String shoppingId;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn(name="PRODUCTID")
+	@ManyToOne
+	@JoinColumn(name="PRODUCTID")
 	Product product;
 	
 	int stock;
@@ -139,6 +135,10 @@ public class Shopping implements Serializable {
 
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+	
+	public void setStock(String stock) {
+		this.stock = Integer.parseInt(stock);
 	}
 
 	public void setPublished(Date published) {
