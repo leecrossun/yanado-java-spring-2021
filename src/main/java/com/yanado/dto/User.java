@@ -9,7 +9,9 @@ import javax.persistence.Transient;
 @Entity
 @Table(name="MEMBER")
 public class User {
-	
+
+	private int userIndex;
+
 	@Id
 	@Column(name="USERID")
 	private String userId;		//아이디
@@ -67,10 +69,11 @@ public class User {
 	}
 	
 	// 회원 가입 시 사용
-	public User(String userId, String password, String userName, 
+	public User(int userIndex, String userId, String password, String userName, 
 			String gender, String birth, String address, String phoneNumber, String email) {
 		super();
 		
+		this.userIndex = userIndex;
 		this.userId = userId;
 		this.password = password;
 		this.userName = userName;
@@ -81,6 +84,14 @@ public class User {
 		this.email = email;
 	}
 
+	public int getUserIndex() {
+		return userIndex;
+	}
+	
+	public void setUserIndex(int userIndex) {
+		this.userIndex = userIndex;
+	}
+	
 	public String getUserId() {
 		return userId;
 	}
