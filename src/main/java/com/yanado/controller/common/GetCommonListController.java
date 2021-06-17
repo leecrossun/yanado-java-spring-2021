@@ -13,8 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.yanado.dao.ProductDAO;
 import com.yanado.dto.Common;
 import com.yanado.dto.CommonDTO;
-import com.yanado.dto.Criteria;
 import com.yanado.dto.Product;
+import com.yanado.dto.Search;
 import com.yanado.service.CommonService;
 
 @Controller
@@ -28,11 +28,10 @@ public class GetCommonListController {
 
 	// 공동구매 리스트
 	@RequestMapping("/common/list")
-	public ModelAndView getList(@RequestParam(required = false, defaultValue="0") int page) {
-		//int total = commonService.getCount();
-		//Criteria c = new Criteria(page, total);
-		
-		List<Common> common = commonService.findAllCommon(page);
+	public ModelAndView getList(@RequestParam(required = false, defaultValue="1") int page) {
+		Search s = new Search(null, page);
+		List<Common> common = commonService.findAllCommon(s);
+		//List<Common> common = commonService.findAll();
 		List<CommonDTO> commonList = new ArrayList<CommonDTO>();
 		
 		for (Common com : common) {
@@ -45,7 +44,13 @@ public class GetCommonListController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/list");
 		mav.addObject("commonList", commonList);
-
+		mav.addObject("flag", 0);
+		
+		int total = commonService.getCount();
+		
+		mav.addObject("total", total);
+		mav.addObject("s", s);
+		
 		return mav;
 	}
 

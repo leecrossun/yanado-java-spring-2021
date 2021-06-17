@@ -1,28 +1,21 @@
 package com.yanado.dto;
 
 public class Search {
-	String condition;
 	String search;
+	int searchInt = 0;
 	int start;
 	int end;
+	int block = 12;
+	int page;
 
 	public Search() {
 	}
 
-	public Search(String condition, String search, int start, int end) {
-		super();
-		this.condition = condition;
+	public Search(String search, int page) {
 		this.search = search;
-		this.start = start;
-		this.end = end;
-	}
-
-	public String getCondition() {
-		return condition;
-	}
-
-	public void setCondition(String condition) {
-		this.condition = condition;
+		this.page = page;
+		this.start =  (page - 1)  * block;
+		this.end = page * block;
 	}
 
 	public String getSearch() {
@@ -37,16 +30,26 @@ public class Search {
 		return start;
 	}
 
-	public void setStart(int start) {
-		this.start = start;
-	}
-
 	public int getEnd() {
 		return end;
 	}
 
-	public void setEnd(int end) {
-		this.end = end;
+	public int getPage() {
+		return page;
 	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public int getSearchInt() {
+		return searchInt;
+	}
+
+	public void setSearchInt(int searchInt) {
+		this.searchInt = searchInt;
+	}
+	
+	
 
 }

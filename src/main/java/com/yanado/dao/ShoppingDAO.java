@@ -1,137 +1,127 @@
 package com.yanado.dao;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.yanado.dto.Product;
 import com.yanado.dto.Shopping;
 
 @Service
 public class ShoppingDAO {
-	
-	//private static JDBCUtil jdbcUtil = null;
-	private SqlSessionFactory sqlSessionFactory;
-		
-	String namespace = ""; // xml 작성 시 추가할 것
 
-	public ShoppingDAO() {/*
-		String resource = "mybatis-config.xml";
-		InputStream inputStream;
+	// JPA
+	@PersistenceContext
+	public EntityManager em;
+	
+	@Transactional
+	public void createShopping(Shopping shopping, Product product) throws DataAccessException
+	{
+		em.persist(product);
+		em.persist(shopping);
+	}
+	
+	@Transactional
+	public void updateShopping(Shopping shopping, Product product) throws DataAccessException
+	{
+		em.merge(product);
+		em.merge(shopping);
+	}
+	
+	// Shopping 삭제 (cascade Product)
+	@Transactional
+	public void deleteShopping(String shoppingId) throws DataAccessException 
+	{
+		Shopping result;
+		TypedQuery<Shopping> query;
 		try {
-			inputStream = Resources.getResourceAsStream(resource);
-		} catch (IOException e) {
-			throw new IllegalArgumentException(e);
-		}
-		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);*/
-	}
-	
-	public int createShopping(Shopping shopping) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try
-		{
-			// statement 추가할 것
-			int result = sqlSession.insert(namespace + "", shopping);
-			
-			if (result > 0) {sqlSession.commit();}
-			return result;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return 0;
-		} finally {
-			sqlSession.close();
+			query = em.createNamedQuery("getShoppingByshoppingId", Shopping.class);
+			query.setParameter("id", shoppingId);
+			result = (Shopping) query.getSingleResult();
+			Product product = result.getProduct();
+			em.remove(result);
+			em.remove(product);
+		} catch (NoResultException ex) {
+			System.out.println("fail getShopping");
 		}
 	}
 	
-	public int updateShopping(Shopping shoppingId) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try
-		{
-			// statement 추가할 것
-			int result = sqlSession.update(namespace + "", shoppingId);
-			
-			if (result > 0) {sqlSession.commit();}
-			return result;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return 0;
-		} finally {
-			sqlSession.close();
-		}
-	}
-	
-	public int deleteShopping(String shoppingId) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try
-		{
-			// statement 추가할 것
-			int result = sqlSession.delete(namespace + "", shoppingId);
-			
-			if (result > 0) {sqlSession.commit();}
-			return result;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return 0;
-		} finally {
-			sqlSession.close();
-		}
-	}
-	
-	// 모든 Shopping 가져오기 (필요없으면 삭제)
-	public List<Shopping> getShoppingList () {
-		
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try
-		{
-			// statement 추가할 것
-			List<Shopping> shopping = sqlSession.selectList(namespace + "");
-			return shopping;
-		} catch (Exception e) {
-			e.printStackTrace();
+	// 모든 Shopping 가져오기 
+	@Transactional
+	public List<Shopping> getShoppingList () throws DataAccessException
+	{
+		List<Shopping> result;
+		TypedQuery<Shopping> query;
+		try {
+			query = em.createNamedQuery("getShoppingList", Shopping.class);
+			result = (List<Shopping>) query.getResultList();
+		} catch (NoResultException ex) {
+			System.out.println("fail getShoppingList");
 			return null;
-		} finally {
-			sqlSession.close();
 		}
+		System.out.println("success getShoppingList");
+		return result;
+	}
+	
+	// Shopping detail 가져오기
+	public Shopping getShoppingByshoppingId(String shoppingId) throws DataAccessException
+	{
+		Shopping result;
+		TypedQuery<Shopping> query;
+		try {
+			query = em.createNamedQuery("getShoppingByshoppingId", Shopping.class);
+			query.setParameter("id", shoppingId);
+			result = (Shopping) query.getSingleResult();
+		} catch (NoResultException ex) {
+			System.out.println("fail getShopping");
+			return null;
+		}
+		System.out.println("success getShopping");
+		return result;
 	}
 	
 	// 카데고리 별로 Shopping 가져오기
-	public List<Shopping> getShoppingByCategory (String detailCategory) {
-		
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try
-		{
-			// statement 추가할 것
-			List<Shopping> shopping = sqlSession.selectList(namespace + "", detailCategory);
-			return shopping;
-		} catch (Exception e) {
-			e.printStackTrace();
+	@Transactional
+	public List<Shopping> getShoppingByCategory (String detailCategory) throws DataAccessException
+	{
+		List<Shopping> result;
+		TypedQuery<Shopping> query = em.createNamedQuery("getShoppingByCategory", Shopping.class);
+		query.setParameter("id", detailCategory);
+		try {
+			result = (List<Shopping>) query.getResultList();
+		} catch (NoResultException ex) {
 			return null;
-		} finally {
-			sqlSession.close();
 		}
+		return result;
 	}
 	
 	// 내가 올린 Shopping 가져오기
-	public List<Shopping> getShoppingByUserId (String userId) {
-		
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try
-		{
-			// statement 추가할 것
-			List<Shopping> shopping = sqlSession.selectList(namespace + "", userId);
-			return shopping;
-		} catch (Exception e) {
-			e.printStackTrace();
+	@Transactional
+	public List<Shopping> getShoppingByUserId (String userId) throws DataAccessException 
+	{
+		ArrayList<Shopping> result;
+		TypedQuery<Shopping> query = em.createNamedQuery("getShoppingByUserId", Shopping.class);
+		query.setParameter("id", userId);
+		try {
+			result = (ArrayList<Shopping>) query.getResultList();
+		} catch (NoResultException ex) {
 			return null;
-		} finally {
-			sqlSession.close();
 		}
+		return result;
 	}
 	
 

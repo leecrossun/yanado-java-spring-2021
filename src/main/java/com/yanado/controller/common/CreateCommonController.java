@@ -1,5 +1,8 @@
 package com.yanado.controller.common;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -54,6 +57,18 @@ public class CreateCommonController {
 		}
 
 		status.setComplete();
+		
+		Date today = new Date(System.currentTimeMillis());
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		String to = transFormat.format(today);
+		String start = transFormat.format(common.getStartDate());
+		
+		if(to.equals(start)) {
+			common.setStatus(2);
+		}
+			
+		
 		commonService.insertCommon(common);
 
 		red.addAttribute("commonId", common.getCommonId());

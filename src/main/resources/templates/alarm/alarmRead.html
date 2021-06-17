@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Common</title>
+<title>Alarm</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -68,18 +68,16 @@
 				<div class="tab01">
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist">
-						<li class="nav-item p-b-10">Common From</li>
+						<li class="nav-item p-b-10">Alarm</li>
 					</ul>
 
 					<!-- Tab panes -->
 					<div class="tab-content p-t-43" align='center'>
 
-						<form
-							th:action="@{${type} == 2? '/common/update' : '/common/create'}"
-							th:object="${common}" method="post">
+						<form th:action="@{/alarm/create}" th:object="${alarm}"
+							method="post">
 
-							<input type="hidden" name="commonId" th:field="*{commonId}">
-							<input type="hidden" name="userId" th:field="*{userId}">
+							<input type="hidden" name="alarmId" th:field="*{alarmId}">
 
 							<!-- - -->
 							<div class="tab-pane fade show active" id="description"
@@ -87,101 +85,69 @@
 
 								<div class="how-pos2 p-lr-15-md">
 
-									<div class="flex-w flex-r-m p-b-10"
-										th:if="${type} == 2">
-										<div class="size-203 flex-c-m respon6">Product</div>
-
-										<div class="size-204 respon6-next">
-											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="productId" th:field="*{productId}"
-													style="padding: 10px; width:100%;text-align: center;" readOnly>
-											</div>
-
-										</div>
-									</div>
-
-									<div class="flex-w flex-r-m p-b-10"
-										th:if="${type} != 2">
-										<div class="size-203 flex-c-m respon6">Product</div>
-
-										<div class="size-204 respon6-next">
-											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="productId" th:field="*{productId}"
-													style="padding: 10px; width:100%;text-align: center;">
-											</div>
-
-										</div>
-									</div>
-
-									<div class="flex-w flex-r-m p-b-10"
-										th:if="${type} != 2">
-										<div class="size-203 flex-c-m respon6"></div>
-
-										<div class="size-204 respon6-next">
-											<div style="width:100%">
-												<button th:onclick="window.open('/product/find', '_blank', 'width=800, height=600'); return false;" th:href="@{/product/find}"
-													style="padding: 10px; background-color: #E2E2E2; margin-right: 10px;">Search</button>
-												<button th:onclick="window.open('/product/create', '_blank', 'width=1000, height=800'); return false;" th:href="@{/product/create}"
-													style="padding: 10px; background-color: #E2E2E2; margin-left: 10px;">Create</button>
-											</div>
-										</div>
-									</div>
-
-
-
 									<div class="flex-w flex-r-m p-b-10">
-										<div class="size-203 flex-c-m respon6">Start Date</div>
+										<div class="size-203 flex-c-m respon6">AlarmId</div>
 
 										<div class="size-204 respon6-next">
-											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="startDate" id="startDate"
-													th:field="*{startDate}" th:value="*{startDate}" readOnly
-													style="padding: 10px;width:100%;text-align: center;" />
+											<div class="rs1-select2 bor8 bg0" th:text="${alarm.alarmId}" style="padding: 10px;">
+											</div>
 
+										</div>
+									</div>
+
+									<div class="p-t-33">
+										<div class="flex-w flex-r-m p-b-10">
+											<div class="size-203 flex-c-m respon6">Type</div>
+
+											<div class="size-204 respon6-next">
+												<div class="rs1-select2 bor8 bg0" th:switch="${alarm.type}" style="padding: 10px;">
+													<span th:case="1">Result</span> <span th:case="2">Notice</span>
+													<span th:case="3">ETC</span>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="p-t-33" th:if="${alarm.type == 1}">
+										<div class="flex-w flex-r-m p-b-10">
+											<div class="size-203 flex-c-m respon6">Price</div>
+
+											<div class="size-204 respon6-next">
+												<div class="rs1-select2 bor8 bg0" th:text="${alarm.price}" style="padding: 10px;">
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="p-t-33" th:if="${alarm.type == 1}">
+										<div class="flex-w flex-r-m p-b-10">
+											<div class="size-203 flex-c-m respon6">deadline</div>
+
+											<div class="size-204 respon6-next">
+												<div class="rs1-select2 bor8 bg0"
+													th:text="${alarm.deadline}" style="padding: 10px;"></div>
 											</div>
 										</div>
 									</div>
 
 
-									<div class="flex-w flex-r-m p-b-10">
-										<div class="size-203 flex-c-m respon6">End Date</div>
+									<div class="p-t-33">
+										<div class="flex-w flex-r-m p-b-10">
+											<div class="size-203 flex-c-m respon6">Message</div>
 
-										<div class="size-204 respon6-next">
-											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="endDate" id="endDate"
-													th:field="*{EndDate}" style="padding: 10px;width:100%;text-align: center;" readOnly/>
+											<div class="size-204 respon6-next">
+												<div class="rs1-select2 bor8 bg0" style="width: 100%">
+
+													<textarea rows="5" cols="30"
+														style="width: 100%; text-align: center;padding: 10px;"
+														th:text="${alarm.message}" readonly></textarea>
+
+												</div>
 											</div>
 										</div>
 									</div>
 
-									<div class="flex-w flex-r-m p-b-10">
-										<div class="size-203 flex-c-m respon6">DeadLine</div>
-
-										<div class="size-204 respon6-next">
-											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="deadline" id="deadline"
-													th:field="*{deadline}" style="padding: 10px;width:100%;text-align: center;text-align: center;" readOnly />
-											</div>
-										</div>
-									</div>
-
-									<div class="flex-w flex-r-m p-b-10">
-										<div class="size-203 flex-c-m respon6">Min Num</div>
-
-										<div class="size-204 respon6-next">
-											<div class="rs1-select2 bor8 bg0">
-												<input type="number" name="min" th:field="*{min}"
-													th:value="*{min}" style="padding: 10px; text-align: center;width:100%;text-align: center;" />
-											</div>
-										</div>
-									</div>
-
-									<div class="flex-w flex-r-m p-b-10">
-										<input type="submit"
-											th:value="${type} == 2 ? 'update' : 'create'"
-											class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04"
-											style="margin-top: 3%; background-color: #E2E2E2; color: black;" />
-									</div>
 								</div>
 							</div>
 						</form>
@@ -241,75 +207,5 @@
 	<!--===============================================================================================-->
 	<script src="../../static/js/main.js"></script>
 
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<link rel="stylesheet"
-		href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css">
-	<script>
-	
-	$('#startDate').datepicker({
-		controlType:'select',
-		oneLine:true,
-		dateFormat: 'yy-mm-dd',
-		prevText: '이전 달',
-	    nextText: '다음 달',
-	    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-	    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-	    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-	    showMonthAfterYear: true,
-	    yearSuffix: '년',
-	    minDate: 0,
-	    
-	    onClose: function( selectedDate ) {    
-            // 시작일(fromDate) datepicker가 닫힐때
-            // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-            $("#endDate").datepicker( "option", "minDate", selectedDate );
-        }                
-	});
-	 
-	$('#endDate').datepicker({
-	    controlType:'select',
-	    oneLine:true,
-	    dateFormat: 'yy-mm-dd',
-	    prevText: '이전 달',
-	    nextText: '다음 달',
-	    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-	    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-	    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-	    showMonthAfterYear: true,
-	    yearSuffix: '년',
-	    
-	    onClose: function( selectedDate ) {
-            $("#deadline").datepicker( "option", "minDate", selectedDate );
-            $("#startDate").datepicker( "option", "maxDate", selectedDate );
-        }
-
-	});
-	
-	$('#deadline').datepicker({
-	    controlType:'select',
-	    oneLine:true,
-	    dateFormat: 'yy-mm-dd',
-	    prevText: '이전 달',
-	    nextText: '다음 달',
-	    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-	    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-	    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-	    showMonthAfterYear: true,
-	    yearSuffix: '년',
-	    
-	    onClose: function( selectedDate ) {
-            $("#endDate").datepicker( "option", "maxDate", selectedDate );
-        }
-
-	    
-	});
-	</script>
 </body>
 </html>

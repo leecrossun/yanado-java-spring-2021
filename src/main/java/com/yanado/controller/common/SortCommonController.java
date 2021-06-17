@@ -16,18 +16,18 @@ import com.yanado.dto.Search;
 import com.yanado.service.CommonService;
 
 @Controller
+public class SortCommonController {
 
-public class SearchCommonController {
 	@Autowired
 	private CommonService commonService;
 
-	// 공동구매 찾기
-	@RequestMapping("/common/search")
-	public ModelAndView searchList(@RequestParam(required = false, defaultValue = "1") int page, String searchKey) {
-		Search search = new Search(searchKey, page);
+	@RequestMapping("/common/sort")
+	public ModelAndView sortList(@RequestParam(required = false, defaultValue = "1") int page, String sortKey) {
+		Search sort = new Search(sortKey, page);
 
-		List<Common> common = commonService.findCommonBySearch(search);
+		List<Common> common = commonService.findCommonBySort(sort);
 		List<CommonDTO> commonList = new ArrayList<CommonDTO>();
+	
 
 		for (Common com : common) {
 			String productId = com.getProductId();
@@ -39,14 +39,15 @@ public class SearchCommonController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/list");
 		mav.addObject("commonList", commonList);
-		mav.addObject("flag", 1);
-		
-		int total = commonService.getSearchCount(searchKey);
-		
+		mav.addObject("flag", 2);
+
+		int total = commonService.getCount();
+
 		mav.addObject("total", total);
-		mav.addObject("s", search);
+		mav.addObject("s", sort);
 		
 
 		return mav;
 	}
+
 }

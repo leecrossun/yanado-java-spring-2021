@@ -59,13 +59,13 @@
 
 					<!-- Logo desktop -->
 					<a th:href="@{/}" class="logo"> <img
-						src="../static/images/icons/logo-01.png" alt="IMG-LOGO">
+						src="../../static/images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
 
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li><a href="#">Shopping</a>
+							<li><a href="#" th:href="@{/shopping/view/all}">Shopping</a>
 								<ul class="sub-menu">
 									<li><a href="">종목</a></li>
 									<li><a href="">종목</a></li>
@@ -75,7 +75,7 @@
 
 							<li class="active-menu"><a href="">Transaction</a></li>
 
-							<li><a th:href="@{/common/list}">Common</a></li>
+							<li><a th:href="@{/common/list(page=1)}">Common</a></li>
 
 							<li><a href="">Auction</a></li>
 							<li><a href="">MyPage</a></li>
