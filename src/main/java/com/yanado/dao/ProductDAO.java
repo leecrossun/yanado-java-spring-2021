@@ -2,7 +2,9 @@ package com.yanado.dao;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.yanado.dto.Product;
 
 @Service
+@Transactional
 public class ProductDAO {
 	
 	@Resource
