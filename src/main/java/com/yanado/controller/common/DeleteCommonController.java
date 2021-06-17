@@ -16,6 +16,7 @@ public class DeleteCommonController {
 	// 공동구매 파기하기
 	@RequestMapping("/common/delete")
 	public String delete(@RequestParam String commonId) {
+		commonService.deleteAllCommonJoin(commonId);
 		commonService.deleteCommonByCommonId(commonId);
 		
 		return "redirect:/common/list";

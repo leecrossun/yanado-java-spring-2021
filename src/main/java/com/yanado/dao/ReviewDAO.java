@@ -5,100 +5,71 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.yanado.dto.Review;
+import com.yanado.dto.Shopping;
 @Service
 public class ReviewDAO {
 	
-	//private static JDBCUtil jdbcUtil = null;
-	private SqlSessionFactory sqlSessionFactory;
+	@PersistenceContext
+	public EntityManager em;
 	
-	String namespace = ""; // xml 작성 시 추가할 것
-
-	public ReviewDAO() {/*
-		String resource = "mybatis-config.xml";
-		InputStream inputStream;
+	@Transactional
+	public List<Review> getReviewByShoppingId (String shoppingId) {
+		ArrayList<Review> result;
+		TypedQuery<Review> query = em.createNamedQuery("getReviewByShoppingId", Review.class);
+		query.setParameter("id", shoppingId);
 		try {
-			inputStream = Resources.getResourceAsStream(resource);
-		} catch (IOException e) {
-			throw new IllegalArgumentException(e);
-		}
-		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);*/
-	}
-	
-	public List<Review> getReviewByShoppingId (String reviewId) {
-		
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try
-		{
-			// statement 추가할 것
-			List<Review> review = sqlSession.selectList(namespace + "", reviewId);
-			return review;
-		} catch (Exception e) {
-			e.printStackTrace();
+			result = (ArrayList<Review>) query.getResultList();
+		} catch (NoResultException ex) {
 			return null;
-		} finally {
-			sqlSession.close();
 		}
+		return result;
 	}
 	
-	public int createReview(Review review) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try
-		{
-			// statement 추가할 것
-			int result = sqlSession.insert(namespace + "", review);
-			
-			if (result > 0) {sqlSession.commit();}
-			return result;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return 0;
-		} finally {
-			sqlSession.close();
+	@Transactional
+	public Review getReviewByReviewId (String reviewId, String shoppingId) throws DataAccessException
+	{
+		Review result;
+		TypedQuery<Review> query = em.createNamedQuery("getReviewByReviewId", Review.class);
+		query.setParameter("id", reviewId);
+		query.setParameter("id2", shoppingId);
+		try {
+			result = (Review) query.getSingleResult();
+		} catch (NoResultException ex) {
+			return null;
 		}
+		return result;
 	}
 	
-	public int updateReview(Review review) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try
-		{
-			// statement 추가할 것
-			int result = sqlSession.update(namespace + "", review);
-			
-			if (result > 0) {sqlSession.commit();}
-			return result;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return 0;
-		} finally {
-			sqlSession.close();
-		}
+	@Transactional
+	public void createReview(Review review) throws DataAccessException 
+	{
+		em.persist(review);
 	}
 	
-	public int deleteReview(String reviewId) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try
-		{
-			// statement 추가할 것
-			int result = sqlSession.delete(namespace + "", reviewId);
-			
-			if (result > 0) {sqlSession.commit();}
-			return result;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return 0;
-		} finally {
-			sqlSession.close();
-		}
+	@Transactional
+	public void updateReview(Review review) throws DataAccessException
+	{
+		em.merge(review);
+	}
+	
+	@Transactional
+	public void deleteReview(Review review) throws DataAccessException
+	{
+		em.remove(review);
 	}
 
 	
