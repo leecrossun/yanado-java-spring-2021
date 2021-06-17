@@ -1,24 +1,48 @@
 package com.yanado.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
+@Table(name="MEMBER")
 public class User {
 	
 	@Id
+	@Column(name="USERID")
 	private String userId;		//아이디
+	
+	@Column(name="USERPWD")
 	private String password;	// 비밀번호
+	
+	@Column(name="USERNAME")
 	private String userName;	// 이름
+	
+	@Column(name="USERGENDER")
 	private String gender;		// 성별
+	
+	@Column(name="USERBIRTH")
 	private String birth;		// 주민등록 앞번호? 생년월일?
+	
+	@Column(name="USERADDRESS")
 	private String address;		// 주소
+	
+	@Column(name="USERPHONE")
 	private String phoneNumber;	// 전화번호
+	
+	@Column(name="USEREMAIL")
 	private String email;		// 이메일
+	
+	@Transient // 우선 테이블에 없어서 무시 처리해두었습니다
+	@Column(name="RANKCOUNT")
 	private int rankCount;		// (주문(+), 취소(-)), 리뷰 등록(+)
 	
 	// 등급 추가...?
+	@Transient // 우선 테이블에 없어서 무시 처리해두었습니다
 	private String userMembership;
+	@Transient // 우선 테이블에 없어서 무시 처리해두었습니다
 	private String inputStr;
 
 	public User() {

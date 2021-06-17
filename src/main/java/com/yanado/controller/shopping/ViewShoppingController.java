@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yanado.dao.ReviewDAO;
 import com.yanado.dao.ShoppingDAO;
+import com.yanado.dto.Review;
 import com.yanado.dto.Shopping;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +21,9 @@ public class ViewShoppingController {
 	
 	@Autowired
 	public ShoppingDAO shoppingDAO;
+	
+	@Autowired
+	public ReviewDAO reviewDAO;
 	
 	// 모든 쇼핑 리스트
 	@RequestMapping("/all")
@@ -35,10 +40,8 @@ public class ViewShoppingController {
 	// 쇼핑 상품 상세보기
 	@RequestMapping("/detail")
 	public ModelAndView viewShoppingDetail(@RequestParam String shoppingId){
-		System.out.println(shoppingId);
 		ModelAndView mav = new ModelAndView();
 		Shopping shopping = shoppingDAO.getShoppingByshoppingId(shoppingId);
-		System.out.println(shopping.getProduct().getProductId());
 		mav.setViewName("shopping/shoppingDetail");
 		mav.addObject("shopping", shopping);
 		return mav;

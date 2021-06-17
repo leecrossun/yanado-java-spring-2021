@@ -47,6 +47,19 @@
 <link rel="stylesheet" type="text/css" href="../../static/css/util.css">
 <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
 <!--===============================================================================================-->
+<style>
+th,
+td{
+font-size:20px;
+text-align:center;
+border-collapse:collapse;
+border: none;
+padding: 10px;
+margin: 10px;
+box-shadow: 1px 1px solid black;
+}
+
+</style>
 </head>
 <body class="animsition">
 	<div th:replace="/menu :: header"></div>
@@ -148,7 +161,7 @@
 			</div>
 			<div>
 				<div class="flex-w flex-c-m m-tb-10">
-					<!-- th:if="${common.common.userId} == ${session.userId}" -->
+					<!-- th:if="${shopping.userId} == ${session.userId}" -->
 					<button
 						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
 						style="margin: 3%">
@@ -161,6 +174,12 @@
 						<a style="color: black;"
 							th:href='@{/shopping/delete(shoppingId=${shopping.shoppingId})}'>삭제</a>
 					</button>
+					<button
+						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
+						style="margin: 3%">
+						<a style="color: black;"
+							th:href='@{/review/view/all(shoppingId=${shopping.shoppingId})}'>상품리뷰</a>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -169,8 +188,8 @@
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">
-		<span class="symbol-btn-back-to-top"> <i
-			class="zmdi zmdi-chevron-up"></i>
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
 
@@ -319,4 +338,4 @@
 	<!--===============================================================================================-->
 	<script src="../../static/js/main.js"></script>
 </body>
-</html>>
+</html>

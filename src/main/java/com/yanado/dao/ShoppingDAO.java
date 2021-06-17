@@ -52,7 +52,9 @@ public class ShoppingDAO {
 			query = em.createNamedQuery("getShoppingByshoppingId", Shopping.class);
 			query.setParameter("id", shoppingId);
 			result = (Shopping) query.getSingleResult();
+			Product product = result.getProduct();
 			em.remove(result);
+			em.remove(product);
 		} catch (NoResultException ex) {
 			System.out.println("fail getShopping");
 		}
