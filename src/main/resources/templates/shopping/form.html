@@ -54,13 +54,16 @@
 	
 	<!-- 재고, 제품명, 카데고리, 이미지, 속성, 설명, 가격, 배송 -->
 	<div align="center">
-	<form th:action="@{/shopping/{type}(type=${formtype})}" th:object="${shopping}" method="post">
+	<form th:action="@{/shopping/{type}(type=${formtype})}" th:object="${shopping}" method="post" enctype="multipart/form-data">
 	<div class="title">
 	<h1>상품 판매 페이지</h1>
 	</div>
 		<p>
 			<label for="productName">상품명</label>
 			<input type="text" id="productName" th:field="*{product.productName}"/>
+		</p>
+		<p>
+			<input type="file" name="file" style="padding: 10px; width: 100%; text-align: center; margin-left: 30%">
 		</p>
 		<p>
 			<label for="stock">재고수량(단위/개)</label>

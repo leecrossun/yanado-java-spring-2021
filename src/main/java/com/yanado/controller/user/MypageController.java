@@ -58,7 +58,7 @@ public class MypageController extends HttpServlet {
 		disp.forward(request, response);
 	}
 
-	@RequestMapping("/user/list")
+	@RequestMapping("/user/list/my")
 	public ModelAndView myList(HttpServletRequest request) {
 		// UserSessionUtils uSession = new UserSessionUtils();
 		// String userId = uSession.getLoginUserId(request.getSession());
