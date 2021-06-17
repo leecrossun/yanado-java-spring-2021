@@ -49,8 +49,8 @@ public class CreateShoppingController {
 			return "shopping/form";
 		}
 
-		//status.setComplete();
 		service.createShopping(shopping);
+		status.setComplete();
 		return "redirect:/shopping/view/all";
 	}
 
