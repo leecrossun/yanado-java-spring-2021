@@ -78,6 +78,23 @@
 						</span>
 
 						<p class="stext-102 cl3 p-t-23" id="dday"></p>
+
+						<!-- 좋아요 기능!!! -->
+						<div class="block2-txt-child2 flex-r p-t-3">
+							<a
+								th:href="@{/favorite/add(productId = ${common.product.productId}, typeId = ${common.common.commonId}, type = '3')}"
+								th:if="${fav == 0}"> <img
+								class="icon-heart1 dis-block trans-04"
+								src="../../static/images/icons/icon-heart-01.png" alt="ICON">
+
+							</a> <a
+								th:href="@{/favorite/delete(productId = ${common.product.productId})}"
+								th:if="${fav == 1}"> <img
+								class="icon-heart2 dis-block trans-04"
+								src="../../static/images/icons/icon-heart-02.png" alt="ICON">
+							</a>
+						</div>
+
 						<!--  -->
 						<div class="p-t-33">
 							<div class="flex-w flex-r-m p-b-10">
@@ -135,6 +152,10 @@
 										class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-cancel-common">
 										Cancel</button>
 
+									<button th:if="${join} == 5"
+										class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-pay-common">
+										Pay</button>
+
 								</div>
 							</div>
 						</div>
@@ -186,7 +207,8 @@
 						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
 						style="margin: 3%">
 						<a style="color: black;"
-							th:href='@{/alarm/create(commonId=${common.common.commonId}, flag=1)}' onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;">알람
+							th:href='@{/alarm/create(commonId=${common.common.commonId}, flag=1)}'
+							onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;">알람
 							생성</a>
 					</button>
 
@@ -194,11 +216,12 @@
 						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
 						style="margin: 3%">
 						<a style="color: black;"
-							th:href='@{alarm/list(commonId=${common.common.commonId}, flag=1)}' onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;">알람
+							th:href='@{alarm/list(commonId=${common.common.commonId}, flag=1)}'
+							onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;">알람
 							목록</a>
 					</button>
 				</div>
-				
+
 				<!-- 여기서까지 알람  -->
 			</div>
 		</div>
@@ -335,6 +358,23 @@
 
 											});
 						});
+		
+		$('.js-pay-common')
+		.each(
+				function() {
+
+					var nameProduct = $(this).parent().parent()
+							.parent().parent().find('.js-name-detail')
+							.html();
+					$(this)
+							.on(
+									'click',
+									function() {
+
+										location.href = "[[@{/}]]"; /* 결제 창으로 넘어가기  */
+
+									});
+				});
 	</script>
 	<!--===============================================================================================-->
 	<script

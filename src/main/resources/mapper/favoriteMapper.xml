@@ -5,7 +5,9 @@
 
 	<sql id="favoriteColumns">
 		userId,
-		productId
+		productId,
+		typeId,
+		type
 	</sql>
 
 	<!-- favorite 생성 -->
@@ -13,7 +15,7 @@
 		parameterType="com.yanado.dto.Favorite">
 		INSERT INTO favorite(
 		<include refid="favoriteColumns" />
-		) VALUES ( #{userId}, #{productId} )
+		) VALUES ( #{userId}, #{productId}, #{typeId}, #{type} )
 	</insert>
 
 	<delete id="deleteFavorite"
@@ -30,13 +32,14 @@
 	</select>
 
 	<!-- 해당 유저와 비슷한 유저 찾기 -->
+	<!-- 
 	<select id="findSimilarListByUser"
 		parameterType="com.yanado.dto.User"
 		resultType="com.yanado.dto.User">
 		select * from user where gender =
 		#{gender} and
 	</select>
-
+ -->
 	<!-- 해당 상품에 좋아요를 누른 사람 -->
 	<select id="findUserByFavorite" parameterType="String"
 		resultType="com.yanado.dto.Favorite">
@@ -52,8 +55,8 @@
 		productId = #{productId}
 	</select>
 
-	<select id="findFavoriteByTop" resultType="com.yanado.dto.Product">
-		select * from product
+	<select id="findFavoriteByTop" resultType="com.yanado.dto.Favorite">
+		select * from favorite
 		where productId in ( SELECT productId FROM (select productId, count(*)
 		as count FROM favorite
 		GROUP BY productId order by count) WHERE rownum <![CDATA[ <=  ]]> 10)
