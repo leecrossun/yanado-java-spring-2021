@@ -41,7 +41,7 @@ public class ReadCommonController {
 		
 		int join = commonService.findCommonJoin(new CommonJoin(common.getCommonId(), userId));
 		
-		Favorite favorit = favoritDao.findFavorite(new Favorite(userId, product.getProductId()));
+		Favorite favorit = favoritDao.findFavorite(new Favorite(userId, product.getProductId(), commonId, 3));
 		int fav = (favorit == null? 0 : 1); 
 		
 		mav.addObject("join", join);

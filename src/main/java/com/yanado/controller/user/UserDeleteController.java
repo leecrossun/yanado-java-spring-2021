@@ -1,31 +1,23 @@
 package com.yanado.controller.user;
 
-import java.io.IOException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.yanado.dao.UserDAO;
+import com.yanado.service.UserService;
 
 //회원 삭제 작업
-@WebServlet("/user/delete")
-public class UserDeleteController extends HttpServlet {
+@Controller
+public class UserDeleteController {
 	
-	private static final long serialVersionUID = 1L;
-
-	protected void service(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-
-		String userId = request.getParameter("userId");
-		int deleteCode = UserDAO.getInstance().deleteUser(userId);	// 1이면 성공, 0이면 실패
-		System.out.println("deleteCode: " + deleteCode);
-
-		//json 반환
-		String result = String.format("[{'res' : '%d'}, {'id' : '%s'}]", deleteCode, userId);
-		response.getWriter().println(result);
+	@Autowired
+	private UserService userService;
+	
+	@RequestMapping("/user/delete")
+	public String userDelete(@RequestParam String userId) {
+		userService.deleteUser(userId);
+		
+		return "redirect:/user/mainPage";
 	}
 }

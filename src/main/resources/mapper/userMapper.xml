@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanado.dao.UserDAO">
+	
+	<select id="user_list" parameterType="String" resultType="com.yanado.dto.User">
+		select * from user order by userIndex DESC
+	</select>
+	
+	<select id="user_byUserId" parameterType="String" resultType="com.yanado.dto.User">
+		select * from user where userId=#{userId}
+	</select>
+	
+	<insert id="user_insert" parameterType="com.yanado.dto.User">
+		insert into user (userIndex, userId, password, userName, 
+			gender, birth, address, phoneNumber, email) values(
+			seq_userIndex.nextVal,
+			#{userId},
+			#{password},
+			#{userName},
+			#{gender},
+			#{birth},
+			#{address},
+			#{phoneNumber},
+			#{email}
+			)
+	</insert>
+	
+	<delete id="user_delete" parameterType="string">
+		delete from user where userId=#{userId}
+	</delete>
+	
+	<update id="user_update" parameterType="com.yanado.dto.User">
+		update user
+		set password=#{password}, phoneNumber=#{phoneNumber}, email=#{email}
+		where userId=#{userId}
+	</update>
+	
+	<update id="user_update_manager" parameterType="com.yanado.dto.User">
+		update user
+		set userMembership=#{inputStr}
+		where userId=#{userId}
+	</update>
+
+</mapper>

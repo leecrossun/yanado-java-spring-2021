@@ -1,34 +1,43 @@
 package com.yanado.controller.user;
 
-import java.io.IOException;
+import javax.validation.Valid;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-//회원 추가 작업 - 파라미터 받아서 회원 리스트로 넘김
-@WebServlet("/user/insert")
-public class UserCreateController extends HttpServlet {
+import com.yanado.dto.User;
+import com.yanado.service.UserService;
+
+@Controller
+@SessionAttributes("user")
+public class UserCreateController {
 	
-	private static final long serialVersionUID = 1L;
-
-	protected void service(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
+	@Autowired
+	private UserService userService;
+	
+	@RequestMapping(value = "/user/create", method = RequestMethod.POST)
+	public String createUser(@Valid @ModelAttribute("user") User user, BindingResult result,
+			SessionStatus status, RedirectAttributes red) {
 		
-		request.setCharacterEncoding("utf-8");
-
-		String userId = request.getParameter("name");
-		String password = request.getParameter("pasword");
-		String userName = request.getParameter("userName");
-		String gender = request.getParameter("gender");
-		String birth = request.getParameter("birth");
-		String address = request.getParameter("request");
-		String phoneNumber = request.getParameter("phoneNumber");
-		String email = request.getParameter("email");
-//		int rankCount = request.getParameter("rankCount");
+		red.addAttribute("type", 1);
 		
-		response.sendRedirect("/user/user_login.jsp");
+		if (result.hasErrors()) {
+			System.out.println(result.getAllErrors());
+			return "user/form";
+		}
+		
+		status.setComplete();
+		userService.createUser(user);
+		
+		red.addAttribute("userId", user.getUserId());
+		
+		return "redirect:/user/mainPage";
 	}
-} 
+}

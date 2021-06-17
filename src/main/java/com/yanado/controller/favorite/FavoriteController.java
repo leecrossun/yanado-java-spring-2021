@@ -21,12 +21,13 @@ public class FavoriteController {
 	private FavoriteDAO favoriteDao;
 	
 	@RequestMapping("/favorite/add")
-	public String add(@RequestParam String productId, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+	public String add(@RequestParam String productId, @RequestParam String typeId, @RequestParam int type, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		// UserSessionUtils uSession = new UserSessionUtils();
 		// String userId = uSession.getLoginUserId(request.getSession());
 		String userId = "admin";
 		
-		Favorite favorite = new Favorite(userId, productId);
+		Favorite favorite = new Favorite(userId, productId, typeId, type);
+		System.out.println("type : " + favorite.getType());
 		favoriteDao.insertFavorite(favorite);
 		
 		 redirectAttributes.addFlashAttribute("fav", 1);
@@ -39,7 +40,7 @@ public class FavoriteController {
 		// UserSessionUtils uSession = new UserSessionUtils();
 				// String userId = uSession.getLoginUserId(request.getSession());
 				String userId = "admin";
-		Favorite favorite = new Favorite(userId, productId);
+		Favorite favorite = new Favorite(userId, productId, null, 0);
 		favoriteDao.deleteFavorite(favorite);
 		
 		String referer = request.getHeader("Referer");

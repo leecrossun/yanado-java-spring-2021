@@ -19,15 +19,18 @@
 	<!-- sequence 이름 alarm_seq -->
 	<!-- alarm 생성 -->
 	<insert id="insertAlarm" parameterType="com.yanado.dto.Alarm">
-		<selectKey keyProperty="alarmId" resultType="java.lang.String" order="BEFORE">
+		<selectKey keyProperty="alarmId"
+			resultType="java.lang.String" order="BEFORE">
 			SELECT
 			alarm_seq.nextval From DUAL
 		</selectKey>
 
 		INSERT INTO alarm(
 		<include refid="alarmColumns" />
-		) VALUES ( #{alarmId}, #{userId}, #{commonId, jdbcType=VARCHAR}, #{aucId, jdbcType=VARCHAR}, #{type}, #{price}, #{message},
-		SYSDATE, #{deadline}
+		) VALUES ( #{alarmId}, #{userId}, #{commonId, jdbcType=VARCHAR},
+		#{aucId, jdbcType=VARCHAR}, #{type}, #{price}, #{message},
+		SYSDATE,
+		#{deadline}
 		)
 	</insert>
 
@@ -49,13 +52,9 @@
 		select * from alarm where alarmId = #{alarmId}
 	</select>
 
-	 <!-- MyPage 관련 alarm -->
+	<!-- MyPage 관련 alarm -->
 	<select id="findAllAlarmByUserId" parameterType="String"
 		resultType="com.yanado.dto.Alarm">
-		select * from ( select * from alarm c where commonId in
-		(select commonId from commonJoin where userId = 'userId') UNION
-		select
-		* from alarm a where aucId in (select aucId from aucJoin where userId
-		= 'userId') ) order by a.sendDate, b.sendDate
+		select * from alarm where userId = #{userId}
 	</select>
 </mapper>

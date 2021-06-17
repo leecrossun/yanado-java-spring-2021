@@ -18,9 +18,10 @@ public interface FavoriteDAO {
 	void deleteFavorite(Favorite favorite);
 
 	List<Favorite> findFavoriteByUserId(String userId);
+	
 	List<Favorite> findUserByFavorite(String productId);
 	
-	List<Product> findFavoriteByTop();
+	List<Favorite> findFavoriteByTop();
 	
 	List<User> findSimilarListByUser(User user);
 	

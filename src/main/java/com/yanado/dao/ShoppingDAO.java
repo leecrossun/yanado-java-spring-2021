@@ -18,6 +18,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yanado.dto.Product;
 import com.yanado.dto.Shopping;
 
 @Service
@@ -28,14 +29,16 @@ public class ShoppingDAO {
 	public EntityManager em;
 	
 	@Transactional
-	public void createShopping(Shopping shopping) throws DataAccessException
+	public void createShopping(Shopping shopping, Product product) throws DataAccessException
 	{
+		em.persist(product);
 		em.persist(shopping);
 	}
 	
 	@Transactional
-	public void updateShopping(Shopping shopping) throws DataAccessException
+	public void updateShopping(Shopping shopping, Product product) throws DataAccessException
 	{
+		em.merge(product);
 		em.merge(shopping);
 	}
 	
@@ -49,7 +52,9 @@ public class ShoppingDAO {
 			query = em.createNamedQuery("getShoppingByshoppingId", Shopping.class);
 			query.setParameter("id", shoppingId);
 			result = (Shopping) query.getSingleResult();
+			Product product = result.getProduct();
 			em.remove(result);
+			em.remove(product);
 		} catch (NoResultException ex) {
 			System.out.println("fail getShopping");
 		}

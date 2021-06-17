@@ -1,58 +1,40 @@
 package com.yanado.controller.user;
 
-import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
-import com.yanado.dao.UserDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.yanado.dto.User;
+import com.yanado.service.UserService;
 
 //회원 정보 업데이트
 @WebServlet("/user/update")
-public class UserUpdateController extends HttpServlet {
+public class UserUpdateController {
 	
-	private static final long serialVersionUID = 1L;
-
-	protected void service(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
+	@Autowired
+	private UserService userService;
+	
+	@RequestMapping(value="/user/update", method=RequestMethod.GET)
+	public String userUpdate(@Valid @ModelAttribute("user") User user, BindingResult result,
+			SessionStatus status, RedirectAttributes red) {
 		
-		request.setCharacterEncoding("utf-8");
+		red.addAttribute("type", 2);
 		
-		String updateCode = request.getParameter("updateCode");
-		System.out.println("updateCode : " + updateCode);
-		
-		// 개인회원이 회원정보 수정할 경우
-		if (updateCode.equals("individual")) {
-			String userId = request.getParameter("userId");
-			String userNewPassword = request.getParameter("userNewPassword");
-			String phoneNumber = request.getParameter("phoneNumber");
-			String email = request.getParameter("email");
-			
-			User dto = new User(userId, userNewPassword, phoneNumber, email);
-			UserDAO.getInstance().updateUser(dto);
-			
-			RequestDispatcher disp = request.getRequestDispatcher("/main/mainPage.jsp");
-			disp.forward(request, response);
+		if (result.hasErrors()) {
+			return "redirect:/user/update?userId="+user.getUserId();
 		}
 		
-		// 관리자가 회원목록에서 등급 수정할 경우
-		else if (updateCode.equals("manager")) { 
-			String userId = request.getParameter("userId");
-			String userMembership = request.getParameter("userMembership");
-			
-			User dto = new User(userId, userMembership);
-			int resultCode = UserDAO.getInstance().updateManager(dto);	// 1이면 성공, 0이면 실패
-			System.out.println("resultCode: " + resultCode);
-			
-			//json 반환
-			String result = String.format("[{'res' : '%d'}, {'id' : '%s'}]", resultCode, userId);
-			response.getWriter().println(result);
-		}
+		userService.updateUser(user);
+		status.setComplete();
+		red.addAttribute("userId", user.getUserId());
+		
+		return "redirect:/user/mainPage";
 	}
 }

@@ -3,7 +3,9 @@ package com.yanado.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -13,6 +15,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -24,19 +27,27 @@ import org.hibernate.annotations.NamedQuery;
 	(
 			name = "getReviewByShoppingId",
 			query = "SELECT r FROM Review r WHERE r.shopping.shoppingId=:id"
+	),
+	@NamedQuery
+	(
+			name = "getReviewByReviewId",
+			query = "SELECT r FROM Review r WHERE r.reviewId=:id and r.shopping.shoppingId=:id2"
 	)
 })
 public class Review implements Serializable{
 	@Id
+	@GeneratedValue(generator = "REVIEW_GEN")
+	@GenericGenerator(name = "REVIEW_GEN", strategy = "uuid")
+	@Column(name="REVIEWID")
 	String reviewId;
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="shoppingId")
+	@JoinColumn(name="SHOPPINGID")
 	Shopping shopping;
 	
 	@OneToOne
-	@JoinColumn(name="userId")
+	@JoinColumn(name="USERID")
 	User user;
 	String content;
 	int rating;

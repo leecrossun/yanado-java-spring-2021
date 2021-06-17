@@ -27,12 +27,27 @@ public class ReviewDAO {
 	public EntityManager em;
 	
 	@Transactional
-	public List<Review> getReviewByShoppingId (Shopping shoppingId) {
+	public List<Review> getReviewByShoppingId (String shoppingId) {
 		ArrayList<Review> result;
 		TypedQuery<Review> query = em.createNamedQuery("getReviewByShoppingId", Review.class);
 		query.setParameter("id", shoppingId);
 		try {
 			result = (ArrayList<Review>) query.getResultList();
+		} catch (NoResultException ex) {
+			return null;
+		}
+		return result;
+	}
+	
+	@Transactional
+	public Review getReviewByReviewId (String reviewId, String shoppingId) throws DataAccessException
+	{
+		Review result;
+		TypedQuery<Review> query = em.createNamedQuery("getReviewByReviewId", Review.class);
+		query.setParameter("id", reviewId);
+		query.setParameter("id2", shoppingId);
+		try {
+			result = (Review) query.getSingleResult();
 		} catch (NoResultException ex) {
 			return null;
 		}

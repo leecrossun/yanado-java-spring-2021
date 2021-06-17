@@ -16,8 +16,10 @@ import com.yanado.dao.FavoriteDAO;
 import com.yanado.dao.ProductDAO;
 import com.yanado.dao.UserDAO;
 import com.yanado.dto.Favorite;
+import com.yanado.dto.FavoriteDTO;
 import com.yanado.dto.Product;
 import com.yanado.dto.User;
+import com.yanado.service.CommonService;
 
 @Controller
 
@@ -25,49 +27,64 @@ public class RecommmendController {
 
 	@Autowired
 	private FavoriteDAO favoriteDao;
+	
+	@Autowired
 	private ProductDAO productDao;
+	
+	@Autowired
+	private CommonService commonService;
 
 	@RequestMapping("/main")
 	public ModelAndView recommend(HttpServletRequest request) {
 		UserSessionUtils uSession = new UserSessionUtils();
 		String userId = uSession.getLoginUserId(request.getSession());
+
+		List<FavoriteDTO> fList = new ArrayList<FavoriteDTO>();
+
+		if (userId == null) {
+			List<Favorite> favList = favoriteDao.findFavoriteByTop();
 		
-		List<Product> productList; 
-		
-		if(userId == null) {
-			productList = favoriteDao.findFavoriteByTop(); 
+			for(Favorite fav : favList) {
+				 FavoriteDTO f = new FavoriteDTO(fav, productDao.getProductByProductId(fav.getProductId()));
+			//	FavoriteDTO f = new FavoriteDTO(fav, commonService.findProduct(fav.getProductId()));
+				fList.add(f);
+				
+				System.out.println(f.getFav().getType());
+			}
 		} else {
-			
+
 			List<Favorite> favList1 = favoriteDao.findFavoriteByUserId(userId);
 			List<Favorite> userList = new ArrayList<Favorite>();
-			
+
 			Collections.shuffle(favList1);
-			
+
 			// 유저가 좋아요를 누른 목록에서 좋아요를 누른 사람
-			for(int i = 0; i < 10; i++) {
+			for (int i = 0; i < 10; i++) {
 				userList.addAll(favoriteDao.findUserByFavorite(favList1.get(i).getProductId()));
 			}
-			
+
 			Collections.shuffle(userList);
-			
+
 			// 그 사람들이 좋아요를 누른 목록
 			List<Favorite> favoriteList = new ArrayList<Favorite>();
-			for(int i = 0; i < 10; i++) {
+			for (int i = 0; i < 10; i++) {
 				favoriteList.addAll(favoriteDao.findFavoriteByUserId(userList.get(i).getUserId()));
-				
+
 			}
-			
+
 			Collections.shuffle(favoriteList);
+
 			
-			productList = new ArrayList<Product>();
-			for(int i = 0; i < 10; i++) {
-				productList.add(productDao.getProductByProductId(favoriteList.get(i).getProductId()));
+			for (Favorite fav : favoriteList) {
+				FavoriteDTO f = new FavoriteDTO(fav,
+						productDao.getProductByProductId(fav.getProductId()));
+				fList.add(f);
 			}
-			
+
 		}
-		
+
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("favoriteList", productList);
+		mav.addObject("favoriteList", fList);
 		mav.setViewName("index");
 
 		return mav;

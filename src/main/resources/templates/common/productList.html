@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Alarm</title>
+<title>Product</title>
 <script type="text/javascript">
 	function closeThis(url) {
 		opener.document.location.href = url;
@@ -37,12 +37,12 @@
 	padding: 10px;
 }
 
-#priorList table .alarmId {
-	width: 80%;
+#priorList table .productId {
+	width: 30%;
 }
 
-#priorList table .sendDate {
-	width: 20%;
+#priorList table .name {
+	width: 70%;
 }
 
 #priorList table td {
@@ -61,23 +61,32 @@
 </style>
 </head>
 <body>
-		<div id='priorList'
-			th:if="${not #lists.isEmpty(alarmList) && alarmList != null }">
-			<table>
-				<thead>
-					<tr>
-						<th class="alarmId">AlarmId</th>
-						<th class="sendDate">sendDate</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="alarm, index : ${alarmList}">
-						<td><a th:href="@{/alarm/read(alarmId=${alarm.alarmId})}" th:text="${alarm.alarmId}"></a></td>
-						<td th:text="${alarm.sendDate}"></td>
-					</tr>
+	<div id='priorList' th:if="${not #lists.isEmpty(productList) && productList != null }" >
+		<table>
+			<thead>
+				<tr>
+					<th class="productId">ProductId</th>
+					<th class="name">ProductName</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="product, index : ${produdctList}">
+					<td><a th:onclick="end();" th:value="${product.productId}" id="pId"
+						th:text="${product.productId}"></a></td>
+					<td th:text="${product.productName}"></td>
+				</tr>
 
-				</tbody>
-			</table>
-		</div>
+				
+			</tbody>
+		</table>
+	</div>
+	
+	<script type="text/javascript">
+					function end() {
+							opener.document.getElementById("productId").value = document.getElementById("pId").value;
+					//	opener.document.getElementById("productId").value = '0000';
+						window.close();
+					}
+				</script>
 </body>
 </html>

@@ -137,38 +137,47 @@
 
 	<!-- Product -->
 	<section class="bg0 p-t-23 p-b-140">
-	
+
 		<div class="container">
 			<div class="p-b-10">
-			<h3 class="ltext-103 cl5" align="center" style="margin: 10px;">추천 아이템</h3>
+				<h3 class="ltext-103 cl5" align="center" style="margin: 10px;">추천
+					아이템</h3>
 				<div class="row isotope-grid">
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women"
-					th:if="${not #lists.isEmpty(favoriteList) && favoriteList != null }"
-					th:each="favorite, index : ${favoriteList}">
-					<!-- Block2 -->
-					<div class="block2">
+					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women"
+						th:if="${not #lists.isEmpty(favoriteList) && favoriteList != null }"
+						th:each="favorite, index : ${favoriteList}">
+						<!-- Block2 -->
+						<div class="block2">
 
-						<div class="block2-pic hov-img0">
-							<img src="../../static/images/test.png" alt="IMG-PRODUCT">
-							<a href="#"
-								class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-								Quick View </a>
-						</div>
-
-						<div class="block2-txt flex-w flex-t p-t-14">
-							<div class="block2-txt-child1 flex-col-l ">
-								<a href="#"
-									class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"
-									th:text="${favorite.productName}"> </a> <span
-									class="stext-105 cl3" th:text="${favorite.price}">
-								</span>
+							<div class="block2-pic hov-img0">
+								<img src="../../static/images/test.png" alt="IMG-PRODUCT">
+								<a href="#" th:if="${favorite.fav.type} == 1"
+									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+									Quick View </a> 
+									<a href="#" th:if="${favorite.fav.type} == 2"
+									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+									Quick View </a> 
+									<a th:href="@{/common/read(commonId=${favorite.fav.typeId})}" th:if="${favorite.fav.type} == 3"
+									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+									Quick View </a> 
+									<a href="#" th:if="${favorite.fav.type} == 4"
+									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+									Quick View </a>
 							</div>
+
+							<div class="block2-txt flex-w flex-t p-t-14">
+								<div class="block2-txt-child1 flex-col-l ">
+									<a 
+										class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"
+										th:text="${favorite.product.productName}"> </a> <span
+										class="stext-105 cl3" th:text="${favorite.product.price}"> </span>
+								</div>
+							</div>
+
 						</div>
-
 					</div>
-				</div>
 
-			</div>
+				</div>
 			</div>
 		</div>
 	</section>
