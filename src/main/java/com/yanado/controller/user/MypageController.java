@@ -39,6 +39,8 @@ public class MypageController extends HttpServlet {
 	@Autowired
 	private AlarmDAO alarmDao;
 	
+	@Autowired
+	private UserDAO userDAO;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -48,7 +50,7 @@ public class MypageController extends HttpServlet {
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("userId");
 
-		User dto = UserDAO.getInstance().getUserByUserId(userId);
+		User dto = userDAO.getUserByUserId(userId);
 
 		request.setAttribute("dto", dto);
 
