@@ -1,11 +1,15 @@
 package com.yanado.controller.common;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.filechooser.FileSystemView;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yanado.dao.ProductDAO;
@@ -43,10 +50,29 @@ public class CreateCommonProductController {
 		return "common/product";
 	}
 
-	// 공동구매 생성하기
 	@RequestMapping(value = "/product/create", method = RequestMethod.POST)
 	public String createProduct(@Valid @ModelAttribute("product") Product product, BindingResult result,
-			SessionStatus status, RedirectAttributes red) {
+			MultipartFile file, HttpServletRequest request, SessionStatus status) {
+
+		String basePath = "src/main/resources/static/productImage";
+		File folder = new File(basePath);
+
+		if (!folder.exists()) {
+			try {
+				folder.mkdir(); // 폴더 생성합니다.
+				
+			} catch (Exception e) {
+				e.getStackTrace();
+			}
+		}
+		String filePath = folder.getAbsolutePath() + "\\" + file.getOriginalFilename();
+		System.out.println(filePath);
+		File dest = new File(filePath);
+		try {
+			file.transferTo(dest);
+		} catch (IllegalStateException | IOException e) {
+			System.out.println(e.getMessage());
+		}
 
 		if (result.hasErrors()) {
 			System.out.println(result.getAllErrors());
@@ -54,10 +80,11 @@ public class CreateCommonProductController {
 		}
 
 		status.setComplete();
+		product.setImage("../static/productImage/" + file.getOriginalFilename());
 		productDao.createProduct(product);
 
-		red.addAttribute("productId", product.getProductId());
-		red.addAttribute("type", 1);
+		request.setAttribute("productId", product.getProductId());
+		request.setAttribute("type", 1);
 
 		return "common/product";
 	}
@@ -72,5 +99,6 @@ public class CreateCommonProductController {
 
 		return mav;
 	}
+
 
 }

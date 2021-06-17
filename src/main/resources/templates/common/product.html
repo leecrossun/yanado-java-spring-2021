@@ -55,7 +55,7 @@
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
 
-						<div class="p-t-33" th:if="${type == null}" align="center"
+						<div class="p-t-33" th:if="${type != null}" align="center"
 							style="margin-top: 70%; margin-left: 130%; padding: 5%; font-size: 20px;">
 							<p th:text="1234" style="text-align : center; padding: 10px;"></p>
 							<button onclick="end();" style="margin: 5%; ">Confirm</button>
@@ -73,7 +73,7 @@
 				</div>
 			</div>
 
-			<div class="bor10 m-t-50 p-t-43 p-b-40" th:if="${type != null}">
+			<div class="bor10 m-t-50 p-t-43 p-b-40" th:if="${type == null}">
 				<!-- Tab01 -->
 				<div class="tab01">
 					<!-- Nav tabs -->
@@ -85,7 +85,7 @@
 					<div class="tab-content p-t-43" align='center'>
 
 						<form th:action="@{/product/create}" th:object="${product}"
-							method="post">
+							method="post" enctype="multipart/form-data">
 
 							<input type="hidden" name="productId" th:field="*{productId}">
 							<input type="hidden" name="supplierId" th:field="*{supplierId}">
@@ -177,8 +177,8 @@
 
 										<div class="size-204 respon6-next">
 											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="image" th:field="*{image}"
-													style="padding: 10px; width: 100%; text-align: center">
+												<input type="file" name="file"
+													style="padding: 10px; width: 100%; text-align: center; margin-left: 30%">
 											</div>
 
 										</div>
