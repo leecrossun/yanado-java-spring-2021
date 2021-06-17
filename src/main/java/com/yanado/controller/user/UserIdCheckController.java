@@ -20,7 +20,7 @@ public class UserIdCheckController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		String id = request.getParameter("id");
-		User dto = UserDAO.getInstance().getUserByUserId(id); 
+		User dto = UserDAO.getUserByUserId(id); 
 		String res = "no";	//가입 불가
 
 		if (dto == null) {	//null 이면 조회 안 됨
@@ -30,6 +30,5 @@ public class UserIdCheckController extends HttpServlet {
 		response.setContentType("text/plain;charset=utf-8"); 
 		String resultStr = String.format("[{'result':'%s'},{'id':'%s'}]", res, id);
 		response.getWriter().println(resultStr);
-		
 	}
 }
