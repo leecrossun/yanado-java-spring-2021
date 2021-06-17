@@ -45,8 +45,8 @@ public class RecommmendController {
 			List<Favorite> favList = favoriteDao.findFavoriteByTop();
 		
 			for(Favorite fav : favList) {
-				// FavoriteDTO f = new FavoriteDTO(fav, productDao.getProductByProductId(fav.getProductId()));
-				FavoriteDTO f = new FavoriteDTO(fav, commonService.findProduct(fav.getProductId()));
+				 FavoriteDTO f = new FavoriteDTO(fav, productDao.getProductByProductId(fav.getProductId()));
+			//	FavoriteDTO f = new FavoriteDTO(fav, commonService.findProduct(fav.getProductId()));
 				fList.add(f);
 				
 				System.out.println(f.getFav().getType());

@@ -1,5 +1,7 @@
 package com.yanado.controller.alarm;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -18,6 +20,7 @@ import com.fasterxml.jackson.databind.Module.SetupContext;
 import com.yanado.dao.AlarmDAO;
 import com.yanado.dto.Alarm;
 import com.yanado.dto.Common;
+import com.yanado.dto.CommonJoin;
 import com.yanado.dto.Product;
 import com.yanado.service.CommonService;
 
@@ -47,7 +50,6 @@ public class CreateAlarmController {
 			
 			alarm.setDeadline(common.getDeadline());
 			alarm.setPrice(product.getPrice());
-			alarm.setUserId("admin");
 			alarm.setCommonId(commonId);
 			alarm.setAucId(null);
 			
@@ -73,7 +75,14 @@ public class CreateAlarmController {
 		}
 
 		status.setComplete();
-		alarmDao.insertAlarm(newalarm);
+		
+		List<CommonJoin> commonJoin = commonService.findAllCommonJoinByCommonId(newalarm.getCommonId());
+		for (CommonJoin j : commonJoin) {
+			
+			newalarm.setUserId(j.getUserId());
+			alarmDao.insertAlarm(newalarm);
+		}
+		
 		
 		if(newalarm.getCommonId() != null) {
 			red.addAttribute("commonId", newalarm.getCommonId());
