@@ -1,56 +1,44 @@
 package com.yanado.controller.user;
 
-import java.io.IOException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.yanado.dao.UserDAO;
 import com.yanado.dto.User;
+import com.yanado.service.UserService;
 
-@WebServlet("/user/login")
-public class LoginController extends HttpServlet {
+@Controller
+public class LoginController {
 	
-	private static final long serialVersionUID = 1L;
-
-	protected void service(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
+	@Autowired
+	private UserService userService;
+	
+	@RequestMapping(value="/user/login", method=RequestMethod.GET)
+	public String LoginPage() {
+		return "/user/loginPage";
+	}
+	
+	@RequestMapping(value="/user/login", method=RequestMethod.POST) 
+	public String Login(@RequestParam("userId") String userId, 
+			@RequestParam("password") String password) throws NullPointerException {
 		
-		request.setCharacterEncoding("utf-8");
-
-		String userId = request.getParameter("userId");
-		String password = request.getParameter("password");
-
-		User dto = UserDAO.getInstance().getUserByUserId(userId);
+		String path = "";
 		
-		String param = ""; // param의 값
-		String resultStr = ""; // 전송될 json 문자열
+		User user = new User();
 		
-
-		if (dto == null || dto.getUserId().equals(userId) == false) {
-			param = "no_userId";
+		user.setUserId(userId);
+		user.setPassword(password);
+		
+		int result = userService.Login(user);
+		
+		if (result == 1) {
+			path = "/user/mainPage";
+		} else {
+			path = "/user/LoginPage";
 		}
-
-		else if (dto.getPassword().equals(password) == false) {
-			param = "no_password";
-		}
 		
-		else {
-			param = "clear";
-			HttpSession session = request.getSession();
-
-			session.setAttribute(UserSessionUtils.USER_SESSION_KEY, userId);
-			
-			// 멤버십 추가됨
-			session.setAttribute("membership", dto.getUserMembership());
-		}
-
-		resultStr = String.format("[{'param':'%s'}]", param);
-		response.setContentType("text/plain; charset=utf-8");
-		response.getWriter().println(resultStr);
+		return path;
 	}
 }

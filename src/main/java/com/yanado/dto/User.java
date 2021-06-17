@@ -2,6 +2,8 @@ package com.yanado.dto;
 
 public class User {
 
+	private int userIndex;
+	
 	private String userId;		//아이디
 	private String password;	// 비밀번호
 	private String userName;	// 이름
@@ -38,10 +40,11 @@ public class User {
 	}
 	
 	// 회원 가입 시 사용
-	public User(String userId, String password, String userName, 
+	public User(int userIndex, String userId, String password, String userName, 
 			String gender, String birth, String address, String phoneNumber, String email) {
 		super();
 		
+		this.userIndex = userIndex;
 		this.userId = userId;
 		this.password = password;
 		this.userName = userName;
@@ -52,6 +55,14 @@ public class User {
 		this.email = email;
 	}
 
+	public int getUserIndex() {
+		return userIndex;
+	}
+	
+	public void setUserIndex(int userIndex) {
+		this.userIndex = userIndex;
+	}
+	
 	public String getUserId() {
 		return userId;
 	}
