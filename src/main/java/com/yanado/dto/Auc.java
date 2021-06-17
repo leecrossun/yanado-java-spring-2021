@@ -18,6 +18,7 @@ public class Auc {
 	Date regDate;
 	Date startDate;
 	Date endDate;
+	Date deadline;
 	
 	Product product;
 	

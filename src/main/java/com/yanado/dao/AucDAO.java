@@ -1,6 +1,9 @@
 package com.yanado.dao;
 
-public interface AucDAO {
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AucDAO extends JpaRepository {
 	Auc getAuc(int aucNo); //경매 물품 생성한 것 번호
 	
 	void regAuction(Auc auc); // 경매 물품 생성 + createProduct 필요
