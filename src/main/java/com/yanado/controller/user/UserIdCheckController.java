@@ -30,5 +30,6 @@ public class UserIdCheckController extends HttpServlet {
 		response.setContentType("text/plain;charset=utf-8"); 
 		String resultStr = String.format("[{'result':'%s'},{'id':'%s'}]", res, id);
 		response.getWriter().println(resultStr);
+		
 	}
 }
