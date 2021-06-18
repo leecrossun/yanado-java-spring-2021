@@ -2,22 +2,38 @@ package com.yanado.dto;
 
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+
+import org.hibernate.validator.constraints.Range;
+
+@Entity
 public class Auc {
+	@id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	String aucNo;
+	
+	@NotNull
 	String userId;
 	
-	int status;
+	@Range(min=0,max=4)
+	int status; 
 	
 	int highestPrice;
 	int minimumAmount;
 	String highestUserId;
-	
+	@PositiveOrZero
 	int participants;
 	String payment;
 
 	Date regDate;
+	@NotNull
 	Date startDate;
+	@NotNull
 	Date endDate;
+	@NotNull
 	Date deadline;
 	
 	public Auc() {
