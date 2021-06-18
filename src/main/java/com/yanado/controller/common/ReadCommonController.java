@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yanado.dao.FavoriteDAO;
+import com.yanado.dao.ProductDAO;
 import com.yanado.dto.Common;
 import com.yanado.dto.CommonDTO;
 import com.yanado.dto.CommonJoin;
@@ -25,6 +26,9 @@ public class ReadCommonController {
 	
 	@Autowired
 	private FavoriteDAO favoritDao;
+	
+	@Autowired
+	private ProductDAO productDao;
 
 	// 공동구매 보기
 	@RequestMapping("/common/read")
@@ -37,7 +41,7 @@ public class ReadCommonController {
 		mav.setViewName("common/read");
 		
 		Common common = commonService.findCommonByCommonId(commonId);
-		Product product = commonService.findProduct(common.getProductId()); // 나중에 수정
+		Product product = productDao.getProductByProductId(common.getProductId()); // 나중에 수정
 		
 		int join = commonService.findCommonJoin(new CommonJoin(common.getCommonId(), userId));
 		

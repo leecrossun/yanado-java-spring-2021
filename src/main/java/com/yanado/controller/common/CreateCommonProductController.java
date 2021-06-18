@@ -95,7 +95,10 @@ public class CreateCommonProductController {
 		mav.setViewName("common/productList");
 
 		// 리스트 가져오기
-		// Listt<Product> = productDao.
+		List<Product> productList = productDao.selectShoppingList();
+		mav.addObject("productList", productList);
+		
+		System.out.println(productList.size());
 
 		return mav;
 	}

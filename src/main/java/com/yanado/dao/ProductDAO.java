@@ -1,15 +1,19 @@
 package com.yanado.dao;
 import java.util.List;
 
+import javax.transaction.Transactional;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.yanado.dto.Product;
 
 @Mapper
+@Transactional
 public interface ProductDAO {
 	
 	// 물품 목록 조회 시 사용
 	public List<Product> selectList();
+	
+	public List<Product> selectShoppingList();
 
 	public int createProduct(Product dto);
 

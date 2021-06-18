@@ -21,6 +21,8 @@ public class UserIdCheckController extends HttpServlet {
 	@Autowired
 	UserDAO userDAO;
 	private static final long serialVersionUID = 1L;
+	
+	@Autowired private UserDAO userDao;
 
 	@Autowired
 	private UserDAO userDAO;
@@ -29,6 +31,7 @@ public class UserIdCheckController extends HttpServlet {
 			throws ServletException, IOException {
 
 		String id = request.getParameter("id");
+
 		User dto = userDAO.getUserByUserId(id); 
 		String res = "no";	//가입 불가
 

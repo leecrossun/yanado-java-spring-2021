@@ -59,9 +59,16 @@
 	color: #47c9af;
 }
 </style>
+<script type="text/javascript">
+		function end() {
+			opener.document.getElementById("productId").value = document.getElementById("pId").innerText;
+			window.close();
+		}
+	</script>
 </head>
 <body>
-	<div id='priorList' th:if="${not #lists.isEmpty(productList) && productList != null }" >
+	<div id='priorList'
+		th:if="${not #lists.isEmpty(productList) && productList != null }">
 		<table>
 			<thead>
 				<tr>
@@ -70,23 +77,17 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="product, index : ${produdctList}">
-					<td><a th:onclick="end();" th:value="${product.productId}" id="pId"
-						th:text="${product.productId}"></a></td>
+				<tr th:each="product, index : ${productList}">
+					<td><a th:value="${product.productId}" href="javascript:end();"
+						id="pId" th:text="${product.productId}"></a></td>
 					<td th:text="${product.productName}"></td>
 				</tr>
 
-				
+
 			</tbody>
 		</table>
 	</div>
+
 	
-	<script type="text/javascript">
-					function end() {
-							opener.document.getElementById("productId").value = document.getElementById("pId").value;
-					//	opener.document.getElementById("productId").value = '0000';
-						window.close();
-					}
-				</script>
 </body>
 </html>

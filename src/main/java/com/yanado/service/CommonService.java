@@ -19,12 +19,6 @@ public class CommonService {
 	@Autowired
 	private CommonDAO dao;
 
-	// 나중에 지움
-
-	public Product findProduct(String productId) {
-		return dao.findProduct(productId);
-	}
-
 	public int getCount() {
 		return dao.getCount();
 	}
