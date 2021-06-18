@@ -22,12 +22,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class HelloSpringApplication {
 
-	@GetMapping("/")
-	public ModelAndView index() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("index");
-		return mav;
-	}
+	/*
+	 * @GetMapping("/") public ModelAndView index() { ModelAndView mav = new
+	 * ModelAndView(); mav.setViewName("index"); return mav; }
+	 */
 
 	public static void main(String[] args) {
 		SpringApplication.run(HelloSpringApplication.class, args);

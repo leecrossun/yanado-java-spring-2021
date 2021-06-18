@@ -31,13 +31,13 @@ public class GetCommonListController {
 	public ModelAndView getList(@RequestParam(required = false, defaultValue="1") int page) {
 		Search s = new Search(null, page);
 		List<Common> common = commonService.findAllCommon(s);
-		//List<Common> common = commonService.findAll();
+		
 		List<CommonDTO> commonList = new ArrayList<CommonDTO>();
 		
 		for (Common com : common) {
 			String productId = com.getProductId();
-			//Product product = productDAO.getProductByProductId(productId);
-			Product product = commonService.findProduct(productId);
+			Product product = productDAO.getProductByProductId(productId);
+			//Product product = commonService.findProduct(productId);
 			commonList.add(new CommonDTO(com, product));
 		}
 		

@@ -12,9 +12,6 @@ import com.yanado.dto.Search;
 
 @Mapper
 public interface CommonDAO {
-	
-	//나중에 삭제
-	public Product findProduct(String productId);
 
 	public int getCount();
 	

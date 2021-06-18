@@ -34,7 +34,7 @@ public class RecommmendController {
 	@Autowired
 	private CommonService commonService;
 
-	@RequestMapping("/main")
+	@RequestMapping("/")
 	public ModelAndView recommend(HttpServletRequest request) {
 		UserSessionUtils uSession = new UserSessionUtils();
 		String userId = uSession.getLoginUserId(request.getSession());

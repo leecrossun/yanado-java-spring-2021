@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yanado.dao.AlarmDAO;
+import com.yanado.dao.ProductDAO;
 import com.yanado.dao.UserDAO;
 import com.yanado.dto.Alarm;
 import com.yanado.dto.Common;
@@ -41,6 +42,9 @@ public class MypageController extends HttpServlet {
 	
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Autowired
+	private ProductDAO productDao;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -58,7 +62,7 @@ public class MypageController extends HttpServlet {
 		disp.forward(request, response);
 	}
 
-	@RequestMapping("/user/list")
+	@RequestMapping("/user/mypage/list")
 	public ModelAndView myList(HttpServletRequest request) {
 		// UserSessionUtils uSession = new UserSessionUtils();
 		// String userId = uSession.getLoginUserId(request.getSession());
@@ -75,7 +79,7 @@ public class MypageController extends HttpServlet {
 			List<CommonDTO> commonList = new ArrayList<CommonDTO>();
 			
 			for(Common common : comList) {
-				Product p = commonService.findProduct(common.getProductId());
+				Product p = productDao.getProductByProductId(common.getProductId());
 				commonList.add(new CommonDTO(common, p));
 			}
 			
