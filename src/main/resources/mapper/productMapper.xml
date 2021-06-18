@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanado.dao.ProductDAO">
+	
+	<select id="selectList" parameterType="String" resultType="com.yanado.dto.Product">
+		select * from product order by productId DESC
+	</select>
+	
+	<select id="selectShoppingList" resultType="com.yanado.dto.Product">
+		select * from product where category = 'shopping'
+	</select>
+	
+	<select id="getProductByProductId" parameterType="String" resultType="com.yanado.dto.Product">
+		select * from product where productId=#{productId}
+	</select>
+	
+	<insert id="createProduct" parameterType="com.yanado.dto.Product">
+		<selectKey keyProperty="productId"
+			resultType="java.lang.String" order="BEFORE">
+			SELECT
+			product_seq.nextval From DUAL
+		</selectKey>
+	
+		insert into product (productId, productName, category, detailCategory,
+			image, attribute1, attribute2, attribute3, content, price, delivery, supplierId) values(
+			#{productId},
+			#{productName},
+			#{category},
+			#{detailCategory, jdbcType=VARCHAR},
+			#{image},
+			#{attribute1, jdbcType=VARCHAR},
+			#{attribute2, jdbcType=VARCHAR},
+			#{attribute3, jdbcType=VARCHAR},
+			#{content},
+			#{price},
+			#{delivery},
+			#{supplierId}
+			)
+	</insert>
+	
+	<delete id="deleteProduct" parameterType="string">
+		delete from product where productId=#{productId}
+	</delete>
+	
+	<update id="updateProduct" parameterType="com.yanado.dto.Product">
+		update product
+		set productName=#{productName}, category=#{category}, detailCategory=#{detailCategory},
+			image=#{image}, attribute1=#{attribute1}, attribute2=#{attribute2}, attribute3=#{attribute},
+			content=#{content}, price=#{price}, delivery=#{delivery}, supplierId=#{supplierId}
+		where productId=#{product}
+	</update>
+</mapper>

@@ -1,27 +1,25 @@
 package com.yanado.dto;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 @Entity
-/*
- * @SequenceGenerator( name = "PRODUCT_SEQ_GEN", sequenceName = "PRODUCT_SEQ",
- * initialValue = 1, allocationSize = 1)
- */
 public class Product {
 	@Id
 	@NotNull
 	@Column(name="PRODUCTID")
-	/*
-	 * @GeneratedValue(strategy = GenerationType.SEQUENCE, generator =
-	 * "PRODUCT_SEQ_GEN")
-	 */
 	@GeneratedValue(generator = "PRODUCT_GEN")
 	@GenericGenerator(name = "PRODUCT_GEN", strategy = "uuid")
 	String productId;
@@ -32,6 +30,9 @@ public class Product {
 
 	@NotNull
 	String category;
+	
+	@OneToMany(mappedBy="product")
+	private List<Item>itemList;
 	
 	@Column(name="DETAILCATEGORY")
 	String detailCategory;

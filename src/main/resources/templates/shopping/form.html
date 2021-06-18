@@ -36,75 +36,183 @@
 	<link rel="stylesheet" type="text/css" href="../../static/css/main.css">
 <!--===============================================================================================-->
 	<style>
-	p {
-	margin: 10px;
+	input {
+	height:50px;
+	width:90%;
+	text-align:center;
 	}
-	input,
 	textarea {
-	border: 1px solid black;
-	box-shadow: 2px 2px black;
+	width:90%;
 	}
-	.title {
-	margin: 30px;
+	select {
+	width:100px;
+	}
+	.submit_btn {
+	margin-top: 3%;
+	background-color: #E2E2E2 !important;
+	color: black !important;
+	}
+	.submit_btn:hover {
+	border:1px solid black !important;
 	}
 	</style>
 </head>
 <body class="animsition">
 	<div th:replace="/menu :: header"></div>
 	
-	<!-- 재고, 제품명, 카데고리, 이미지, 속성, 설명, 가격, 배송 -->
-	<div align="center">
-	<form th:action="@{/shopping/{type}(type=${formtype})}" th:object="${shopping}" method="post">
-	<div class="title">
-	<h1>상품 판매 페이지</h1>
-	</div>
-		<p>
-			<label for="productName">상품명</label>
-			<input type="text" id="productName" th:field="*{product.productName}"/>
-		</p>
-		<p>
-			<label for="stock">재고수량(단위/개)</label>
-			<input type="text" id="stock" th:field="*{stock}"/>
-		</p>
-		<p>
-		<label for="detailCategory">상품 카데고리</label>
-			<select id="detailCategory" th:field="*{product.detailCategory}">
-			    <option th:value="'1'" th:text="여성신발">test</option>
-			    <option th:value="'2'" th:text="남성신발">test</option>
-			     <option th:value="'3'" th:text="신발용품"></option>
-			    <option th:value="'4'" th:text="여성가방"></option>
-			     <option th:value="'5'" th:text="남성가방"></option>
-			    <option th:value="'7'" th:text="지갑"></option>
-			     <option th:value="'8'" th:text="벨트">test</option>
-			    <option th:value="'9'" th:text="모자">test</option>
-			     <option th:value="'10'" th:text="장갑">test</option>
-			     <option th:value="'11'" th:text="양발">test</option>
-			  	<option th:value="'12'" th:text="선글라스OR안경테">test</option>
-			     <option th:value="'13'" th:text="헤어악세서리"></option>
-			    <option th:value="'14'" th:text="패션소품"></option>
-			     <option th:value="'15'" th:text="시계"></option>
-			    <option th:value="'16'" th:text="순금"></option>
-			     <option th:value="'17'" th:text="주얼리"></option>
-			    <option th:value="'18'" th:text="제화브랜드"></option>
-			</select>
-		</p>
-		<p>
-		<label for="content">상품설명</label>
-		<textarea id="content" th:field="*{product.content}"></textarea>
-		</p>
-		<p>
-		<label for="price">가격 (단위/원)</label>
-			<input type="text" id="price" th:field="*{product.price}"/>
-		</p>
-		<p>
-		<label for="delivery">추가 배송비 (단위/원)</label>
-			<input type="text" id="delivery" th:field="*{product.delivery}"/>
-		</p>
-		<input type="submit" value="작성완료"/>
-	</form>
-	</div>
-	
+	<section class="sec-product-detail bg0 p-t-65 p-b-60">
+		<div class="container">
+			<div class="row">
 
+				<div class="col-md-6 col-lg-5 p-b-30">
+					<div class="p-r-50 p-t-5 p-lr-0-lg">
+
+						<div class="p-t-33"></div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="bor10 m-t-50 p-t-43 p-b-40">
+				<!-- Tab01 -->
+				<div class="tab01">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="nav-item p-b-10">Shopping Form</li>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content p-t-43" align='center'>
+
+						<form th:action="@{/shopping/{type}(type=${formtype})}" th:object="${shopping}" method="post" enctype="multipart/form-data">
+							<!-- - -->
+							<div class="tab-pane fade show active" id="description"
+								role="tabpanel">
+
+								<div class="how-pos2 p-lr-15-md">
+
+									<div class="flex-w flex-r-m p-b-10">
+										<div class="size-203 flex-c-m respon6">Product Name</div>
+
+										<div class="size-204 respon6-next">
+											<div class="rs1-select2 bor8 bg0">
+												<input type="text" id="productName" th:field="*{product.productName}"/>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="flex-w flex-r-m p-b-10"
+										th:if="${type} != 2">
+										<div class="size-203 flex-c-m respon6">Image</div>
+
+										<div class="size-204 respon6-next">
+											<div class="rs1-select2 bor8 bg0">
+												<input type="file" name="file" style="padding: 10px; width: 100%; text-align: center; margin-left: 30%">
+											</div>
+
+										</div>
+									</div>
+
+<!-- 									<div class="flex-w flex-r-m p-b-10"
+										th:if="${type} != 2">
+										<div class="size-203 flex-c-m respon6"></div>
+
+										<div class="size-204 respon6-next">
+											<div style="width:100%">
+												<button th:onclick="window.open('/product/find', '_blank', 'width=800, height=600'); return false;" th:href="@{/product/find}"
+													style="padding: 10px; background-color: #E2E2E2; margin-right: 10px;">Search</button>
+												<button th:onclick="window.open('/product/create', '_blank', 'width=1000, height=800'); return false;" th:href="@{/product/create}"
+													style="padding: 10px; background-color: #E2E2E2; margin-left: 10px;">Create</button>
+											</div>
+										</div>
+									</div> -->
+
+
+
+									<div class="flex-w flex-r-m p-b-10">
+										<div class="size-203 flex-c-m respon6">Stock</div>
+
+										<div class="size-204 respon6-next">
+											<div class="rs1-select2 bor8 bg0">
+												<input type="number" id="stock" th:field="*{stock}"/>
+											</div>
+										</div>
+									</div>
+
+
+									<div class="flex-w flex-r-m p-b-10">
+										<div class="size-203 flex-c-m respon6">Category</div>
+
+										<div class="size-204 respon6-next">
+											<div class="rs1-select2 bor8 bg0">
+												<select id="detailCategory" th:field="*{product.detailCategory}">
+												    <option th:value="'1'" th:text="여성신발">test</option>
+												    <option th:value="'2'" th:text="남성신발">test</option>
+												     <option th:value="'3'" th:text="신발용품"></option>
+												    <option th:value="'4'" th:text="여성가방"></option>
+												     <option th:value="'5'" th:text="남성가방"></option>
+												    <option th:value="'7'" th:text="지갑"></option>
+												     <option th:value="'8'" th:text="벨트">test</option>
+												    <option th:value="'9'" th:text="모자">test</option>
+												     <option th:value="'10'" th:text="장갑">test</option>
+												     <option th:value="'11'" th:text="양발">test</option>
+												  	<option th:value="'12'" th:text="선글라스OR안경테">test</option>
+												     <option th:value="'13'" th:text="헤어악세서리"></option>
+												    <option th:value="'14'" th:text="패션소품"></option>
+												     <option th:value="'15'" th:text="시계"></option>
+												    <option th:value="'16'" th:text="순금"></option>
+												     <option th:value="'17'" th:text="주얼리"></option>
+												    <option th:value="'18'" th:text="제화브랜드"></option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="flex-w flex-r-m p-b-10">
+										<div class="size-203 flex-c-m respon6">Description</div>
+
+										<div class="size-204 respon6-next">
+											<div class="rs1-select2 bor8 bg0">
+												<textarea id="content" th:field="*{product.content}"></textarea>
+											</div>
+										</div>
+									</div>
+
+									<div class="flex-w flex-r-m p-b-10">
+										<div class="size-203 flex-c-m respon6">Price</div>
+
+										<div class="size-204 respon6-next">
+											<div class="rs1-select2 bor8 bg0">
+												<input type="number" id="price" th:field="*{product.price}"/>
+											</div>
+										</div>
+									</div>
+									
+									<div class="flex-w flex-r-m p-b-10">
+										<div class="size-203 flex-c-m respon6">Delivery Fee</div>
+
+										<div class="size-204 respon6-next">
+											<div class="rs1-select2 bor8 bg0">
+												<input type="number" id="delivery" th:field="*{product.delivery}" th:value="2500" th:placeholder="추가배송비"/>
+											</div>
+										</div>
+									</div>
+
+									<div class="flex-w flex-r-m p-b-10">
+										<input type="submit"
+											class="submit_btn flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04"
+											style="" />
+									</div>
+								</div>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 <!--===============================================================================================-->	
 	<script src="../../static/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -209,98 +317,3 @@
 
 </body>
 </html>
-<!-- <!DOCTYPE html>
-
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head xmlns:th="http://www.thymeleaf.org">
-<meta charset="UTF-8">
-<title>판매하기</title>
-===============================================================================================
-<link rel="icon" type="image/png"
-	href="../../static/images/icons/favicon.png" />
-===============================================================================================
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/bootstrap/css/bootstrap.min.css">
-===============================================================================================
-<link rel="stylesheet" type="text/css"
-	href="../../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-===============================================================================================
-<link rel="stylesheet" type="text/css"
-	href="../../static/fonts/iconic/css/material-design-iconic-font.min.css">
-===============================================================================================
-<link rel="stylesheet" type="text/css"
-	href="../../static/fonts/linearicons-v1.0.0/icon-font.min.css">
-===============================================================================================
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/animate/animate.css">
-===============================================================================================
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/css-hamburgers/hamburgers.min.css">
-===============================================================================================
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/animsition/css/animsition.min.css">
-===============================================================================================
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/select2/select2.min.css">
-===============================================================================================
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/daterangepicker/daterangepicker.css">
-===============================================================================================
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/slick/slick.css">
-===============================================================================================
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/MagnificPopup/magnific-popup.css">
-===============================================================================================
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/perfect-scrollbar/perfect-scrollbar.css">
-===============================================================================================
-<link rel="stylesheet" type="text/css" href="../../static/css/util.css">
-<link rel="stylesheet" type="text/css" href="../../static/css/main.css">
-===============================================================================================
-</head>
-<body class="animsition">
-	<div th:replace="/menu :: header"></div>
-	재고, 제품명, 카데고리, 이미지, 속성, 설명, 가격, 배송
-	<form th:action="@{/shopping/create}" th:object="${shopping}" method="post">
-	<h1>상품 판매 페이지</h1>
-		<p>
-			<input type="text" id="productName" th:field="*{product.productName}"/>
-		</p>
-		<p>
-			<input type="text" id="stock" th:field="*{stock}"/>
-		</p>
-		<p>
-			<select id="detailCategory" th:field="*{product.detailCategory}">
-			    <option th:value="'1'" th:text="여성신발">test</option>
-			    <option th:value="'2'" th:text="남성신발">test</option>
-			     <option th:value="'3'" th:text="신발용품"></option>
-			    <option th:value="'4'" th:text="여성가방"></option>
-			     <option th:value="'5'" th:text="남성가방"></option>
-			    <option th:value="'7'" th:text="지갑"></option>
-			     <option th:value="'8'" th:text="벨트">test</option>
-			    <option th:value="'9'" th:text="모자">test</option>
-			     <option th:value="'10'" th:text="장갑">test</option>
-			     <option th:value="'11'" th:text="양발">test</option>
-			  	<option th:value="'12'" th:text="선글라스 또는 안경테">test</option>
-			     <option th:value="'13'" th:text="헤어악세서리"></option>
-			    <option th:value="'14'" th:text="패션소품"></option>
-			     <option th:value="'15'" th:text="시계"></option>
-			    <option th:value="'16'" th:text="순금"></option>
-			     <option th:value="'17'" th:text="주얼리"></option>
-			    <option th:value="'18'" th:text="제화브랜드"></option>
-			</select>
-		</p>
-		<p>
-		<textarea id="content" th:field="*{product.content}"></textarea>
-		</p>
-		<p>
-			<input type="text" id="price" th:field="*{product.price}"/>
-		</p>
-		<p>
-			<input type="text" id="delivery" th:field="*{product.delivery}"/>
-		</p>
-	</form>
-
-</body>
-</html> -->

@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.yanado.dao.AlarmDAO;
+import com.yanado.dao.ProductDAO;
 import com.yanado.dto.Alarm;
 import com.yanado.dto.Common;
 import com.yanado.dto.CommonJoin;
@@ -20,6 +21,9 @@ public class Scheduler {
 
 	@Autowired
 	private CommonService service;
+	
+	@Autowired
+	private ProductDAO productDao;
 
 	@Autowired
 	private AlarmDAO alarmDao;
@@ -37,7 +41,7 @@ public class Scheduler {
 
 		for (Common c : list) {
 
-			Product p = service.findProduct(c.getProductId());
+			Product p = productDao.getProductByProductId(c.getProductId());
 
 			String start = transFormat.format(c.getStartDate());
 			String end = transFormat.format(c.getEndDate());

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yanado.dao.ProductDAO;
 import com.yanado.dto.Common;
 import com.yanado.dto.CommonDTO;
 import com.yanado.dto.Product;
@@ -20,6 +21,9 @@ import com.yanado.service.CommonService;
 public class SearchCommonController {
 	@Autowired
 	private CommonService commonService;
+	
+	@Autowired
+	private ProductDAO productDao;
 
 	// 공동구매 찾기
 	@RequestMapping("/common/search")
@@ -31,8 +35,8 @@ public class SearchCommonController {
 
 		for (Common com : common) {
 			String productId = com.getProductId();
-			// Product product = productDAO.getProductByProductId(productId);
-			Product product = commonService.findProduct(productId);
+			Product product = productDao.getProductByProductId(productId);
+			//Product product = commonService.findProduct(productId);
 			commonList.add(new CommonDTO(com, product));
 		}
 

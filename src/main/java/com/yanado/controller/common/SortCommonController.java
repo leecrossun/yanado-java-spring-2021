@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yanado.dao.ProductDAO;
 import com.yanado.dto.Common;
 import com.yanado.dto.CommonDTO;
 import com.yanado.dto.Product;
@@ -20,6 +21,9 @@ public class SortCommonController {
 
 	@Autowired
 	private CommonService commonService;
+	
+	@Autowired
+	private ProductDAO	productDao;
 
 	@RequestMapping("/common/sort")
 	public ModelAndView sortList(@RequestParam(required = false, defaultValue = "1") int page, String sortKey) {
@@ -31,8 +35,7 @@ public class SortCommonController {
 
 		for (Common com : common) {
 			String productId = com.getProductId();
-			// Product product = productDAO.getProductByProductId(productId);
-			Product product = commonService.findProduct(productId);
+			 Product product = productDao.getProductByProductId(productId);
 			commonList.add(new CommonDTO(com, product));
 		}
 

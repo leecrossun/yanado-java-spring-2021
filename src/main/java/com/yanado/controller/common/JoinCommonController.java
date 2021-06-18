@@ -30,9 +30,6 @@ public class JoinCommonController {
 		String userId = "admin";
 		
 		Common common = commonService.findCommonByCommonId(commonId);
-		System.out.println(common.getProductId());
-		//Product product = commonService.findProduct(common.getProductId()); // 나중에 수정
-		
 		common.setParticipants(common.getParticipants()+1);
 		commonService.increaseJoin(commonId);
 		

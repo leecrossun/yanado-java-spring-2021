@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.databind.Module.SetupContext;
 import com.yanado.dao.AlarmDAO;
+import com.yanado.dao.ProductDAO;
 import com.yanado.dto.Alarm;
 import com.yanado.dto.Common;
 import com.yanado.dto.CommonJoin;
@@ -32,6 +31,9 @@ public class CreateAlarmController {
 
 	@Autowired
 	private CommonService commonService;
+	
+	@Autowired
+	private ProductDAO productDao;
 
 	// 알람 생성 폼으로 가기
 	@ModelAttribute("alarm")
@@ -45,7 +47,7 @@ public class CreateAlarmController {
 		if (flag == 1) {
 			String commonId = request.getParameter("commonId");
 			Common common = commonService.findCommonByCommonId(commonId);
-			Product product = commonService.findProduct(common.getProductId()); // 나중에 수정
+			Product product = productDao.getProductByProductId(common.getProductId()); // 나중에 수정
 
 			alarm.setDeadline(common.getDeadline());
 			alarm.setPrice(product.getPrice());

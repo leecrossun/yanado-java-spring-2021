@@ -57,13 +57,12 @@
 
 						<div class="p-t-33" th:if="${type != null}" align="center"
 							style="margin-top: 70%; margin-left: 130%; padding: 5%; font-size: 20px;">
-							<p th:text="1234" style="text-align : center; padding: 10px;"></p>
+							<p th:text="${productId}" style="text-align : center; padding: 10px;"></p>
 							<button onclick="end();" style="margin: 5%; ">Confirm</button>
 
 							<script type="text/javascript">
 								function end() {
-									//	opener.document.getElementById("productId").value = '[[${productId}]]';
-									opener.document.getElementById("productId").value = '0000';
+									opener.document.getElementById("productId").value = '[[${productId}]]';
 									window.close();
 								}
 							</script>

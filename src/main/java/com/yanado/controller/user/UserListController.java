@@ -11,7 +11,7 @@ import com.yanado.dao.UserDAO;
 import com.yanado.dto.User;
 
 @Controller
-@RequestMapping("/user/list")
+@RequestMapping("/user/allUserlist")
 public class UserListController {
 	
 	@Autowired
