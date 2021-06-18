@@ -7,7 +7,7 @@
 		userId;
 		status;
 		highestPrice;
-		lowestPrice;
+		mininumAmount;
 		highestUserId;
 		participants;
 		payment;
@@ -16,4 +16,14 @@
 		endDate,
 		deadline
 	</sql>
+	<insert id='createAuc' parameterType='com.yanado.dto.Auc'>
+		<selectKey keyProperty='aucNo'
+			resultType='java.lang.String' order='BEFORE'>
+			SELECT
+			auc_seq.nextval From DUAL
+		</selectKey>
+		
+		insert into auc (<include refid='aucColumns"/>) values(
+			#{aucNo},#{userId},#{status},#{highestPrice},#{mininumAmout}0,#
+	</insert>
 </mapper>

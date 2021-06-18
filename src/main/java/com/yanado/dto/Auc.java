@@ -9,7 +9,7 @@ public class Auc {
 	int status;
 	
 	int highestPrice;
-	int mininumAmount;
+	int minimumAmount;
 	String highestUserId;
 	
 	int participants;
@@ -31,12 +31,12 @@ public class Auc {
 		this.endDate = endDate;
 	}
 	
-	public Auc(String aucNo, String userId, int status, int highestPrice, int mininumAmount, String highestUserId, int participants, String payment, Date regDate, Date startDate, Date endDate, Date deadline) {
+	public Auc(String aucNo, String userId, int status, int highestPrice, int minimumAmount, String highestUserId, int participants, String payment, Date regDate, Date startDate, Date endDate, Date deadline) {
 		this.aucNo = aucNo;
 		this.userId = userId;
 		this.status = status;
 		this.highestPrice = highestPrice;
-		this.mininumAmount = mininumAmount;
+		this.minimumAmount = minimumAmount;
 		this.highestUserId = highestUserId;
 		this.participants = participants;
 		this.payment = payment;
@@ -70,11 +70,11 @@ public class Auc {
 	public void sethighestPrice(int highestPrice) {
 		this.highestPrice = highestPrice;
 	}
-	public int getlowestPrice() {
-		return lowestPrice;
+	public int getminimumAmount() {
+		return minimumAmount;
 	}
-	public void setlowestPrice(int lowestPrice) {
-		this.lowestPrice = lowestPrice;
+	public void setminimumAmount(int minimumAmount) {
+		this.minimumAmount = minimumAmount;
 	}
 	public String gethighestUserId() {
 		return highestUserId;

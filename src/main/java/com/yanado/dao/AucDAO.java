@@ -9,6 +9,8 @@ public interface AucDAO {
 	public int updateAuc(Auc auc);
 	public int deleteAuc(String aucNo);
 	
+	public findProductByAuc(String aucId);
+	
 	Auc getAuc(int aucNo); //경매 물품 생성한 것 번호
 	
 	void regAuction(Auc auc); // 경매 물품 생성 + createProduct 필요
@@ -20,8 +22,6 @@ public interface AucDAO {
 	List<User> getBuyerListByAucNo(int aucNo); // 경매 참여한 사람들 리스트
 	
 	void changeStatus(String aucNo);
-	
-	Product findProductByAuc(String aucId); // 경매 상품 찾기
 
 	List<Auc> findAucById(String aucId); //경매 ID 리스트
 	
