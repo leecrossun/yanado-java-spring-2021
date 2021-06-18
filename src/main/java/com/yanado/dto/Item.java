@@ -32,32 +32,42 @@ public class Item implements Serializable{
 	@GeneratedValue(generator = "ITEM_GEN")
 	@GenericGenerator(name = "ITEM_GEN", strategy = "uuid")
 	@Column(name="ITEMID")
-	String ItemId;
+	String itemId;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="ORDERID")
+	Order order;
+	
+	@ManyToOne
 	@JoinColumn(name="PRODUCTID")
-	List<Product> product;
+	Product product;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.REMOVE)
 	@JoinColumn(name="USERID")
 	User user;
 	
-	int unicost;
+	int unitcost;
 	int quentity;
+	
+	@Column(name="ATTRIBUTE1")
 	String att1;
+	
+	@Column(name="ATTRIBUTE2")
 	String att2;
+	
+	@Column(name="ATTRIBUTE3")
 	String att3;
 	int status;
 	
 	public Item() {}
 	
-	public Item(String itemId, List<Product> product, User user, int unicost, int quentity, String att1, String att2,
+	public Item(String itemId, Product product, User user, int unitcost, int quentity, String att1, String att2,
 			String att3, int status) {
 		super();
-		ItemId = itemId;
+		this.itemId = itemId;
 		this.product = product;
 		this.user = user;
-		this.unicost = unicost;
+		this.unitcost = unitcost;
 		this.quentity = quentity;
 		this.att1 = att1;
 		this.att2 = att2;
@@ -66,20 +76,20 @@ public class Item implements Serializable{
 	}
 
 	public String getItemId() {
-		return ItemId;
+		return itemId;
 	}
 
 	public void setItemId(String itemId) {
-		ItemId = itemId;
+		this.itemId = itemId;
 	}
 
 	
 
-	public List<Product> getProduct() {
+	public Product getProduct() {
 		return product;
 	}
 
-	public void setProduct(List<Product> product) {
+	public void setProduct(Product product) {
 		this.product = product;
 	}
 
@@ -91,12 +101,22 @@ public class Item implements Serializable{
 		this.user = user;
 	}
 
-	public int getUnicost() {
-		return unicost;
+	public int getUnitcost() {
+		return unitcost;
 	}
 
-	public void setUnicost(int unicost) {
-		this.unicost = unicost;
+	public void setUnitcost(int unitcost) {
+		this.unitcost = unitcost;
+	}
+	
+	
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 	public int getQuentity() {

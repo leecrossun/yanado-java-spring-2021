@@ -33,7 +33,7 @@ import javax.persistence.NamedNativeQuery;
 	@NamedQuery
 	(
 			name = "getShoppingByCategory",
-			query = "SELECT s FROM Shopping s WHERE s.product.productId=:id"
+			query = "SELECT s.shoppingId, s.product, s.stock, s.status, s.published FROM Shopping s WHERE s.product.productId=:id"
 	),
 	@NamedQuery
 	(

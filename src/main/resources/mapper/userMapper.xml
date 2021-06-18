@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		select * from user order by userIndex DESC
 	</select>
 	
-	<select id="user_byUserId" parameterType="String" resultType="com.yanado.dto.User">
-		select * from user where userId=#{userId}
+	<select id="getUserByUserId" parameterType="String" resultType="com.yanado.dto.User">
+		select * from member where userId=#{userId}
 	</select>
 	
 	<insert id="user_insert" parameterType="com.yanado.dto.User">
