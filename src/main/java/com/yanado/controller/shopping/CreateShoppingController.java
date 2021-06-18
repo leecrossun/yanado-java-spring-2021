@@ -32,9 +32,6 @@ public class CreateShoppingController {
 	@Autowired
 	private ShoppingService service;
 	
-	@Autowired
-	private ProductDAO productDAO;
-	
 	@ModelAttribute("shopping")
 	public Shopping formBacking(HttpServletRequest request) {
 		Shopping shopping = new Shopping();
