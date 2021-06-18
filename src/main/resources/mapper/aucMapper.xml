@@ -7,7 +7,7 @@
 		userId;
 		status;
 		highestPrice;
-		mininumAmount;
+		minimumAmount;
 		highestUserId;
 		participants;
 		payment;
@@ -23,7 +23,20 @@
 			auc_seq.nextval From DUAL
 		</selectKey>
 		
-		insert into auc (<include refid='aucColumns"/>) values(
-			#{aucNo},#{userId},#{status},#{highestPrice},#{mininumAmout}0,#
+		insert into auc(<include refid='aucColumns'/>) values(
+			#{aucNo},#{userId},#{status},#{highestPrice},#{minimumAmout},#{highestUserId},0,0,
+			SYSDATE,#{startDate}, #{endDate},#{deadline})
 	</insert>
+	
+	<delete id='deleteAuc' parameterType='string'>
+		delete from auc where aucNo=#{aucNo}
+	</delete>
+	
+	<update id="updateCommon" parameterType="com.yanado.dto.Common">
+		update auc
+		set highestPrice = #{highestPrice}, participants = #{participants}, status = #{status},
+		startDate = #{startDate}, endDate = #{endDate}, deadline = #{deadline}
+		where aucNo = #{aucNo}
+	</update>
+	
 </mapper>
