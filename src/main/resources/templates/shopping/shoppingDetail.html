@@ -58,7 +58,14 @@ padding: 10px;
 margin: 10px;
 box-shadow: 1px 1px solid black;
 }
-
+	.submit_btn {
+	margin-top: 3%;
+	background-color: #E2E2E2 !important;
+	color: black !important;
+	}
+	.submit_btn:hover {
+	border:1px solid black !important;
+	}
 </style>
 </head>
 <body class="animsition">
@@ -75,7 +82,7 @@ box-shadow: 1px 1px solid black;
 								<div class="item-slick3">
 									<div class="wrap-pic-w pos-relative">
 										<img src="../../static/images/test.png" alt="IMG-PRODUCT"
-										th:src="@{../../static/images/{img}(img=${shopping.product.image})}">
+										th:src="@{../{img}(img=${shopping.product.image})}">
 									</div>
 								</div>
 							</div>
@@ -134,6 +141,31 @@ box-shadow: 1px 1px solid black;
 								</div>
 							</div>
 						</div>
+						
+						<div class="p-t-33">
+							<div class="flex-w flex-r-m p-b-10">
+								<div class="size-203 flex-c-m respon6">Buy</div>
+
+								<div class="size-204 respon6-next">
+									<div class="rs1-select2 bor8 bg0">
+										<p style="margin: 1em;" align='center'>
+											<button
+											class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 submit_btn"
+											style="margin: 3%">
+											<a style="color: black;"
+												th:href='@{/review/view/all(shoppingId=${shopping.shoppingId})}'>Buy Product</a>
+											</button>
+											<button
+											class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 submit_btn"
+											style="margin: 3%">
+											<a style="color: black;"
+												th:href='@{/review/view/all(shoppingId=${shopping.shoppingId})}'>Add to Cart</a>
+											</button>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
 
 					</div>
 				</div>
@@ -163,19 +195,19 @@ box-shadow: 1px 1px solid black;
 				<div class="flex-w flex-c-m m-tb-10">
 					<!-- th:if="${shopping.userId} == ${session.userId}" -->
 					<button
-						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
+						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4  submit_btn"
 						style="margin: 3%">
 						<a style="color: black;"
 							th:href='@{/shopping/update(shoppingId=${shopping.shoppingId})}'>수정</a>
 					</button>
 					<button
-						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
+						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4  submit_btn"
 						style="margin: 3%">
 						<a style="color: black;"
 							th:href='@{/shopping/delete(shoppingId=${shopping.shoppingId})}'>삭제</a>
 					</button>
 					<button
-						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
+						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4  submit_btn"
 						style="margin: 3%">
 						<a style="color: black;"
 							th:href='@{/review/view/all(shoppingId=${shopping.shoppingId})}'>상품리뷰</a>

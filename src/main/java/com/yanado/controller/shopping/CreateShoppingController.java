@@ -45,6 +45,7 @@ public class CreateShoppingController {
 		String userId = "admin";
 		product.setSupplierId(userId);
 		shopping.setProduct(product);
+		shopping.setStatus(1);
 	
 		return shopping;
 	}
