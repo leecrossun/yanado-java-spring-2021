@@ -57,33 +57,23 @@ public class CreateOrdercontroller {
 			// String userId = uSession.getLoginUserId(request.getSession());
 			
 			Product product = shoppingDAO.getShoppingByshoppingId(shoppingId).getProduct();
+			User buyer = userDAO.getUserByUserId("admin");
+			User seller = userDAO.getUserByUserId(product.getSupplierId());
 			
-			ArrayList<Item> items = new ArrayList<Item>();
-			Item item = new Item();
-			item.setProduct(product);
-			item.setQuentity(quentity);
-			item.setUnitcost(product.getPrice() * quentity);
-			item.setStatus(0);
+			List<Item> items = new ArrayList<Item>();
+			Item item = new Item(null, product, seller, product.getPrice() * quentity, quentity, null, null, null, 0);
 			items.add(item);
-			order.setItem(items);
-			
 			
 			// Total Price
 			int total = 0;
 			for (Item i : items) {
 			    total += i.getUnitcost();
 			}
-			order.setTotalPrice(total);
-			User buyer = userDAO.getUserByUserId("admin");
-			User seller = userDAO.getUserByUserId(product.getSupplierId());
 			
-			item.setUser(seller);
-			order.setUser(buyer);
-			order.setOrderDate(new Date());
+			order = new Order(null, buyer, items, seller.getUserName(), seller.getPhoneNumber(), seller.getAddress(),
+					buyer.getUserName(), buyer.getPhoneNumber(), buyer.getAddress(), total, new Date(), null, 0, null, null);
 			
 			mav.addObject("order",order);
-			mav.addObject("buyer", buyer);
-			mav.addObject("seller", seller);
 			mav.setViewName("order/form");
 			return mav;
 		}
