@@ -1,5 +1,5 @@
 package com.yanado.controller.auc;
 
-public class DeleteAucController {
-	
+public class UpdateAucController {
+
 }
