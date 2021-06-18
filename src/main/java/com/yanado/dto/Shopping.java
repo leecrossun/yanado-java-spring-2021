@@ -52,7 +52,6 @@ import javax.persistence.NamedNativeQuery;
 	)
 	
 })
-
 public class Shopping implements Serializable {
 	@Id
 	@Column(name="SHOPPINGID")
