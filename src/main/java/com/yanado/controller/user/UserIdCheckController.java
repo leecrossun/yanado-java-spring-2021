@@ -18,6 +18,8 @@ import com.yanado.dto.User;
 @WebServlet("/user/checkId")
 public class UserIdCheckController extends HttpServlet {
 	
+	@Autowired
+	UserDAO userDAO;
 	private static final long serialVersionUID = 1L;
 
 	@Autowired

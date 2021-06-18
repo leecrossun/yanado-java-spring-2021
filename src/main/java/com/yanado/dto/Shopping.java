@@ -60,7 +60,7 @@ public class Shopping implements Serializable {
 	@GenericGenerator(name = "SHOPPING_GEN", strategy = "uuid")
 	String shoppingId;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="PRODUCTID")
 	Product product;
 	
@@ -72,7 +72,6 @@ public class Shopping implements Serializable {
 	
 	// 여기서 따로 어노테이션 주지 않아도 되는지 (db에는 reviewId가 없는데..)
 	@OneToMany(mappedBy="shopping", cascade = CascadeType.ALL, orphanRemoval = true)
-	@Transient
 	private List<Review> reviewList;
 	
 	
