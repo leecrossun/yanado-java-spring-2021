@@ -2,6 +2,7 @@ package com.yanado.controller.auc;
 
 @Controller
 @SessionAtrributes("auc")
+@RequestMapping("auc/create")
 public class CreateAucController {
 	   @Autowired
 	   private AucDAO aucDAO;
