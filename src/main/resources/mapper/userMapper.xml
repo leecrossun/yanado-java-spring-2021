@@ -4,11 +4,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 <mapper namespace="com.yanado.dao.UserDAO">
 	
 	<select id="user_list" parameterType="String" resultType="com.yanado.dto.User">
-		select * from user order by userIndex DESC
+		select USERID as userId, USERPWD as password, USERNAME as userName, USERGENDER as gender, USERBIRTH as birth, USERADDRESS as address, USERPHONE as phoneNumber, USEREMAIL as email  from member order by userIndex DESC
 	</select>
 	
 	<select id="getUserByUserId" parameterType="String" resultType="com.yanado.dto.User">
-		select * from member where userId=#{userId}
+		select USERID as userId, USERPWD as password, USERNAME as userName, USERGENDER as gender, USERBIRTH as birth, USERADDRESS as address, USERPHONE as phoneNumber, USEREMAIL as email from member where userId=#{userId}
 	</select>
 	
 	<insert id="user_insert" parameterType="com.yanado.dto.User">
