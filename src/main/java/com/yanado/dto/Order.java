@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NamedQueries;
@@ -28,6 +29,7 @@ import org.hibernate.annotations.NamedQuery;
 	)
 	
 })
+@Table(name="ORDERINFO")
 public class Order implements Serializable{
 	
 	@Id
@@ -36,12 +38,11 @@ public class Order implements Serializable{
 	@Column(name="ORDERID")
 	String orderId;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="USERID")
 	User user;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="ITEMID")
+	@OneToMany(mappedBy="order")
 	List<Item> item;
 	
 	@Column(name="SHIPNAME")
