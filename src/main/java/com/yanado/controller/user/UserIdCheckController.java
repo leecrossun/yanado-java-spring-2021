@@ -18,15 +18,21 @@ import com.yanado.dto.User;
 @WebServlet("/user/checkId")
 public class UserIdCheckController extends HttpServlet {
 	
+	@Autowired
+	UserDAO userDAO;
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired private UserDAO userDao;
 
+	@Autowired
+	private UserDAO userDAO;
+	
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String id = request.getParameter("id");
-		User dto = userDao.getUserByUserId(id); 
+
+		User dto = userDAO.getUserByUserId(id); 
 		String res = "no";	//가입 불가
 
 		if (dto == null) {	//null 이면 조회 안 됨

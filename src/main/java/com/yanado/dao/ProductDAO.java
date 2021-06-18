@@ -2,7 +2,6 @@ package com.yanado.dao;
 import java.util.List;
 
 import javax.transaction.Transactional;
-
 import org.apache.ibatis.annotations.Mapper;
 
 import com.yanado.dto.Product;
