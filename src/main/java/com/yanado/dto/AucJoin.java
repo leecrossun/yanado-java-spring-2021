@@ -38,4 +38,10 @@ public class AucJoin {
 	public void setbidPrice(int bidPrice) {
 		this.bidPrice = bidPrice;
 	}
+	public int getbidCount() {
+		return bidPrice;
+	}
+	public void setbidCount(int bidCount) {
+		this.bidCount = bidCount;
+	}
 }

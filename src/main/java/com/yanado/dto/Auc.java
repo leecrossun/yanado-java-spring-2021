@@ -9,7 +9,7 @@ public class Auc {
 	int status;
 	
 	int highestPrice;
-	int lowestPrice;
+	int mininumAmount;
 	String highestUserId;
 	
 	int participants;
@@ -20,12 +20,10 @@ public class Auc {
 	Date endDate;
 	Date deadline;
 	
-	Product product;
-	
 	public Auc() {
 	}
 	
-	public Auc(String aucNo, String userId, int highestPrice,Date startDate, Date endDate) {
+	public Auc(String aucNo, String userId, int highestPrice, Date startDate, Date endDate, Date deadline) {
 		this.aucNo = aucNo;
 		this.userId = userId;
 		this.highestPrice = highestPrice;
@@ -33,18 +31,19 @@ public class Auc {
 		this.endDate = endDate;
 	}
 	
-	public Auc(String aucNo, String userId, int status, int hightestPrice, int lowestPrice, String highestUserId, int participants, String payment) {
+	public Auc(String aucNo, String userId, int status, int highestPrice, int mininumAmount, String highestUserId, int participants, String payment, Date regDate, Date startDate, Date endDate, Date deadline) {
 		this.aucNo = aucNo;
 		this.userId = userId;
 		this.status = status;
 		this.highestPrice = highestPrice;
-		this.lowestPrice = lowestPrice;
+		this.mininumAmount = mininumAmount;
 		this.highestUserId = highestUserId;
 		this.participants = participants;
 		this.payment = payment;
 		this.regDate = regDate;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.deadline = deadline;
 	}
 	
 	public String getaucNo() {
@@ -112,5 +111,11 @@ public class Auc {
 	}
 	public void setendDate(Date endDate) {
 		this.endDate = endDate;
+	}
+	public Date getdeadline() {
+		return deadline;
+	}
+	public void setdeadline(Date deadline) {
+		this.deadline = deadline;
 	}
 }

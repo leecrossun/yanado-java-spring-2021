@@ -3,7 +3,13 @@ package com.yanado.dao;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+@Mapper
 public interface AucDAO extends JpaRepository {
+	
+	public void createAuc(Auc auc);
+	public int updateAuc(Auc auc);
+	public deleteAuc(String aucNo);
+	
 	Auc getAuc(int aucNo); //경매 물품 생성한 것 번호
 	
 	void regAuction(Auc auc); // 경매 물품 생성 + createProduct 필요
