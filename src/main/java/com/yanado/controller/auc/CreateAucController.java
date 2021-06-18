@@ -1,10 +1,8 @@
 package com.yanado.controller.auc;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
 @SessionAtrributes("auc")
-public class RegisterAucController {
+public class CreateAucController {
 	@Autowired
 	private AucDAO aucDAO;
 	
