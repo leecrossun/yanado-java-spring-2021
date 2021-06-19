@@ -1,8 +1,12 @@
 package com.yanado.dto;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -35,12 +39,13 @@ public class User {
 	@Column(name="USEREMAIL")
 	private String email;		// 이메일
 	
-	@Transient // 우선 테이블에 없어서 무시 처리해두었습니다
-	@Column(name="RANKCOUNT")
-	private int rankCount;		// (주문(+), 취소(-)), 리뷰 등록(+)
-	
+	@Transient
+	@OneToMany(mappedBy="user")
+	List<Order> order;
+
 	@Transient // 우선 테이블에 없어서 무시 처리해두었습니다
 	private String userMembership;
+  
 	@Transient // 우선 테이블에 없어서 무시 처리해두었습니다
 	private String inputStr;
 
@@ -128,11 +133,11 @@ public class User {
 		this.address = address;
 	}
 
-	public String getNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setNumber(String phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
