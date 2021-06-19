@@ -28,8 +28,8 @@ import com.yanado.dto.User;
 import com.yanado.service.CommonService;
 
 // 해당 회원 아이디로 정보 가져와서 마이페이지로 이동
-@WebServlet("/user/mypage")
 @Controller
+@WebServlet("/user/mypage")
 public class MypageController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -46,26 +46,29 @@ public class MypageController extends HttpServlet {
 	@Autowired
 	private ProductDAO productDao;
 
-	protected void service(HttpServletRequest request, HttpServletResponse response)
+	protected void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-
+		
 		request.setCharacterEncoding("utf-8");
-
+		
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("userId");
-
+		
 		User dto = userDAO.getUserByUserId(userId);
-
+		
 		request.setAttribute("dto", dto);
-
-		RequestDispatcher disp = request.getRequestDispatcher("/user/user_mypage.jsp");
+		
+		RequestDispatcher disp = request.getRequestDispatcher("/resources/templates/mypage/mypageMain.html");
 		disp.forward(request, response);
 	}
+	
 
 	@RequestMapping("/user/list/my")
+
   public ModelAndView myList(HttpServletRequest request) {
 		 UserSessionUtils uSession = new UserSessionUtils();
 		String userId = uSession.getLoginUserId(request.getSession());
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("user/userList");
 		

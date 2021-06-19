@@ -60,11 +60,11 @@ public class User {
 		}
 		
 	// 마이페이지에서 정보 수정 시 사용
-	public User(String userId, String password, String phoneNumber, String email) {
+	public User(String password, String address, String phoneNumber, String email) {
 		super();
 		
-		this.userId = userId;
 		this.password = password;
+		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 	}
