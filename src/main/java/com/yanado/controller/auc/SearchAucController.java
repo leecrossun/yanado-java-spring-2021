@@ -1,5 +1,7 @@
 package com.yanado.controller.auc;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +26,7 @@ public class SearchAucController {
 		ModelAndView mav = new ModelAndView("view/auc/view");
 		mav.setViewName("auc/view");
 		
-		Auc auc = aucDAO.findAucByAucNo(aucNo);
+		List<Auc> auc = aucDAO.findAucByAucNo(aucNo);
 		
 		mav.addObject("allaucList", auc);
 		
