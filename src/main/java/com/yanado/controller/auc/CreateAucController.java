@@ -1,5 +1,8 @@
 package com.yanado.controller.auc;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -27,23 +30,34 @@ public class CreateAucController {
 	      Auc auc = new Auc();
 	      String userId = "admin";
 	      auc.setuserId(userId);
-	      auc.setstatus(0);
+	      auc.setstatus(1);
 
 	      return auc;
 	   }
 	   
 	   @RequestMapping(value="/auc/create",method=RequestMethod.GET)
 	   public String from() {
-	      return "auc/form";
+	      return "/auc/form";
 	   }
 	   
 	   @RequestMapping(value = "/auc/create", method = RequestMethod.POST)
 	   public String createShopping(@Valid @ModelAttribute("auc") Auc auc, BindingResult result,
 	         SessionStatus status) {
-
+		   
 	      if (result.hasErrors()) {
+	    	 System.out.println(result.getAllErrors());
 	         return "/auc/form";
 	      }
+	      
+	      Date date = new Date(System.currentTimeMillis());
+	      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	      String reg = formatter.format(date);
+	      String start = formatter.format(auc.getstartDate());
+	      
+	      if (reg.equals(start)) {
+	    	  auc.setstatus(2);
+	      }
+	      
 	      aucService.createAuc(auc);
 	      status.setComplete();
 	      return "redirect:/auc/read";
