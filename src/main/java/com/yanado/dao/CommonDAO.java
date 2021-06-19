@@ -42,6 +42,8 @@ public interface CommonDAO {
 	public List<Common> findCommonByFilter2(Search filter);
  
 	public Common findCommonByCommonId(String commonId);
+	
+	public Common findCommonByProductId(String productId);
 
 
 	// 필드 한개만 변경될 시
@@ -62,9 +64,11 @@ public interface CommonDAO {
 	
 	public int deleteAllCommonJoin(String commonId);
 	
-	public int findCommonJoin(CommonJoin commonJoin);
+	public CommonJoin findCommonJoin(CommonJoin commonJoin);
 	
 	public List<CommonJoin> notPayment(String commonId);
+	
+	public int updatePayment(CommonJoin commonJoin);
 
 	// My Page
 	public List<Common> findCommonByUserId(String userId);

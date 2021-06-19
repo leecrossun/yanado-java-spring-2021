@@ -40,6 +40,7 @@ public class PaymentController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("payment/success");
+		
 		return mav;
 		
 	}
