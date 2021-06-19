@@ -15,7 +15,7 @@ public interface AucDAO {
 	public int updateAuc(Auc auc);
 	public int deleteAuc(String aucNo);
 	
-	public Auc findAucByAucNo(String AucNo); //경매 물품 이름 리스트
+	public List<Auc> findAucByAucNo(String AucNo); //경매 물품 이름 리스트
 	
 	List<Auc> getAllAucList(); // 모든 경매 리스트
 	
@@ -23,9 +23,9 @@ public interface AucDAO {
 	
 	List<User> getBuyerListByAucNo(int aucNo); // 경매 참여한 사람들 리스트
 	
-	List<Auc> findAucById(String aucId); //경매 ID 리스트
+	List<Auc> findAucByaucNo(String aucNo); //경매 ID 리스트
 	
-	void findProductByAuc(String aucId);
+	void findProductByAuc(String aucNo);
 	
 	Auc getAuc(int aucNo); //경매 물품 생성한 것 번호
 	

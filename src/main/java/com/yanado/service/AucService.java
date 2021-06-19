@@ -1,5 +1,7 @@
 package com.yanado.service;
 
+import java.util.List;
+
 import com.yanado.dao.AucDAO;
 import com.yanado.dto.Auc;
 
@@ -15,4 +17,11 @@ public class AucService {
 	public int deleteAuc(String aucNo) {
 		return aucDAO.deleteAuc(aucNo);
 	}
+	
+	public List<Auc> findAucByaucNo(String aucNo){
+		return aucDAO.findAucByAucNo(aucNo);
+	}
 }
+
+
+
