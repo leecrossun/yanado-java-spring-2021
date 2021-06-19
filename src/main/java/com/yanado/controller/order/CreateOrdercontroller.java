@@ -27,6 +27,7 @@ import com.yanado.dto.Order;
 import com.yanado.dto.Product;
 import com.yanado.dto.Shopping;
 import com.yanado.dto.User;
+import com.yanado.service.CommonService;
 import com.yanado.service.ShoppingService;
 
 @Controller
@@ -43,6 +44,9 @@ public class CreateOrdercontroller {
 		@Autowired
 		private OrderDAO orderDAO;
 		
+		@Autowired
+		private ProductDAO productDAO;
+		
 		@ModelAttribute("order")
 		public Order formBacking(HttpServletRequest request) {
 			Order order = new Order();
@@ -51,12 +55,14 @@ public class CreateOrdercontroller {
 		}
 
 		@RequestMapping(method = RequestMethod.GET)
-		public ModelAndView form(@Valid @ModelAttribute("order") Order order, @RequestParam int quentity, @RequestParam String shoppingId, BindingResult result,  SessionStatus status) {
+		public ModelAndView form(@Valid @ModelAttribute("order") Order order, @RequestParam(defaultValue = "1") int quentity, @RequestParam String productId, BindingResult result, 
+				@RequestParam(defaultValue = "1")  int type, SessionStatus status) {
 			ModelAndView mav = new ModelAndView();
 			// UserSessionUtils uSession = new UserSessionUtils();
 			// String userId = uSession.getLoginUserId(request.getSession());
 			
-			Product product = shoppingDAO.getShoppingByshoppingId(shoppingId).getProduct();
+			Product product = productDAO.getProductByProductId(productId);
+			
 			User buyer = userDAO.getUserByUserId("admin");
 			User seller = userDAO.getUserByUserId(product.getSupplierId());
 			
