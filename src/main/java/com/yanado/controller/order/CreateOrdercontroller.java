@@ -87,12 +87,8 @@ public class CreateOrdercontroller {
 				return "shopping/form";
 			}
 			System.out.println("createOrder Log");
-			System.out.println(order.getItem().get(0).getProduct().getProductName());
-			System.out.println(order.getItem().get(0).getProduct().getPrice());
 			orderDAO.createOrder(order, order.getItem());
-			
-			status.setComplete();
-			return "redirect:/shopping/view/all";
+			return "redirect:/order/view/result";
 		}
 
 	}
