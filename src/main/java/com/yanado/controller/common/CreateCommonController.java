@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.yanado.controller.user.UserSessionUtils;
 import com.yanado.dto.Common;
 import com.yanado.service.CommonService;
 
@@ -30,9 +31,9 @@ public class CreateCommonController {
 	@ModelAttribute("common")
 	public Common formBacking(HttpServletRequest request) {
 		Common common = new Common();
-		// UserSessionUtils uSession = new UserSessionUtils();
-		// String userId = uSession.getLoginUserId(request.getSession());
-		String userId = "admin";
+		UserSessionUtils uSession = new UserSessionUtils();
+		String userId = uSession.getLoginUserId(request.getSession());
+		userId = "admin";
 		common.setUserId(userId);
 		common.setStatus(1);
 		common.setMin(0);

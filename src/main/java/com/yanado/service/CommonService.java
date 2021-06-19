@@ -76,6 +76,10 @@ public class CommonService {
 	public Common findCommonByCommonId(String commonId) {
 		return dao.findCommonByCommonId(commonId);
 	}
+	
+	public Common findCommonByProductId(String productId) {
+		return dao.findCommonByProductId(productId);
+	}
 
 	public int deleteAllCommonJoin(String commonId) {
 		return dao.deleteAllCommonJoin(commonId);
@@ -105,7 +109,7 @@ public class CommonService {
 		return dao.cancelCommon(commonJoin);
 	}
 
-	public int findCommonJoin(CommonJoin commonJoin) {
+	public CommonJoin findCommonJoin(CommonJoin commonJoin) {
 		return dao.findCommonJoin(commonJoin);
 	}
 
@@ -116,6 +120,11 @@ public class CommonService {
 	public List<CommonJoin> notPayment(String commonId) {
 		return dao.notPayment(commonId);
 	}
+	
+	public int updatePayment(CommonJoin commonJoin) {
+		return dao.updatePayment(commonJoin);
+	}
+
 
 	// My Page
 	public List<Common> findCommonByUserId(String userId) {

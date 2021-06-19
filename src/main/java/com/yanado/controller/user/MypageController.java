@@ -64,15 +64,17 @@ public class MypageController extends HttpServlet {
 	
 
 	@RequestMapping("/user/list/my")
-	public ModelAndView myList(HttpServletRequest request) {
-		// UserSessionUtils uSession = new UserSessionUtils();
-		// String userId = uSession.getLoginUserId(request.getSession());
+
+  public ModelAndView myList(HttpServletRequest request) {
+		 UserSessionUtils uSession = new UserSessionUtils();
+		String userId = uSession.getLoginUserId(request.getSession());
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("user/userList");
 		
 		// 3 : common, 5 : alarm
 
-		String userId = "admin";
+		userId = "admin";
 		int type = Integer.parseInt(request.getParameter("type"));
 
 		if (type == 3) {

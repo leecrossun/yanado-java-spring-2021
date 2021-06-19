@@ -80,30 +80,35 @@
 	<select id="findCommonBySort"
 		parameterType="com.yanado.dto.Search"
 		resultType="com.yanado.dto.Common">
-		select * from (select ROWNUM as RNUM, A.* from (select c.* from common c order by ${search} desc ) A where ROWNUM <![CDATA[ <=  ]]> #{end}) where RNUM <![CDATA[ >= ]]> #{start}
-		
+		select * from (select ROWNUM as RNUM, A.* from (select c.* from common
+		c order by ${search} desc ) A where ROWNUM <![CDATA[ <=  ]]>
+		#{end}) where RNUM <![CDATA[ >= ]]>
+		#{start}
+
 	</select>
-	
+
 	<select id="findCommonByFilter1"
 		parameterType="com.yanado.dto.Search"
 		resultType="com.yanado.dto.Common">
 		select * from (select ROWNUM as RNUM, A.* FROM (select *
-		from common where status = #{searchInt}) A where ROWNUM <![CDATA[ <=  ]]>
+		from common
+		where status = #{searchInt}) A where ROWNUM <![CDATA[ <=  ]]>
 		#{end})
 		where RNUM <![CDATA[ >=  ]]>
 		#{start}
 	</select>
-	
+
 	<select id="findCommonByFilter2"
 		parameterType="com.yanado.dto.Search"
 		resultType="com.yanado.dto.Common">
 		select * from (select ROWNUM as RNUM, A.* FROM (select *
-		from common where status = 2 or status = 3) A where ROWNUM <![CDATA[ <=  ]]>
+		from common
+		where status = 2 or status = 3) A where ROWNUM <![CDATA[ <=  ]]>
 		#{end})
 		where RNUM <![CDATA[ >=  ]]>
 		#{start}
 	</select>
-	
+
 	<!-- common 읽기 -->
 	<select id="findCommonByCommonId" parameterType="String"
 		resultType="com.yanado.dto.Common">
@@ -112,21 +117,32 @@
 		commonId = #{commonId}
 	</select>
 
+	<select id="findCommonByProductId" parameterType="String"
+		resultType="com.yanado.dto.Common">
+		select * from common
+		where
+		productId = #{productId}
+	</select>
+
 	<select id="getCount" resultType="int">
 		select count(*) from
 		common
 	</select>
 
-	<select id="getSearchCount" parameterType="String" resultType="int">
-		select count(*) from common c, product p where c.productId = p.productId and p.productName like '%' || #{search} || '%'
+	<select id="getSearchCount" parameterType="String"
+		resultType="int">
+		select count(*) from common c, product p where c.productId
+		= p.productId and p.productName like '%' || #{search} || '%'
 	</select>
-	
-	<select id="getFilterCount1" parameterType="int" resultType="int">
+
+	<select id="getFilterCount1" parameterType="int"
+		resultType="int">
 		select count(*) from common where status = #{filter}
 	</select>
-	
+
 	<select id="getFilterCount2" resultType="int">
-		select count(*) from common where status = 2 or status = 3
+		select count(*) from
+		common where status = 2 or status = 3
 	</select>
 
 	<update id="increaseJoin" parameterType="String">
@@ -167,9 +183,11 @@
 	</delete>
 
 	<select id="findCommonJoin"
-		parameterType="com.yanado.dto.CommonJoin" resultType="int">
-		select count(*)
-		from commonJoin where commonId = #{commonId} and userId = #{userId}
+		parameterType="com.yanado.dto.CommonJoin"
+		resultType="com.yanado.dto.CommonJoin">
+		select *
+		from commonJoin where commonId = #{commonId} and
+		userId = #{userId}
 	</select>
 
 	<select id="findAllCommonJoinByCommonId" parameterType="String"
@@ -187,6 +205,11 @@
 		delete from
 		commonJoin where commonId=#{commonId}
 	</delete>
+
+	<update id="updatePayment">
+		update commonJoin set payment = #{payment} where
+		commonId = #{commonId} and userId = #{userId}
+	</update>
 
 	<!-- MyPage 관련 -->
 	<select id="findCommonByUserId" parameterType="String"

@@ -23,6 +23,11 @@
 		delete from favorite where userId = #{userId} and
 		productId = #{productId}
 	</delete>
+	
+		<delete id="deleteAllFavorite"
+		parameterType="String">
+		delete from favorite where productId = #{productId}
+	</delete>
 
 	<!-- 사용자가 졸아요를 누른 목록 목록 -->
 	<select id="findFavoriteByUserId" parameterType="String"
