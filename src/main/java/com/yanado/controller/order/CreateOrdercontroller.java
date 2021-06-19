@@ -55,8 +55,7 @@ public class CreateOrdercontroller {
 		}
 
 		@RequestMapping(method = RequestMethod.GET)
-		public ModelAndView form(@Valid @ModelAttribute("order") Order order, @RequestParam(defaultValue = "1") int quentity, @RequestParam String productId, BindingResult result, 
-				@RequestParam(defaultValue = "1")  int type, SessionStatus status) {
+		public ModelAndView form(@Valid @ModelAttribute("order") Order order, @RequestParam(defaultValue = "1") int quentity, @RequestParam String productId, BindingResult result,  SessionStatus status) {
 			ModelAndView mav = new ModelAndView();
 			// UserSessionUtils uSession = new UserSessionUtils();
 			// String userId = uSession.getLoginUserId(request.getSession());
