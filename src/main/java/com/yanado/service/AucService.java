@@ -1,6 +1,7 @@
 package com.yanado.service;
 
 import com.yanado.dao.AucDAO;
+import com.yanado.dto.Auc;
 
 public class AucService {
 	private AucDAO aucDAO;

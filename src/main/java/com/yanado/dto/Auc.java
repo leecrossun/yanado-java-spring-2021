@@ -1,18 +1,15 @@
 package com.yanado.dto;
 
 import java.sql.Date;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
-
 import org.hibernate.validator.constraints.Range;
+import org.springframework.data.annotation.Id;
 
 @Entity
 public class Auc {
-	@id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
 	String aucNo;
 	
 	@NotNull

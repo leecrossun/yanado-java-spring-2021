@@ -1,9 +1,16 @@
 package com.yanado.controller.auc;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yanado.dao.AucDAO;
+import com.yanado.dto.Auc;
+
 @Controller
-@RequestMapping('auc/view')
+@RequestMapping("auc/view")
 public class SearchAucController {
 	
 	@Autowired
@@ -17,9 +24,10 @@ public class SearchAucController {
 		ModelAndView mav = new ModelAndView("view/auc/view");
 		mav.setViewName("auc/view");
 		
-		Auc auc = aucDAO.findAucById;
-		Auc auc = aucDAO.findAucByProduct;
+		Auc auc = aucDAO.findAucByAucNo(aucNo);
 		
 		mav.addObject("allaucList", auc);
+		
+		return mav;
 	}
 }

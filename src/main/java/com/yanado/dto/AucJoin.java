@@ -1,21 +1,26 @@
 package com.yanado.dto;
 
 public class AucJoin {
-	string aucNo;
+	String aucNo;
 	String userId;
+	
 	int bidPrice;
 	int bidCount;
+	
+	public AucJoin() {
+	}
+	
+	public AucJoin(String aucNo, String userId, int bidPrice) {
+		this.aucNo = aucNo;
+		this.userId = userId;
+		this.bidPrice = bidPrice;
+	}
 	
 	public AucJoin(String aucNo, String userId, int bidPrice, int bidCount) {
 		this.aucNo = aucNo;
 		this.userId = userId;
 		this.bidPrice = bidPrice;
 		this.bidCount = bidCount;
-	}
-	public AucJoin(String aucNo, String userId, int bidPrice, int bidCount) {
-		this.aucNo = aucNo;
-		this.userId = userId;
-		this.bidPrice = bidPrice;
 	}
 	
 	public String getaucNo() {

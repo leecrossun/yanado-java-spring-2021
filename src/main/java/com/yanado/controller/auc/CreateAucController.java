@@ -1,10 +1,22 @@
 package com.yanado.controller.auc;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+
 import com.yanado.dto.Auc;
 import com.yanado.service.AucService;
 
 @Controller
-@SessionAtrributes("auc")
+@SessionAttributes("auc")
 @RequestMapping("/auc/create")
 public class CreateAucController {
 	   @Autowired
@@ -20,9 +32,9 @@ public class CreateAucController {
 	      return auc;
 	   }
 	   
-	   @RequestMapping(value='/auc/create',method=RequestMethod.GET)
+	   @RequestMapping(value="/auc/create",method=RequestMethod.GET)
 	   public String from() {
-	      return 'auc/form';
+	      return "auc/form";
 	   }
 	   
 	   @RequestMapping(value = "/auc/create", method = RequestMethod.POST)
@@ -30,11 +42,11 @@ public class CreateAucController {
 	         SessionStatus status) {
 
 	      if (result.hasErrors()) {
-	         return "auc/form";
+	         return "/auc/form";
 	      }
 	      aucService.createAuc(auc);
 	      status.setComplete();
-	      return "redirect:/auc/";
+	      return "redirect:/auc/read";
 	   }
 
 }
