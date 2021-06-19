@@ -137,25 +137,28 @@
 									</div>
 								</div>
 							</div>
-							<div class="flex-w flex-r-m p-b-10"
+							<!-- <div class="flex-w flex-r-m p-b-10"
 								th:if="${common.common.status} == 2 or ${common.common.status} == 3"
+								style='padding-left: 20%; margin-top: 3%'>
+								<div class="size-204 flex-w flex-m respon6-next"> -->
+								
+								<div class="flex-w flex-r-m p-b-10"
 								style='padding-left: 20%; margin-top: 3%'>
 								<div class="size-204 flex-w flex-m respon6-next">
 									<div class="wrap-num-product flex-w m-r-20 m-tb-10"
 										style="display: none"></div>
 
-									<button th:if="${join} == 0"
+									<button th:if="${join} == null"
 										class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-join-common">
 										Join</button>
 
-									<button th:if="${join} == 1"
+									<button th:if="${join != null && common.common.status != 5}"
 										class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-cancel-common">
 										Cancel</button>
 
-									<button th:if="${join == 1 && common.common.status == 5}"
+								<button th:if="${join != null && common.common.status == 5 && join.payment == 0}"
 										class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-pay-common">
 										Pay</button>
-
 								</div>
 							</div>
 						</div>
@@ -410,8 +413,9 @@
 									.on(
 											'click',
 											function() {
-
-												location.href = "[[@{/order/create(productId=${common.product.productId})}]]"; /* 결제 창으로 넘어가기  */
+												var url = "[[@{/order/create(type=2, productId=${common.product.productId})}]]"
+												url = url.replace("amp;", "")
+												location.href = url; /* 결제 창으로 넘어가기  */
 
 											});
 						});
