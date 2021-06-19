@@ -10,31 +10,34 @@ import org.hibernate.validator.constraints.Range;
 import lombok.Data;
 
 public class Common {
-	String commonId;
+	String commonId; // 공동구매 ID
 	
 	@NotNull
-	String userId;
+	String userId; // common을 등록한 회원 ID
 
 	@NotNull
-	String productId;
+	String productId; // 공동구매할 상품 ID
 	
 	@PositiveOrZero
-	int participants;
+	int participants; // 공동구매에 참여한 수
 	
 	@Positive
-	int min;
+	int min; // 공동 구매 최소 인원
 
 	@Range(min = 1, max = 5)
-	int status; // 1 : 진행 전, 2 : 정원 미달, 3 : 최소인원 넘음, 4 : 파기, 5: 성공 (및 종료)
-
-	Date regDate;
+	int status; // 공동구매 진행 현황, 1 : 진행 전, 2 : 정원 미달, 3 : 최소인원 넘음, 4 : 파기, 5: 성공 (및 종료)
 
 	@NotNull
-	Date startDate;
+	Date regDate; // 등록일
+
 	@NotNull
-	Date endDate;
+	Date startDate; // 공동구매 신청 시작일
+	
 	@NotNull
-	Date deadline;
+	Date endDate; // 공동구매 신청 종료일
+	
+	@NotNull
+	Date deadline; // 공동구매 성공시, 결제 마감일
 
 	public Common() {
 	}

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yanado.controller.user.UserSessionUtils;
 import com.yanado.dao.FavoriteDAO;
 import com.yanado.dao.ProductDAO;
 import com.yanado.dto.Common;
@@ -33,9 +34,9 @@ public class ReadCommonController {
 	// 공동구매 보기
 	@RequestMapping("/common/read")
 	public ModelAndView read(HttpServletRequest request, @RequestParam String commonId) {
-		//UserSessionUtils uSession = new UserSessionUtils();
-		//String userId = uSession.getLoginUserId(request.getSession());
-		String userId = "admin";
+		UserSessionUtils uSession = new UserSessionUtils();
+		String userId = uSession.getLoginUserId(request.getSession());
+		userId = "admin";
 	
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/read");

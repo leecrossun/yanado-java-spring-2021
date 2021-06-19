@@ -20,13 +20,10 @@ public class UserIdCheckController extends HttpServlet {
 	
 	@Autowired
 	UserDAO userDAO;
+	
 	private static final long serialVersionUID = 1L;
 	
-	@Autowired private UserDAO userDao;
 
-	@Autowired
-	private UserDAO userDAO;
-	
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

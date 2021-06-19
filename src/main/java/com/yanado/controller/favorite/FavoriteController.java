@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.yanado.controller.user.UserSessionUtils;
 import com.yanado.dao.FavoriteDAO;
 import com.yanado.dto.Favorite;
 
@@ -22,9 +23,9 @@ public class FavoriteController {
 	
 	@RequestMapping("/favorite/add")
 	public String add(@RequestParam String productId, @RequestParam String typeId, @RequestParam int type, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-		// UserSessionUtils uSession = new UserSessionUtils();
-		// String userId = uSession.getLoginUserId(request.getSession());
-		String userId = "admin";
+		UserSessionUtils uSession = new UserSessionUtils();
+		String userId = uSession.getLoginUserId(request.getSession());
+		userId = "admin";
 		
 		Favorite favorite = new Favorite(userId, productId, typeId, type);
 		System.out.println("type : " + favorite.getType());

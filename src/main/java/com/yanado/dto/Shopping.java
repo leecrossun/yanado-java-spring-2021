@@ -57,13 +57,13 @@ public class Shopping implements Serializable {
 	@Column(name="SHOPPINGID")
 	@GeneratedValue(generator = "SHOPPING_GEN")
 	@GenericGenerator(name = "SHOPPING_GEN", strategy = "uuid")
-	String shoppingId;
+	String shoppingId; // shopping ID
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="PRODUCTID")
-	Product product;
+	Product product; // 상품 객체
 	
-	int stock;
+	int stock; // 
 	int status;
 	
 	@Temporal(TemporalType.DATE)

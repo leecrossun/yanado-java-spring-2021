@@ -6,12 +6,13 @@ import org.hibernate.validator.constraints.Range;
 
 public class CommonJoin {
 	@NotNull
-	String commonId;
+	String commonId; // 참여한 공동구매 ID
+	
 	@NotNull
-	String userId;
+	String userId; // 공동구매에 참여한 회원 ID
 	
 	@Range(min= 0, max=1)
-	int payment;
+	int payment; // 지불 여부, 1 : 지불 함 / 0 : 지불 안함
 
 	public CommonJoin(@NotNull String commonId, @NotNull String userId, int payment) {
 		this.commonId = commonId;
