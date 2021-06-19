@@ -16,7 +16,6 @@ import com.yanado.dto.Product;
 import com.yanado.dto.Search;
 import com.yanado.service.CommonService;
 
-import sun.net.www.content.text.plain;
 
 @Controller
 public class FilterCommonController {

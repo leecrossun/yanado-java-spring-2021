@@ -193,16 +193,17 @@
 						<!-- - -->
 						<div class="tab-pane fade" id="information" role="tabpanel" th:if="${common.product.attribute1 != null && common.product.attribute1 != ''}">
 							<div class="row">
-								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto "  align="center">
-									<ul class="p-lr-28 p-lr-15-sm">
-										<li class="flex-w flex-t p-b-7"><span
-											class="stext-102 cl3 size-205"> Attribute1 </span> <span
-											class="stext-102 cl6 size-206"  th:text="${common.product.attribute1}"> </span></li>
-											<li class="flex-w flex-t p-b-7"><span
+								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto " align="center">
+									<ul class="p-lr-28 p-lr-15-sm" style="text-align:center;">
+										<li class="flex-w flex-t p-b-7"  th:if="${common.product.attribute1 != null && common.product.attribute1 != ''}"><span
+											class="stext-102 cl3 size-205"> Attribute1 </span> 
+											<span class="stext-102 cl6 size-206"  th:text="${common.product.attribute1}"> </span></li>
+											
+											<li class="flex-w flex-t p-b-7"  th:if="${common.product.attribute2 != null && common.product.attribute2 != ''}"><span
 											class="stext-102 cl3 size-205"> Attribute2 </span> <span
 											class="stext-102 cl6 size-206"  th:text="${common.product.attribute2}"> </span></li>
 											
-											<li class="flex-w flex-t p-b-7"><span
+											<li class="flex-w flex-t p-b-7"  th:if="${common.product.attribute3 != null && common.product.attribute3 != ''}"><span
 											class="stext-102 cl3 size-205"> Attribute3 </span> <span
 											class="stext-102 cl6 size-206"  th:text="${common.product.attribute3}"> </span></li>
 									

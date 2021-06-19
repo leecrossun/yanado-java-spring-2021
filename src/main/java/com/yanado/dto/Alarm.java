@@ -8,18 +8,22 @@ import org.hibernate.validator.constraints.Range;
 
 public class Alarm {
 
-	String alarmId;
-	String userId;
-	String commonId = null;
-	String aucId = null;
+	String alarmId; // 알람 ID
+	String userId; // 알람을 받는 회원의 ID
+	
+	String commonId = null; // 해당 알람이 생성된 공동구매 ID
+	
+	String aucId = null; // 해당 알람이 생성된 경매 ID
 
 	@Range(min = 1, max = 3)
-	int type; // 1 : result, 2 : notice, 3 : etc
+	int type; // 알람의 용도 1 : result, 2 : notice, 3 : etc
+	
 	@PositiveOrZero
-	int price;
-	String message;
-	Date sendDate;
-	Date deadline;
+	int price; // 해당 상품의 가격
+	
+	String message; // 알람 내용
+	Date sendDate; // 보낸 날짜
+	Date deadline; // 상품 결제 마감일
 
 	public Alarm() {
 	}

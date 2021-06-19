@@ -26,9 +26,9 @@ public class CancelCommonController {
 			throws Exception {
 		
 		
-		//UserSessionUtils uSession = new UserSessionUtils();
-		//String userId = uSession.getLoginUserId(request.getSession());
-		String userId = "admin";
+		UserSessionUtils uSession = new UserSessionUtils();
+		String userId = uSession.getLoginUserId(request.getSession());
+		userId = "admin";
 		
 		Common common = commonService.findCommonByCommonId(commonId);
 		

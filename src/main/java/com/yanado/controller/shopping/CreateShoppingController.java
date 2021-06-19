@@ -91,7 +91,7 @@ public class CreateShoppingController {
 		}
 
 		Product product = shopping.getProduct();
-		product.setImage("../static/productImage/" + file.getOriginalFilename());
+		product.setImage("../../static/productImage/" + file.getOriginalFilename());
 		
 		shopping.setProduct(product);
 

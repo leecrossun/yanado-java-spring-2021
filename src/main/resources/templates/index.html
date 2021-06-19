@@ -142,15 +142,15 @@
 			<div class="p-b-10">
 				<h3 class="ltext-103 cl5" align="center" style="margin: 10px;">추천
 					아이템</h3>
-				<div class="row isotope-grid">
+				<div class="row isotope-grid" >
 					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women"
 						th:if="${not #lists.isEmpty(favoriteList) && favoriteList != null }"
-						th:each="favorite, index : ${favoriteList}">
+						th:each="favorite, index : ${favoriteList}" >
 						<!-- Block2 -->
-						<div class="block2">
+						<div class="block2" >
 
-							<div class="block2-pic hov-img0">
-								<img src="../../static/images/test.png" alt="IMG-PRODUCT">
+							<div class="block2-pic hov-img0" >
+								<img th:src="${favorite.product.image}" alt="IMG-PRODUCT" >
 								<a href="#" th:if="${favorite.fav.type} == 1"
 									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 									Quick View </a> 

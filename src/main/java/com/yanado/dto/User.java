@@ -39,7 +39,6 @@ public class User {
 	@Column(name="RANKCOUNT")
 	private int rankCount;		// (주문(+), 취소(-)), 리뷰 등록(+)
 	
-	// 등급 추가...?
 	@Transient // 우선 테이블에 없어서 무시 처리해두었습니다
 	private String userMembership;
 	@Transient // 우선 테이블에 없어서 무시 처리해두었습니다

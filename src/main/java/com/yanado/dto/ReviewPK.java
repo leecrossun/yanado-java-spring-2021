@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @SuppressWarnings("serial")
+
 public class ReviewPK implements Serializable{
-	private String reviewId;
-	private Shopping shopping;
+	private String reviewId; // 리뷰 Id
+	private Shopping shopping; // 리뷰를 남긴 쇼핑
 	
 	public ReviewPK() {}
 	
