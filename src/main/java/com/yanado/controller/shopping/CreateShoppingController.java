@@ -17,6 +17,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yanado.controller.user.UserSessionUtils;
 import com.yanado.dao.ProductDAO;
 import com.yanado.dao.ShoppingDAO;
 import com.yanado.dto.Product;
@@ -37,9 +38,9 @@ public class CreateShoppingController {
 		Shopping shopping = new Shopping();
 		Product product = new Product();
 		
-		// UserSessionUtils uSession = new UserSessionUtils();
-		// String userId = uSession.getLoginUserId(request.getSession());
-		String userId = "admin";
+		String userId = UserSessionUtils.getLoginUserId(request.getSession());
+
+		//String userId = "admin";
 		product.setSupplierId(userId);
 		shopping.setProduct(product);
 		shopping.setStatus(1);

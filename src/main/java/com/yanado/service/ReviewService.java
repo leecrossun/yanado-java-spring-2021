@@ -20,9 +20,9 @@ public class ReviewService {
 	{
 		// 테스트용 기본값 (로그인, 이미지업로드 추가 시 삭제)
 		review.setPublished(new Date());
-		User user = new User();
-		user.setUserId("admin");
-		review.setUser(user);
+		/*
+		 * User user = new User(); user.setUserId("admin"); review.setUser(user);
+		 */
 		reviewDAO.createReview(review);
 	}
 	
