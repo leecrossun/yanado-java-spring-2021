@@ -21,7 +21,6 @@ import com.yanado.dto.Auc;
 import com.yanado.service.AucService;
 
 @Controller
-@RequestMapping("auc/create")
 @SessionAttributes("auc")
 public class CreateAucController {
 	   @Autowired
@@ -47,7 +46,7 @@ public class CreateAucController {
 	   
 	   @RequestMapping(value = "auc/create", method = RequestMethod.POST)
 	   public String createShopping(@Valid @ModelAttribute("auc") Auc auc, BindingResult result,
-			   RedirectAttributes red,SessionStatus status) {
+			   RedirectAttributes red, SessionStatus status) {
 		   
 	      if (result.hasErrors()) {
 	    	 System.out.println(result.getAllErrors());

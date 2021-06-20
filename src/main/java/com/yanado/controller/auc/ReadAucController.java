@@ -20,12 +20,12 @@ public class ReadAucController {
 	@RequestMapping("/auc/read")
 	public ModelAndView read(HttpServletRequest request, @RequestParam String aucNo) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/auc/read");
+		mav.setViewName("auc/read");
 		
 		List<Auc> auc = aucService.findAucByaucNo(aucNo);
-		mav.addObject("aucList",auc);
+		mav.addObject("auc",auc);
 		
-		return null;
+		return mav;
 	}
 	
 }
