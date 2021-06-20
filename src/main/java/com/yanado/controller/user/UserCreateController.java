@@ -52,7 +52,7 @@ public class UserCreateController {
 		
 		userDAO.createUser(dto);
 		
-		return "redirect:mypage/loginPage";
+		return "redirect:user/loginPage";
 	}
 	
 	@RequestMapping(value="/user/create", method = RequestMethod.GET)

@@ -50,7 +50,7 @@
  function msg(){
   var str = '[[${type}]]';
   
-  if(str != ''){
+  if(str == 0){
 	  alert('아이디 또는 비밀번호가 일치하지 않습니다.');
   }
   
@@ -113,7 +113,7 @@
 
 										<div class="size-204 respon6-next">
 											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="password" id="password"
+												<input type="password" name="password" id="password"
 													style="padding: 10px; text-align: center">
 											</div>
 
@@ -206,12 +206,6 @@
 				return;
 			}
 
-		/* 	var url = "/member/login";
-			var param = "id=" + encodeURIComponent(id) + "&pwd="
-					+ encodeURIComponent(pwd);
-			sendRequest(url, param, resultFun, "POST"); */
-			/* 
-			location.href = "[[@{/user/login}]]"; */
 		}
 
 		function resultFun() { // id, pwd 체크
