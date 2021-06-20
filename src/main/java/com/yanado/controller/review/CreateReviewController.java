@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yanado.controller.user.UserSessionUtils;
 import com.yanado.dao.ReviewDAO;
 import com.yanado.dao.ShoppingDAO;
 import com.yanado.dto.Review;
 import com.yanado.dto.Shopping;
+import com.yanado.dto.User;
 import com.yanado.service.ReviewService;
 import com.yanado.service.ShoppingService;
 
@@ -34,13 +36,17 @@ public class CreateReviewController {
 
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String createReview(@Valid @ModelAttribute("review") Review review, @RequestParam String shoppingId, BindingResult result,
-			SessionStatus status) {
+	public String createReview(@Valid @ModelAttribute("review") Review review, @RequestParam String shoppingId, BindingResult result, HttpServletRequest request, SessionStatus status) {
 
 		if (result.hasErrors()) {
 			return "redirect:/review/view/all?shoppingId=" + shoppingId;
 		}
 		review.setShopping(shoppingDAO.getShoppingByshoppingId(shoppingId));
+		
+		User user = new User();
+		user.setUserId( UserSessionUtils.getLoginUserId(request.getSession()));
+		review.setUser(user);
+		 
 		service.createReview(review);
 		status.setComplete();
 		return "redirect:/review/view/all?shoppingId=" + shoppingId;

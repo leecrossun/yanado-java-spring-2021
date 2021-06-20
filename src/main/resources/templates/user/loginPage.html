@@ -47,14 +47,17 @@
 <!--===============================================================================================-->
 
 <script type="text/javascript">
- function msg(){
-  var str = '[[${type}]]';
-  
-  if(str != ''){
-	  alert('아이디 또는 비밀번호가 일치하지 않습니다.');
-  }
-  
- }
+	function msg() {
+		var params = location.search.substr(location.search.indexOf("?") + 1);
+		param = params.split("?")
+
+		if (param == 'type=0') {
+			alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+		} else {
+			return;
+		}
+
+	}
 </script>
 
 
@@ -86,7 +89,7 @@
 					<!-- Tab panes -->
 					<div class="tab-content p-t-43" align='center'>
 
-						<form th:action="@{/user/login}" method="post" >
+						<form th:action="@{/user/login}" method="post">
 
 							<!-- - -->
 							<div class="tab-pane fade show active" id="description"
@@ -113,7 +116,7 @@
 
 										<div class="size-204 respon6-next">
 											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="password" id="password"
+												<input type="password" name="password" id="password"
 													style="padding: 10px; text-align: center">
 											</div>
 
@@ -206,12 +209,6 @@
 				return;
 			}
 
-		/* 	var url = "/member/login";
-			var param = "id=" + encodeURIComponent(id) + "&pwd="
-					+ encodeURIComponent(pwd);
-			sendRequest(url, param, resultFun, "POST"); */
-			/* 
-			location.href = "[[@{/user/login}]]"; */
 		}
 
 		function resultFun() { // id, pwd 체크

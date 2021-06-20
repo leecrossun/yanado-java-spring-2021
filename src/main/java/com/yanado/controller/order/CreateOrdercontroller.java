@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yanado.controller.user.UserSessionUtils;
 import com.yanado.dao.OrderDAO;
 import com.yanado.dao.ProductDAO;
 import com.yanado.dao.ShoppingDAO;
@@ -63,15 +64,14 @@ public class CreateOrdercontroller {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView form(@Valid @ModelAttribute("order") Order order,
 			@RequestParam(defaultValue = "1") int quentity, @RequestParam String productId,
-			@RequestParam(defaultValue = "1") int type, BindingResult result, SessionStatus status) {
+			@RequestParam(defaultValue = "1") int type, BindingResult result, SessionStatus status,HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
-		// UserSessionUtils uSession = new UserSessionUtils();
-		// String userId = uSession.getLoginUserId(request.getSession());
+		String userId = UserSessionUtils.getLoginUserId(request.getSession());
 
 		Product product = productDAO.getProductByProductId(productId);
 
-		User buyer = userDAO.getUserByUserId("admin");
+		User buyer = userDAO.getUserByUserId(userId);
 		User seller = userDAO.getUserByUserId(product.getSupplierId());
 
 		List<Item> items = new ArrayList<Item>();
