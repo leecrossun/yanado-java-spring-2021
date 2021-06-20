@@ -13,7 +13,7 @@
      		var price = String(String(x.rowIndex+1)+"price");
 
       	  
-	      	opener.document.getElementById("productName").value = document.getElementById(title).innerHTML;
+	      	opener.document.getElementById("productName").value = document.getElementById(title).innerHTML.replace(/(<([^>]+)>)/ig,"");
 	      	//opener.document.getElementById("productName").value = document.getElementById(category).innerHTML;
 	      	opener.document.getElementById("price").value = document.getElementById(price).innerHTML;
 
