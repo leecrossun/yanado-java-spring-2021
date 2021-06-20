@@ -42,7 +42,7 @@ public class Item implements Serializable{
 	@JoinColumn(name="PRODUCTID")
 	Product product;
 	
-	@ManyToOne(cascade=CascadeType.REMOVE)
+	@ManyToOne
 	@JoinColumn(name="USERID")
 	User user;
 	

@@ -34,6 +34,17 @@ public class OrderDAO {
 	}
 	
 	@Transactional
+	public void deleteOrder(Order order, List<Item> items) throws DataAccessException
+	{
+		for (int i = 0; i < items.size(); i++) {
+			Item item = items.get(i);
+			em.remove(item);
+		}
+		em.remove(order);
+		System.out.println("delete order");
+	}
+	
+	@Transactional
 	public Order getOrderByOrderId(String orderId) throws DataAccessException
 	{
 		Order result;
@@ -43,10 +54,10 @@ public class OrderDAO {
 			query.setParameter("id", orderId);
 			result = (Order)query.getSingleResult();
 		} catch (NoResultException ex) {
-			System.out.println("fail getShopping");
+			System.out.println("fail getOrder");
 			return null;
 		}
-		System.out.println("success getShopping");
+		System.out.println("success getOrder");
 		return result;
 	}
 
