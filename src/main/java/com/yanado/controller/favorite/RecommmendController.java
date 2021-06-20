@@ -27,10 +27,10 @@ public class RecommmendController {
 
 	@Autowired
 	private FavoriteDAO favoriteDao;
-	
+
 	@Autowired
 	private ProductDAO productDao;
-	
+
 	@Autowired
 	private CommonService commonService;
 
@@ -43,13 +43,16 @@ public class RecommmendController {
 
 		if (userId == null) {
 			List<Favorite> favList = favoriteDao.findFavoriteByTop();
-		
-			for(Favorite fav : favList) {
-				 FavoriteDTO f = new FavoriteDTO(fav, productDao.getProductByProductId(fav.getProductId()));
-			//	FavoriteDTO f = new FavoriteDTO(fav, commonService.findProduct(fav.getProductId()));
-				fList.add(f);
+
+			for (Favorite fav : favList) {
+				FavoriteDTO f = new FavoriteDTO(fav, productDao.getProductByProductId(fav.getProductId()));
 				
-				System.out.println(f.getFav().getType());
+				String path = f.getProduct().getImage();
+				path = path.replaceFirst("../", "");
+				f.getProduct().setImage(path);
+				
+				fList.add(f);
+
 			}
 		} else {
 
@@ -74,10 +77,13 @@ public class RecommmendController {
 
 			Collections.shuffle(favoriteList);
 
-			
 			for (Favorite fav : favoriteList) {
-				FavoriteDTO f = new FavoriteDTO(fav,
-						productDao.getProductByProductId(fav.getProductId()));
+				FavoriteDTO f = new FavoriteDTO(fav, productDao.getProductByProductId(fav.getProductId()));
+
+				String path = f.getProduct().getImage();
+				path = path.replaceFirst("../", "");
+				f.getProduct().setImage(path);
+
 				fList.add(f);
 			}
 

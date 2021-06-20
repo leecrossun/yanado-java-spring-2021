@@ -124,5 +124,13 @@ public class ShoppingDAO {
 		return result;
 	}
 	
+	// Stock 수 줄이기
+	@Transactional
+	public void updateStockByShoppingId (String shoppingId) throws DataAccessException 
+	{
+		TypedQuery<Shopping> query = em.createNamedQuery("updateStockByShoppingId", Shopping.class);
+		query.setParameter("id", shoppingId);
+	}
+	
 
 }

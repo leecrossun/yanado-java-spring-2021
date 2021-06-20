@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.yanado.controller.user.UserSessionUtils;
 import com.yanado.dao.ProductDAO;
 import com.yanado.dto.Product;
 
@@ -37,9 +38,11 @@ public class CreateCommonProductController {
 	@ModelAttribute("product")
 	public Product formBacking(HttpServletRequest request) {
 		Product p = new Product();
-		// UserSessionUtils uSession = new UserSessionUtils();
-		// String userId = uSession.getLoginUserId(request.getSession());
-		String userId = "admin";
+		
+		UserSessionUtils uSession = new UserSessionUtils();
+		String userId = uSession.getLoginUserId(request.getSession());
+		userId = "admin";
+		
 		p.setSupplierId(userId);
 		p.setCategory("common");
 		return p;
@@ -80,7 +83,7 @@ public class CreateCommonProductController {
 		}
 
 		status.setComplete();
-		product.setImage("../static/productImage/" + file.getOriginalFilename());
+		product.setImage("../../static/productImage/" + file.getOriginalFilename());
 		productDao.createProduct(product);
 
 		request.setAttribute("productId", product.getProductId());

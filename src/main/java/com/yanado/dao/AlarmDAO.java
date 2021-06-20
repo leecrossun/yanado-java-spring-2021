@@ -20,6 +20,10 @@ public interface AlarmDAO {
 	List<Alarm> findAlarmByCommonId(String commonId);
 
 	List<Alarm> findAlarmByAuctionId(String aucId);
+	
+	void deleteAllCommonAlarm(String commonId);
+	
+	void deleteAllAcuAlarm(String aucId);
 
 	// MyPage
 	List<Alarm> findAllAlarmByUserId(String userId);

@@ -39,9 +39,6 @@ public class CreateAlarmController {
 	@ModelAttribute("alarm")
 	public Alarm formBacking(HttpServletRequest request) {
 		Alarm alarm = new Alarm();
-		// UserSessionUtils uSession = new UserSessionUtils();
-		// String userId = uSession.getLoginUserId(request.getSession());
-
 		int flag = Integer.parseInt(request.getParameter("flag"));
 
 		if (flag == 1) {

@@ -24,8 +24,8 @@ import org.hibernate.annotations.NamedQuery;
 @NamedQueries({
 	@NamedQuery
 	(
-			name = "getOrderByUserId",
-			query = "SELECT o FROM Order o WHERE o.user.userId=:id"
+			name = "getOrderByOrderId",
+			query = "SELECT o FROM Order o WHERE o.orderId=:id"
 	)
 	
 })
@@ -38,7 +38,7 @@ public class Order implements Serializable{
 	@Column(name="ORDERID")
 	String orderId;
 	
-	@ManyToOne(cascade = CascadeType.REMOVE)
+	@ManyToOne
 	@JoinColumn(name="USERID")
 	User user;
 	

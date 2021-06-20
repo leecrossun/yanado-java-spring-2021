@@ -22,30 +22,33 @@ public class Product {
 	@Column(name="PRODUCTID")
 	@GeneratedValue(generator = "PRODUCT_GEN")
 	@GenericGenerator(name = "PRODUCT_GEN", strategy = "uuid")
-	String productId;
+	String productId; // 상품 ID
 
 	@NotNull
 	@Column(name="PRODUCTNAME")
-	String productName;
+	String productName; // 상품 이름
 
 	@NotNull
-	String category;
+	String category; // 상품 카테고리 : Shopping, Transaction, Common, Auction
 	
 	@OneToMany(mappedBy="product")
 	private List<Item>itemList;
 	
 	@Column(name="DETAILCATEGORY")
-	String detailCategory;
-	String image;
-	String attribute1;
-	String attribute2;
-	String attribute3;
-	String content;
+	String detailCategory; // 세부 카테고리
+	
+	String image; // 상품 이미지 경로
+	
+	String attribute1; // 상품 옵션1
+	String attribute2; // 상품 옵션2
+	String attribute3; // 상품 옵션3
+	
+	String content; // 상품 설명
 
 	@NotNull
-	int price;
+	int price; // 상품 가격
 
-	int delivery;
+	int delivery; // 배달료
 
 	@NotNull
 	@Column(name="SUPPLIERID")

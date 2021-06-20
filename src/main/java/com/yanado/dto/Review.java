@@ -34,26 +34,28 @@ import org.hibernate.annotations.NamedQuery;
 			query = "SELECT r FROM Review r WHERE r.reviewId=:id and r.shopping.shoppingId=:id2"
 	)
 })
+
 public class Review implements Serializable{
 	@Id
 	@GeneratedValue(generator = "REVIEW_GEN")
 	@GenericGenerator(name = "REVIEW_GEN", strategy = "uuid")
 	@Column(name="REVIEWID")
-	String reviewId;
+	String reviewId; // 리뷰 ID
 	
 	@Id
 	@ManyToOne
 	@JoinColumn(name="SHOPPINGID")
-	Shopping shopping;
+	Shopping shopping; // 리뷰를 작성한 쇼핑 상품
 	
 	@OneToOne
 	@JoinColumn(name="USERID")
-	User user;
-	String content;
-	int rating;
+	User user; // 리뷰를 작성한 회원
+	
+	String content; // 리뷰 글
+	int rating; // 별점
 	
 	@Temporal(TemporalType.DATE)
-	Date published;
+	Date published; // 리뷰를 작성한 날짜
 	
 	
 	public Review() {

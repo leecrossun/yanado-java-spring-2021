@@ -148,10 +148,11 @@ box-shadow: 1px 1px solid black;
 
 								<div class="size-204 respon6-next">
 									<div class="rs1-select2 bor8 bg0">
-										<p style="margin: 1em;" align='center'>
+										<div style="margin: 1em; margin: 10px auto;" align='center'>
 											<form th:action="@{/order/create}" method="get">
-												<input type="number" th:name="quentity" th:max="${shopping.stock}" th:min="1" th:value="1" style="border: 1px solid black; text-align:center;"/>
+												 Quentity<input type="number" th:name="quentity" th:max="${shopping.stock}" th:min="1" th:value="1" style="border: 1px solid black; text-align:center;"/>
 												<input type="hidden" th:name="shoppingId" th:value="${shopping.shoppingId}"/> 
+												<input type="hidden" th:name="productId" th:value="${shopping.product.productId}" />
 												<button
 												class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 submit_btn"
 												style="margin: 3%">
@@ -164,7 +165,7 @@ box-shadow: 1px 1px solid black;
 											<a style="color: black;"
 												th:href='@{/review/view/all(shoppingId=${shopping.shoppingId})}'>Add to Cart</a>
 											</button>
-										</p>
+										</div>
 									</div>
 								</div>
 							</div>
