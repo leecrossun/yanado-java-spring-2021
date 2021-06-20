@@ -43,9 +43,6 @@ public class findProductController {
 		        HttpMethod.GET, request, new ParameterizedTypeReference<ListProduct>(){});
 		List<ProductNaver> list = Arrays.asList(response.getBody().getProductNaver());
 		System.out.println("success controller" + list.get(0).getTitle());
-		
-		
-		//ObjectMapper mapper = new ObjectMapper();
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("restapi/result");
