@@ -14,50 +14,53 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yanado.dao.UserDAO;
 import com.yanado.dto.User;
 import com.yanado.service.UserService;
 
 @Controller
-@WebServlet("/user/login")
-public class LoginController extends HttpServlet {
-	
+//@WebServlet("/user/login")
+public class LoginController {
+
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private UserDAO userDAO;
-	
-	protected void service(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		
+
+	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
+	protected String service(HttpServletRequest request, RedirectAttributes red) throws ServletException, IOException {
+
 		request.setCharacterEncoding("utf-8");
 
-		String id = request.getParameter("id");
-		String pwd = request.getParameter("pwd");
+		String id = request.getParameter("userId");
+		String pwd = request.getParameter("password");
 
 		User dto = userDAO.getUserByUserId(id);
-		
-		String param = "";
-		String resultStr = "";
-		
 
-		if (dto == null || dto.getUserId().equals(id) == false) {
-			param = "no_id";
-		} else if (dto.getPassword().equals(pwd) == false) {
-			param = "no_pwd";
+		if (dto == null || dto.getUserId().equals(id) == false || dto.getPassword().equals(pwd) == false) {
+			red.addAttribute("type", "0");
+			return "redirect:/user/login";
 		} else {
-			param = "clear";
-			
+
 			HttpSession session = request.getSession();
 			session.setAttribute(UserSessionUtils.USER_SESSION_KEY, id);
+			return "redirect:/";
 		}
 
-		resultStr = String.format("[{'param':'%s'}]", param);
-		response.setContentType("text/plain; charset=utf-8");
-		response.getWriter().println( resultStr );
+		/*
+		 * resultStr = String.format("[{'param':'%s'}]", param);
+		 * response.setContentType("text/plain; charset=utf-8");
+		 * response.getWriter().println( resultStr );
+		 */
 	}
-	
+
+	@RequestMapping(value = "/user/login", method = RequestMethod.GET)
+	public String form() {
+		return "user/loginPage";
+	}
+
 //@WebServlet("/user/loginPage")
 //@Controller
 //public class LoginController extends HttpServlet {
@@ -91,5 +94,5 @@ public class LoginController extends HttpServlet {
 //		
 //		return path;
 //	}
-	
+
 }
