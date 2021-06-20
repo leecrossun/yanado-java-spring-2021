@@ -33,7 +33,7 @@ public class CreateAucController {
 		  UserSessionUtils uSession = new UserSessionUtils();
 		  @SuppressWarnings("static-access")
 		  String userId = uSession.getLoginUserId(request.getSession());
-	      userId = "admin";
+	      //userId = "admin";
 	      auc.setuserId(userId);
 	      auc.setstatus(1);
 
@@ -53,7 +53,7 @@ public class CreateAucController {
 	    	 System.out.println(result.getAllErrors());
 	         return "auc/form";
 	      }
-		  
+
 		  status.setComplete();
 
 	      Date date = new Date(System.currentTimeMillis());
