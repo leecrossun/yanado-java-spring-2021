@@ -14,14 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yanado.controller.user.UserSessionUtils;
 import com.yanado.dto.Auc;
 import com.yanado.service.AucService;
 
 @Controller
-@SessionAttributes("auc")
 @RequestMapping("auc/create")
+@SessionAttributes("auc")
 public class CreateAucController {
 	   @Autowired
 	   private AucService aucService;
@@ -30,6 +31,7 @@ public class CreateAucController {
 	   public Auc formBacking(HttpServletRequest request) {
 	      Auc auc = new Auc();
 		  UserSessionUtils uSession = new UserSessionUtils();
+		  @SuppressWarnings("static-access")
 		  String userId = uSession.getLoginUserId(request.getSession());
 	      userId = "admin";
 	      auc.setuserId(userId);
@@ -38,20 +40,22 @@ public class CreateAucController {
 	      return auc;
 	   }
 	   
-	   @RequestMapping(value="/auc/create",method=RequestMethod.GET)
+	   @RequestMapping(value="auc/create",method=RequestMethod.GET)
 	   public String from() {
-	      return "/auc/form";
+	      return "auc/form";
 	   }
 	   
-	   @RequestMapping(value = "/auc/create", method = RequestMethod.POST)
+	   @RequestMapping(value = "auc/create", method = RequestMethod.POST)
 	   public String createShopping(@Valid @ModelAttribute("auc") Auc auc, BindingResult result,
-	         SessionStatus status) {
+			   RedirectAttributes red,SessionStatus status) {
 		   
 	      if (result.hasErrors()) {
 	    	 System.out.println(result.getAllErrors());
-	         return "/auc/form";
+	         return "auc/form";
 	      }
-	      
+		  
+		  status.setComplete();
+
 	      Date date = new Date(System.currentTimeMillis());
 	      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	      String reg = formatter.format(date);
@@ -62,7 +66,7 @@ public class CreateAucController {
 	      }
 	      
 	      aucService.createAuc(auc);
-	      status.setComplete();
+	      red.addAttribute("aucNo", auc.getaucNo());
 	      return "redirect:/auc/read";
 	   }
 
