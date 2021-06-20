@@ -13,6 +13,8 @@ public class CommonJoin {
 	
 	@Range(min= 0, max=1)
 	int payment; // 지불 여부, 1 : 지불 함 / 0 : 지불 안함
+	
+	public CommonJoin() {}
 
 	public CommonJoin(@NotNull String commonId, @NotNull String userId, int payment) {
 		this.commonId = commonId;

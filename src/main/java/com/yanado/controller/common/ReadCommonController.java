@@ -1,5 +1,7 @@
 package com.yanado.controller.common;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +46,13 @@ public class ReadCommonController {
 		Common common = commonService.findCommonByCommonId(commonId);
 		Product product = productDao.getProductByProductId(common.getProductId()); // 나중에 수정
 		
-		int join = commonService.findCommonJoin(new CommonJoin(common.getCommonId(), userId));
+		CommonJoin join = commonService.findCommonJoin(new CommonJoin(common.getCommonId(), userId));
 		
 		Favorite favorit = favoritDao.findFavorite(new Favorite(userId, product.getProductId(), commonId, 3));
 		int fav = (favorit == null? 0 : 1); 
 		
 		mav.addObject("join", join);
+		
 		mav.addObject("common", new CommonDTO(common, product));
 		mav.addObject("fav", fav);
 

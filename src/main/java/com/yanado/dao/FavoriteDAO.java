@@ -16,6 +16,8 @@ public interface FavoriteDAO {
 	void insertFavorite(Favorite favorite);
 
 	void deleteFavorite(Favorite favorite);
+	
+	void deleteAllFavorite(String productId);
 
 	List<Favorite> findFavoriteByUserId(String userId);
 	

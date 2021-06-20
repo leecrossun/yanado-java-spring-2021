@@ -33,6 +33,14 @@
 		#{deadline}
 		)
 	</insert>
+	
+	<delete id="deleteAllCommonAlarm" parameterType="String">
+		delete from alarm where commonId = #{commonId}
+	</delete>
+	
+	<delete id="deleteAllAucAlarm" parameterType="String">
+		delete from alarm where aucId = #{aucId}
+	</delete>
 
 	<!-- alarm 읽기 -->
 	<select id="findAlarmByAlarmId" parameterType="String"
