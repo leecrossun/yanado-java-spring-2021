@@ -27,6 +27,14 @@ public class AucService {
 	public List<Auc> findAucByaucNo(String aucNo){
 		return aucDAO.findAucByAucNo(aucNo);
 	}
+	
+	public Auc findAucByuserId(String userId){
+		return aucDAO.findAucByUserId(userId);
+	}
+	
+	public Auc findAuchighestByuserId(String aucNo) {
+		return aucDAO.findAucHighestByAucNo(aucNo);
+	}
 }
 
 

@@ -17,6 +17,10 @@ public interface AucDAO {
 	
 	public List<Auc> findAucByAucNo(String AucNo); //경매 물품 이름 리스트
 	
+	public Auc findAucByUserId(String userId);
+
+	public Auc findAucHighestByAucNo(String AucNo);
+	
 	List<Auc> getAllAucList(); // 모든 경매 리스트
 	
 	List<Auc> getMyAuc(String userId); // 사용자가 참여한 경매 리스트
