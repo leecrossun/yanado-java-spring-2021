@@ -5,10 +5,10 @@ import javax.validation.constraints.NotNull;
 public class Favorite {
 	@NotNull
 	String userId; // 좋아요를 누른 회원
-	
+
 	@NotNull
 	String productId; // 좋아요를 누른 상품 ID
-	
+
 	String typeId; // 좋아요를 누른 상품의 게시글 ID
 	int type; // 상품의 category, 1: shopping, 2 : transaction, 3: common, 4: auc
 

@@ -26,7 +26,4 @@ public class FavoriteDTO {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
-	
-
 }
