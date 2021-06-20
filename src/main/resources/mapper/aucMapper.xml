@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yanado.dao.AucDAO">
+	<sql id='aucColumns'>
+		aucNo,
+		userId;
+		status;
+		highestPrice;
+		minimumAmount;
+		highestUserId;
+		participants;
+		payment;
+		regDate,
+		startDate,
+		endDate,
+		deadline
+	</sql>
+	<insert id='createAuc' parameterType='com.yanado.dto.Auc'>
+		<selectKey keyProperty='aucNo'
+			resultType='java.lang.String' order='BEFORE'>
+			SELECT
+			auc_seq.nextval From DUAL
+		</selectKey>
+		
+		insert into auc(<include refid='aucColumns'/>) values(
+			#{aucNo},#{userId},#{status},#{highestPrice},#{minimumAmout},#{highestUserId},0,0,
+			SYSDATE,#{startDate}, #{endDate},#{deadline})
+	</insert>
+	
+	<delete id='deleteAuc' parameterType='string'>
+		delete from auc where aucNo=#{aucNo}
+	</delete>
+	
+	<update id="updateAuc" parameterType="com.yanado.dto.Auc">
+		update auc
+		set highestPrice = #{highestPrice}, participants = #{participants}, status = #{status},
+		startDate = #{startDate}, endDate = #{endDate}, deadline = #{deadline}
+		where aucNo = #{aucNo}
+	</update>
+	
+</mapper>

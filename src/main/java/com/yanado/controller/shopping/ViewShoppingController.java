@@ -9,8 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yanado.dao.ReviewDAO;
 import com.yanado.dao.ShoppingDAO;
-import com.yanado.dto.Order;
-import com.yanado.dto.Review;
 import com.yanado.dto.Shopping;
 
 import org.springframework.web.bind.annotation.RequestParam;
