@@ -42,6 +42,7 @@ public class LoginController {
 		if (dto == null || dto.getUserId().equals(id) == false || dto.getPassword().equals(pwd) == false) {
 			red.addAttribute("type", "0");
 			return "redirect:/user/login";
+			
 		} else {
 
 			HttpSession session = request.getSession();
