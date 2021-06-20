@@ -57,7 +57,7 @@ public class UserCreateController {
 	
 	@RequestMapping(value="/user/create", method = RequestMethod.GET)
 	public String form() {
-		return "user/loginPage";
+		return "user/signUp";
 	}
 } 
 
