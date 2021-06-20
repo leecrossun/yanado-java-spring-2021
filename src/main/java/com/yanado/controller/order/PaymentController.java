@@ -14,6 +14,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yanado.dao.OrderDAO;
+import com.yanado.dao.ShoppingDAO;
 import com.yanado.dto.Order;
 
 @Controller
@@ -23,6 +24,9 @@ public class PaymentController {
 	@Autowired
 	OrderDAO orderDAO;
 	
+	@Autowired
+	ShoppingDAO shoppingDAO;
+	
 	@RequestMapping("/main")
 	@ModelAttribute("order")
 	public ModelAndView viewKakaoPayment(@RequestParam String orderId, HttpServletRequest request){		
@@ -30,7 +34,7 @@ public class PaymentController {
 		mav.setViewName("payment/kakao");
 		mav.addObject("order",orderDAO.getOrderByOrderId(orderId));
 		mav.addObject("spath", request.getContextPath() + "/payment/kakao/success");
-		mav.addObject("fpath", request.getContextPath() + "/payment/kakao/success");
+		mav.addObject("fpath", request.getContextPath() + "/payment/kakao/fail?orderId=" + orderId);
 		return mav;
 	
 	}
@@ -39,15 +43,18 @@ public class PaymentController {
 	public ModelAndView viewSuccessResult(){
 		
 		ModelAndView mav = new ModelAndView();
+		//shoppingDAO.updateStockByShoppingId(shoppingId);
 		mav.setViewName("payment/success");
 		return mav;
 		
 	}
 	
 	@RequestMapping("/fail")
-	public ModelAndView viewFailResult(){
+	public ModelAndView viewFailResult(@RequestParam String orderId){
 		
 		ModelAndView mav = new ModelAndView();
+		Order order = orderDAO.getOrderByOrderId(orderId);
+		orderDAO.deleteOrder(order, order.getItem());
 		mav.setViewName("payment/fail");
 		return mav;
 		

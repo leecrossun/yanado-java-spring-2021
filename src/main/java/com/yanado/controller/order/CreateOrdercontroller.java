@@ -66,7 +66,7 @@ public class CreateOrdercontroller {
 			User seller = userDAO.getUserByUserId(product.getSupplierId());
 			
 			List<Item> items = new ArrayList<Item>();
-			Item item = new Item(null, product, seller, product.getPrice() * quentity, quentity, null, null, null, 0);
+			Item item = new Item(null, product, seller, product.getPrice() * quentity + product.getDelivery(), quentity, null, null, null, 0);
 			items.add(item);
 			
 			// Total Price

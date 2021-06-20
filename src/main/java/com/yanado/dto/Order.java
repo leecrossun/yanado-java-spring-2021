@@ -38,7 +38,7 @@ public class Order implements Serializable{
 	@Column(name="ORDERID")
 	String orderId;
 	
-	@ManyToOne(cascade = CascadeType.REMOVE)
+	@ManyToOne
 	@JoinColumn(name="USERID")
 	User user;
 	

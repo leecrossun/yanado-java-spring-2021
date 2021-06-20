@@ -102,13 +102,16 @@
 												<table>
 													<tr>
 														<td>Name</td><td><p th:text="${i.product.productName}"></p></td>
-														<td rowspan="4"><img th:src="@{../{img}(img=${i.product.image})}" style="width:150px;"/></td>
+														<td rowspan="5"><img th:src="@{../{img}(img=${i.product.image})}" style="width:170px;"/></td>
 													</tr>
 													<tr>
 														<td>Price</td><td><p th:text="${i.product.price}"></p></td>
 													</tr>
 													<tr>
 														<td>Count</td><td><p th:text="${i.quentity}"></p></td>
+													</tr>
+													<tr>
+														<td>Delivery Fee</td><td><p th:text="${i.product.delivery}"></p></td>
 													</tr>
 													<tr>
 														<td>Unit Cost</td><td><p th:text="${i.unitcost}"></p></td>

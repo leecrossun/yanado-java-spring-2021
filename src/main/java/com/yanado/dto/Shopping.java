@@ -49,6 +49,11 @@ import javax.persistence.NamedNativeQuery;
 	(
 			name = "getShoppingByshoppingId",
 			query = "SELECT s FROM Shopping s WHERE s.shoppingId=:id"
+	),
+	@NamedQuery
+	(
+			name = "updateStockByShoppingId",
+			query = "UPDATE Shopping s SET s.stock = s.stock-1 WHERE s.shoppingId=:id AND s.stock > 0"
 	)
 	
 })
