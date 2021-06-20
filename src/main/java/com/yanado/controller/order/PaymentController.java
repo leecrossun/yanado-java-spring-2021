@@ -45,6 +45,7 @@ public class PaymentController {
 		ModelAndView mav = new ModelAndView();
 		//shoppingDAO.updateStockByShoppingId(shoppingId);
 		mav.setViewName("payment/success");
+		
 		return mav;
 		
 	}

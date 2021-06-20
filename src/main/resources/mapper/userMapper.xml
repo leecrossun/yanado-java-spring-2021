@@ -30,6 +30,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		delete from user where userId=#{userId}
 	</delete>
 	
+	<delete id="user_withdraw" parameterType="string">
+		delete from user where userId=#{userId}
+	</delete>
+	
 	<update id="user_update" parameterType="com.yanado.dto.User">
 		update user
 		set password=#{password}, phoneNumber=#{phoneNumber}, email=#{email}

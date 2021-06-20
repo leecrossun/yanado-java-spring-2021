@@ -8,12 +8,14 @@ public class UserSessionUtils {
 	public static final String USER_SESSION_KEY = "userId";
 
 	public static String getLoginUserId(HttpSession session) {
+		
 		String userId = (String) session.getAttribute(USER_SESSION_KEY);
 
 		return userId;
 	}
 
 	public static boolean hasLogined(HttpSession session) {
+		
 		if (getLoginUserId(session) != null) {
 			return true;
 		}
@@ -22,6 +24,7 @@ public class UserSessionUtils {
 	}
 
 	public static boolean isLoginUser(String userId, HttpSession session) {
+		
 		String loginUser = getLoginUserId(session);
 
 		if (loginUser == null) {
@@ -31,9 +34,9 @@ public class UserSessionUtils {
 		return loginUser.equals(userId);
 	}
 
-	public static String getUserMembership(HttpSession session) {
-		String userMembership = (String) session.getAttribute("userMembership");
-
-		return userMembership;
-	}
+//	public static String getUserMembership(HttpSession session) {
+//		String userMembership = (String) session.getAttribute("userMembership");
+//
+//		return userMembership;
+//	}
 }
