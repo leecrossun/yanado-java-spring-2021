@@ -25,7 +25,7 @@ import com.yanado.service.UserService;
 
 //회원 정보 업데이트
 @Controller
-@WebServlet("/user/update")
+//@WebServlet("/user/update")
 public class UserUpdateController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
