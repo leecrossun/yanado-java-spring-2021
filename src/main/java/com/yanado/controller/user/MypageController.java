@@ -32,7 +32,6 @@ import com.yanado.service.CommonService;
 // 해당 회원 아이디로 정보 가져와서 마이페이지로 이동
 @Controller
 //@WebServlet("/user/mypageMain")
-
 public class MypageController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -51,7 +50,6 @@ public class MypageController extends HttpServlet {
 	
 	@RequestMapping("user/mypageMain")
 	protected ModelAndView service(HttpServletRequest request) throws ServletException, IOException {
-		
 		ModelAndView mav = new ModelAndView();
 		request.setCharacterEncoding("utf-8");
 		
@@ -71,6 +69,7 @@ public class MypageController extends HttpServlet {
 		mav.setViewName("user/mypageMain");
 		mav.addObject("user", dto);
 		return mav;
+
 	}
 
 	@RequestMapping("/user/list/my")
