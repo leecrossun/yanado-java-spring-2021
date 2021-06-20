@@ -15,7 +15,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yanado.dao.AlarmDAO;
 import com.yanado.dao.ProductDAO;
@@ -29,26 +31,24 @@ import com.yanado.service.CommonService;
 
 // 해당 회원 아이디로 정보 가져와서 마이페이지로 이동
 @Controller
-@WebServlet("/user/mypage")
+@WebServlet("/user/mypageMain")
 public class MypageController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private CommonService commonService;
-	
+
 	@Autowired
 	private AlarmDAO alarmDao;
-	
+
 	@Autowired
 	private UserDAO userDAO;
-	
+
 	@Autowired
 	private ProductDAO productDao;
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
 		HttpSession session = request.getSession();
@@ -58,20 +58,18 @@ public class MypageController extends HttpServlet {
 		
 		request.setAttribute("dto", dto);
 		
-		RequestDispatcher disp = request.getRequestDispatcher("/resources/templates/mypage/mypageMain.html");
+		RequestDispatcher disp = request.getRequestDispatcher("/resources/templates/user/mypageMain.html");
 		disp.forward(request, response);
 	}
-	
 
 	@RequestMapping("/user/list/my")
-
-  public ModelAndView myList(HttpServletRequest request) {
-		 UserSessionUtils uSession = new UserSessionUtils();
+	public ModelAndView myList(HttpServletRequest request) {
+		UserSessionUtils uSession = new UserSessionUtils();
 		String userId = uSession.getLoginUserId(request.getSession());
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("user/userList");
-		
+
 		// 3 : common, 5 : alarm
 
 		userId = "admin";
@@ -80,22 +78,22 @@ public class MypageController extends HttpServlet {
 		if (type == 3) {
 			List<Common> comList = commonService.findCommonByUserId(userId);
 			List<CommonDTO> commonList = new ArrayList<CommonDTO>();
-			
-			for(Common common : comList) {
+
+			for (Common common : comList) {
 				Product p = productDao.getProductByProductId(common.getProductId());
 				commonList.add(new CommonDTO(common, p));
 			}
-			
+
 			mav.addObject("list", commonList);
 		}
-		
-		if(type == 5) {
+
+		if (type == 5) {
 			List<Alarm> alarmList = alarmDao.findAllAlarmByUserId(userId);
 			mav.addObject("list", alarmList);
 		}
-		
+
 		mav.addObject("type", type);
-		
+
 		return mav;
 	}
 }
