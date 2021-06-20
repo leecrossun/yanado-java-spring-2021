@@ -13,7 +13,9 @@
      		var price = String(String(x.rowIndex+1)+"price");
 
       	  
-	      	opener.document.getElementById("productName").value = document.getElementById(title).innerHTML;
+	      	opener.document.getElementById("productName").value = document.getElementById(title).innerHTML.replace(/(<([^>]+)>)/ig,"");
+
+	      	출처: https://bonniness.tistory.com/entry/Javascript-정규표현식을-사용하여-태그만-제거하기 [보니스];
 	      	//opener.document.getElementById("productName").value = document.getElementById(category).innerHTML;
 	      	opener.document.getElementById("price").value = document.getElementById(price).innerHTML;
 
