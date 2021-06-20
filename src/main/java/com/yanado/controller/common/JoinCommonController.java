@@ -27,7 +27,7 @@ public class JoinCommonController {
 		
 		UserSessionUtils uSession = new UserSessionUtils();
 		String userId = uSession.getLoginUserId(request.getSession());
-		userId = "admin";
+	//	userId = "admin";
 		
 		Common common = commonService.findCommonByCommonId(commonId);
 		common.setParticipants(common.getParticipants()+1);

@@ -80,7 +80,7 @@
 						<p class="stext-102 cl3 p-t-23" id="dday"></p>
 
 						<!-- 좋아요 기능!!! -->
-						<div class="block2-txt-child2 flex-r p-t-3">
+						<div class="block2-txt-child2 flex-r p-t-3" th:if="${session.userId != null}">
 							<a
 								th:href="@{/favorite/add(productId = ${common.product.productId}, typeId = ${common.common.commonId}, type = '3')}"
 								th:if="${fav == 0}"> <img
@@ -137,16 +137,11 @@
 									</div>
 								</div>
 							</div>
-							<!-- <div class="flex-w flex-r-m p-b-10"
-								th:if="${common.common.status} == 2 or ${common.common.status} == 3"
+							 <div class="flex-w flex-r-m p-b-10"
+								th:if="(${common.common.status} == 2 or ${common.common.status} == 3) and ${session.userId != null}"
 								style='padding-left: 20%; margin-top: 3%'>
-								<div class="size-204 flex-w flex-m respon6-next"> -->
+								<div class="size-204 flex-w flex-m respon6-next"> 
 
-							<div class="flex-w flex-r-m p-b-10"
-								style='padding-left: 20%; margin-top: 3%'>
-								<div class="size-204 flex-w flex-m respon6-next">
-									<div class="wrap-num-product flex-w m-r-20 m-tb-10"
-										style="display: none"></div>
 
 									<button th:if="${join} == null"
 										class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-join-common">
@@ -230,8 +225,7 @@
 		</div>
 
 		<div>
-			<div class="flex-w flex-c-m m-tb-10">
-				<!-- th:if="${common.common.userId} == ${session.userId}" -->
+			<div class="flex-w flex-c-m m-tb-10"  th:if="${session.userId != null} and ${session.userId == common.common.userId}">
 				<button
 					class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
 					style="margin: 3%">
@@ -247,7 +241,7 @@
 			</div>
 			<!-- 여기서 부터 알람!!  -->
 			<!-- 바꿔야 할것 flag = 2로, commonId를 aucId로  -->
-			<div class="flex-w flex-c-m m-tb-10" style="margin-top: -5%">
+			<div class="flex-w flex-c-m m-tb-10" style="margin-top: -5%" th:if="${session.userId != null} and ${session.userId == common.common.userId}">
 				<button
 					class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
 					style="margin: 3%">

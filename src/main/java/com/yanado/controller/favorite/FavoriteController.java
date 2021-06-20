@@ -25,7 +25,7 @@ public class FavoriteController {
 	public String add(@RequestParam String productId, @RequestParam String typeId, @RequestParam int type, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		UserSessionUtils uSession = new UserSessionUtils();
 		String userId = uSession.getLoginUserId(request.getSession());
-		userId = "admin";
+		//userId = "admin";
 		
 		Favorite favorite = new Favorite(userId, productId, typeId, type);
 		System.out.println("type : " + favorite.getType());
@@ -38,9 +38,9 @@ public class FavoriteController {
 	
 	@RequestMapping("/favorite/delete")
 	public String delete(@RequestParam String productId, HttpServletRequest request) {
-		// UserSessionUtils uSession = new UserSessionUtils();
-				// String userId = uSession.getLoginUserId(request.getSession());
-				String userId = "admin";
+		UserSessionUtils uSession = new UserSessionUtils();
+		String userId = uSession.getLoginUserId(request.getSession());
+		//		String userId = "admin";
 		Favorite favorite = new Favorite(userId, productId, null, 0);
 		favoriteDao.deleteFavorite(favorite);
 		

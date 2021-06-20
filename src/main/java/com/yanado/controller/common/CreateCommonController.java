@@ -38,7 +38,7 @@ public class CreateCommonController {
 		Common common = new Common();
 		UserSessionUtils uSession = new UserSessionUtils();
 		String userId = uSession.getLoginUserId(request.getSession());
-		userId = "admin";
+		// userId = "admin";
 		common.setUserId(userId);
 		common.setStatus(1);
 		common.setMin(0);

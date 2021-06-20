@@ -28,7 +28,7 @@ public class CancelCommonController {
 		
 		UserSessionUtils uSession = new UserSessionUtils();
 		String userId = uSession.getLoginUserId(request.getSession());
-		userId = "admin";
+		// userId = "admin";
 		
 		Common common = commonService.findCommonByCommonId(commonId);
 		

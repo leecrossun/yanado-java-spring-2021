@@ -41,7 +41,7 @@ public class CreateCommonProductController {
 		
 		UserSessionUtils uSession = new UserSessionUtils();
 		String userId = uSession.getLoginUserId(request.getSession());
-		userId = "admin";
+		// userId = "admin";
 		
 		p.setSupplierId(userId);
 		p.setCategory("common");
