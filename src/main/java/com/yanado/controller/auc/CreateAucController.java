@@ -15,12 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.yanado.controller.user.UserSessionUtils;
 import com.yanado.dto.Auc;
 import com.yanado.service.AucService;
 
 @Controller
 @SessionAttributes("auc")
-@RequestMapping("/auc/create")
+@RequestMapping("auc/create")
 public class CreateAucController {
 	   @Autowired
 	   private AucService aucService;
@@ -28,7 +29,9 @@ public class CreateAucController {
 	   @ModelAttribute("auc")
 	   public Auc formBacking(HttpServletRequest request) {
 	      Auc auc = new Auc();
-	      String userId = "admin";
+		  UserSessionUtils uSession = new UserSessionUtils();
+		  String userId = uSession.getLoginUserId(request.getSession());
+	      userId = "admin";
 	      auc.setuserId(userId);
 	      auc.setstatus(1);
 
