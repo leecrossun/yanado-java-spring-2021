@@ -32,7 +32,7 @@
 		delete from auc where aucNo=#{aucNo}
 	</delete>
 	
-	<update id="updateCommon" parameterType="com.yanado.dto.Common">
+	<update id="updateAuc" parameterType="com.yanado.dto.Auc">
 		update auc
 		set highestPrice = #{highestPrice}, participants = #{participants}, status = #{status},
 		startDate = #{startDate}, endDate = #{endDate}, deadline = #{deadline}
