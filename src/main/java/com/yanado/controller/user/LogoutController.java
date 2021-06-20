@@ -15,26 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 
-public class LogoutController extends HttpServlet {
+public class LogoutController{
 	
 	private static final long serialVersionUID = 1L;
 
 	@RequestMapping("/user/logout")
-	protected void service(HttpServletRequest request, HttpServletResponse response) 
+	protected String service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 
 		request.getSession().invalidate();
-	
-		RequestDispatcher disp = request.getRequestDispatcher("/resources/templates/mypage/loginPage.html");
-		disp.forward(request, response);
+		
+		return "redirect:/";
 	}
 }
-
-//@Controller
-//public class LogoutController {
-//	
-//	@RequestMapping(value="/user/logout", method=RequestMethod.GET)
-//	public String LogoutPage() {
-//		return "/user/mainPage";
-//	}
-//}
