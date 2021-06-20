@@ -65,7 +65,7 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li><a href="#" th:href="@{/shopping/view/all}">Shopping/Transaction</a></li>
+							<li><a href="#" th:href="@{/shopping/view/all}">Shopping/Transaction</a>
 								<ul class="sub-menu">
 									<li>
 										<a th:href="@{/shopping/view/category(category=${'shopping'})}">Shopping Only</a>
@@ -74,6 +74,7 @@
 										<a th:href="@{/shopping/view/category(category=${'transaction'})}">Transaction Only</a>
 									</li>
 								</ul>
+								</li>
 
 							<li><a th:href="@{/common/list(page=1)}">Common</a></li>
 
