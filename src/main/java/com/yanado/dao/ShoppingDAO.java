@@ -96,16 +96,18 @@ public class ShoppingDAO {
 	
 	// 카데고리 별로 Shopping 가져오기
 	@Transactional
-	public List<Shopping> getShoppingByCategory (String detailCategory) throws DataAccessException
+	public List<Shopping> getShoppingByCategory (String category) throws DataAccessException
 	{
 		List<Shopping> result;
 		TypedQuery<Shopping> query = em.createNamedQuery("getShoppingByCategory", Shopping.class);
-		query.setParameter("id", detailCategory);
+		query.setParameter("id", category);
 		try {
 			result = (List<Shopping>) query.getResultList();
 		} catch (NoResultException ex) {
+			System.out.println("fail" + category);
 			return null;
 		}
+		System.out.println("success" + category);
 		return result;
 	}
 	

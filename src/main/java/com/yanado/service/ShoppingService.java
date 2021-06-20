@@ -21,7 +21,6 @@ public class ShoppingService {
 		
 		// 테스트용 기본값 (로그인, 이미지업로드 추가 시 삭제)
 		//product.setImage("test.png");
-		product.setCategory("shopping");
 		shopping.setPublished(new Date());
 		shopping.setProduct(product);
 		
