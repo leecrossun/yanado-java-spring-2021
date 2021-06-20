@@ -2,7 +2,9 @@ package com.yanado.controller.favorite;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -46,11 +48,11 @@ public class RecommmendController {
 
 			for (Favorite fav : favList) {
 				FavoriteDTO f = new FavoriteDTO(fav, productDao.getProductByProductId(fav.getProductId()));
-				
+
 				String path = f.getProduct().getImage();
 				path = path.replaceFirst("../", "");
 				f.getProduct().setImage(path);
-				
+
 				fList.add(f);
 
 			}
@@ -62,22 +64,32 @@ public class RecommmendController {
 			Collections.shuffle(favList1);
 
 			// 유저가 좋아요를 누른 목록에서 좋아요를 누른 사람
-			for (int i = 0; i < 10; i++) {
-				userList.addAll(favoriteDao.findUserByFavorite(favList1.get(i).getProductId()));
+			for (Favorite fav : favList1) {
+				userList.addAll(favoriteDao.findUserByFavorite(fav.getProductId()));
 			}
 
 			Collections.shuffle(userList);
 
 			// 그 사람들이 좋아요를 누른 목록
 			List<Favorite> favoriteList = new ArrayList<Favorite>();
-			for (int i = 0; i < 10; i++) {
-				favoriteList.addAll(favoriteDao.findFavoriteByUserId(userList.get(i).getUserId()));
+			for (Favorite user : userList) {
+				favoriteList.addAll(favoriteDao.findFavoriteByUserId(user.getUserId()));
 
 			}
 
 			Collections.shuffle(favoriteList);
 
+			int i = 0;
 			for (Favorite fav : favoriteList) {
+
+				if (i == 10) {
+					break;
+				}
+				
+				if(isin(fList, fav.getProductId())) {
+					continue;
+				}
+
 				FavoriteDTO f = new FavoriteDTO(fav, productDao.getProductByProductId(fav.getProductId()));
 
 				String path = f.getProduct().getImage();
@@ -85,6 +97,7 @@ public class RecommmendController {
 				f.getProduct().setImage(path);
 
 				fList.add(f);
+				i++;
 			}
 
 		}
@@ -95,5 +108,15 @@ public class RecommmendController {
 
 		return mav;
 	}
-
+	
+	public boolean isin(List<FavoriteDTO> a, String pId) {
+		
+		for(FavoriteDTO f : a) {
+			if(f.getProduct().getProductId().equals(pId)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }

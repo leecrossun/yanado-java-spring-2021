@@ -26,10 +26,10 @@ public class ReadCommonController {
 
 	@Autowired
 	private CommonService commonService;
-	
+
 	@Autowired
 	private FavoriteDAO favoritDao;
-	
+
 	@Autowired
 	private ProductDAO productDao;
 
@@ -38,23 +38,22 @@ public class ReadCommonController {
 	public ModelAndView read(HttpServletRequest request, @RequestParam String commonId) {
 		UserSessionUtils uSession = new UserSessionUtils();
 		String userId = uSession.getLoginUserId(request.getSession());
-		userId = "admin";
-	
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/read");
-		
+
 		Common common = commonService.findCommonByCommonId(commonId);
 		Product product = productDao.getProductByProductId(common.getProductId()); // 나중에 수정
-		
-		CommonJoin join = commonService.findCommonJoin(new CommonJoin(common.getCommonId(), userId));
-		
-		Favorite favorit = favoritDao.findFavorite(new Favorite(userId, product.getProductId(), commonId, 3));
-		int fav = (favorit == null? 0 : 1); 
-		
-		mav.addObject("join", join);
-		
+
+		if (userId != null) {
+			CommonJoin join = commonService.findCommonJoin(new CommonJoin(common.getCommonId(), userId));
+			Favorite favorit = favoritDao.findFavorite(new Favorite(userId, product.getProductId(), commonId, 3));
+			int fav = (favorit == null ? 0 : 1);
+			mav.addObject("fav", fav);
+			mav.addObject("join", join);
+		}
+
 		mav.addObject("common", new CommonDTO(common, product));
-		mav.addObject("fav", fav);
 
 		return mav;
 	}

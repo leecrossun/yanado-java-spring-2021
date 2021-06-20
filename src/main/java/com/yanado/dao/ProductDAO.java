@@ -20,6 +20,8 @@ public interface ProductDAO {
 	public int updateProduct(Product dto);
 
 	public int deleteProduct(String productId);
+	
+	public int isCommonProduct(String productId);
 
 	//public int updateManager(Product dto);
 

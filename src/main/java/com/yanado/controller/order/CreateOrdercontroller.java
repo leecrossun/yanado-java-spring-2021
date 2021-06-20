@@ -90,16 +90,6 @@ public class CreateOrdercontroller {
 
 		mav.addObject("order", order);
 		mav.setViewName("order/form");
-	
-		if(type == 2) {
-			System.out.println("TYPE 2");
-			Common common = commonService.findCommonByProductId(productId);
-			System.out.println("commonId " + common.getCommonId());
-			CommonJoin join = new CommonJoin(common.getCommonId(), buyer.getUserId(), 1);
-			int res = commonService.updatePayment(join);
-			System.out.println("result : " + res);
-		}
-		
 		return mav;
 	}
 

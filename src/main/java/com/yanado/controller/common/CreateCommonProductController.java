@@ -41,7 +41,7 @@ public class CreateCommonProductController {
 		
 		UserSessionUtils uSession = new UserSessionUtils();
 		String userId = uSession.getLoginUserId(request.getSession());
-		userId = "admin";
+		// userId = "admin";
 		
 		p.setSupplierId(userId);
 		p.setCategory("common");
@@ -100,9 +100,6 @@ public class CreateCommonProductController {
 		// 리스트 가져오기
 		List<Product> productList = productDao.selectShoppingList();
 		mav.addObject("productList", productList);
-		
-		System.out.println(productList.size());
-
 		return mav;
 	}
 

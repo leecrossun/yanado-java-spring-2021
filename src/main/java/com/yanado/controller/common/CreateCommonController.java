@@ -17,7 +17,9 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yanado.controller.user.UserSessionUtils;
+import com.yanado.dao.ProductDAO;
 import com.yanado.dto.Common;
+import com.yanado.dto.Product;
 import com.yanado.service.CommonService;
 
 @Controller
@@ -26,6 +28,9 @@ public class CreateCommonController {
 
 	@Autowired
 	private CommonService commonService;
+	
+	@Autowired
+	private ProductDAO productDAO;
 
 	// 공동구매 생성 폼으로 가기
 	@ModelAttribute("common")
@@ -33,7 +38,7 @@ public class CreateCommonController {
 		Common common = new Common();
 		UserSessionUtils uSession = new UserSessionUtils();
 		String userId = uSession.getLoginUserId(request.getSession());
-		userId = "admin";
+		// userId = "admin";
 		common.setUserId(userId);
 		common.setStatus(1);
 		common.setMin(0);
@@ -55,6 +60,19 @@ public class CreateCommonController {
 		if (result.hasErrors()) {
 			System.out.println(result.getAllErrors());
 			return "common/form";
+		}
+		
+		System.out.println(common.getProductId());
+		
+		if(productDAO.isCommonProduct(common.getProductId()) == 0) {
+			Product product  = productDAO.getProductByProductId(common.getProductId());
+			
+			product.setProductId(null);
+			product.setCategory("common");
+			
+			productDAO.createProduct(product);
+			
+			common.setProductId(product.getProductId());
 		}
 
 		status.setComplete();

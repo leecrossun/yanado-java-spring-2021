@@ -25,15 +25,16 @@ import com.yanado.service.UserService;
 
 //회원 추가 작업 - 파라미터 받아서 회원 리스트로 넘김
 @Controller
-@WebServlet("/user/create")
-public class UserCreateController extends HttpServlet {
+//@WebServlet("/user/create")
+public class UserCreateController {
 	
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private UserDAO userDAO;
 	
-	protected void service(HttpServletRequest request, HttpServletResponse response) 
+	@RequestMapping(value="/user/create", method = RequestMethod.POST)
+	protected String service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
@@ -51,7 +52,12 @@ public class UserCreateController extends HttpServlet {
 		
 		userDAO.createUser(dto);
 		
-		response.sendRedirect("/resources/templates/mypage/loginPage.html");
+		return "redirect:mypage/loginPage";
+	}
+	
+	@RequestMapping(value="/user/create", method = RequestMethod.GET)
+	public String form() {
+		return "user/signUp";
 	}
 } 
 

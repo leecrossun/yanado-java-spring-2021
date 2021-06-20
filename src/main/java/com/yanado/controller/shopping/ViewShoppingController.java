@@ -53,7 +53,7 @@ public class ViewShoppingController {
 		List<Shopping> shopping = shoppingDAO.getShoppingByCategory(category);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("shopping/shoppingList");
-		mav.addObject("shopping", shopping);
+		mav.addObject("shoppingList", shopping);
 		return mav;
 		
 	}
