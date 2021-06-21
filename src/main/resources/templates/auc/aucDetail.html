@@ -49,30 +49,31 @@
 <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
 <!--===============================================================================================-->
 <style>
-th,
-td{
-font-size:20px;
-text-align:center;
-border-collapse:collapse;
-border: none;
-padding: 10px;
-margin: 10px;
-box-shadow: 1px 1px solid black;
+th, td {
+	font-size: 20px;
+	text-align: center;
+	border-collapse: collapse;
+	border: none;
+	padding: 10px;
+	margin: 10px;
+	box-shadow: 1px 1px solid black;
 }
-	.submit_btn {
+
+.submit_btn {
 	margin-top: 3%;
 	background-color: #E2E2E2 !important;
 	color: black !important;
-	}
-	.submit_btn:hover {
-	border:1px solid black !important;
-	}
+}
+
+.submit_btn:hover {
+	border: 1px solid black !important;
+}
 </style>
 </head>
-<body >
-	 <div th:replace="/menu :: header"></div>
+<body>
+	<div th:replace="/menu :: header"></div>
 	<!-- Product Detail -->
- 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
+	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-lg-7 p-b-30">
@@ -83,7 +84,7 @@ box-shadow: 1px 1px solid black;
 								<div class="item-slick3">
 									<div class="wrap-pic-w pos-relative">
 										<img src="../../static/images/test.png" alt="IMG-PRODUCT"
-										th:src="@{../{img}(img=${product.image})}">
+											th:src="@{../{img}(img=${product.image})}">
 									</div>
 								</div>
 							</div>
@@ -91,24 +92,30 @@ box-shadow: 1px 1px solid black;
 					</div>
 				</div>
 
-				 <div class="col-md-6 col-lg-5 p-b-30">
+				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14"
 							th:text="${product.productName}"></h4>
 
 						<span class="mtext-106 cl2" th:text="|${product.price} 원|">
 						</span>
-					
-						<div class="block2-txt-child2 flex-r p-t-3" th:if="${session.userId != null}">
+
+						<div class="block2-txt-child2 flex-r p-t-3"
+							th:if="${session.userId != null}">
 							<a
 								th:href="@{/favorite/add(productId = ${product.productId}, typeId = ${auc.aucId}, type = '4')}"
-								th:if="${fav == 0}"> <img class="icon-heart1 dis-block trans-04" src="../../static/images/icons/icon-heart-01.png" alt="ICON">
+								th:if="${fav == 0}"> <img
+								class="icon-heart1 dis-block trans-04"
+								src="../../static/images/icons/icon-heart-01.png" alt="ICON">
 
-							</a> <a th:href="@{/favorite/delete(productId = ${shopping.product.productId})}" th:if="${fav == 1}"> <img class="icon-heart2 dis-block trans-04"
+							</a> <a
+								th:href="@{/favorite/delete(productId = ${shopping.product.productId})}"
+								th:if="${fav == 1}"> <img
+								class="icon-heart2 dis-block trans-04"
 								src="../../static/images/icons/icon-heart-02.png" alt="ICON">
 							</a>
 						</div>
-						
+
 						<div class="p-t-33">
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-203 flex-c-m respon6">Status</div>
@@ -117,16 +124,16 @@ box-shadow: 1px 1px solid black;
 									<div class="rs1-select2 bor8 bg0">
 										<p style="margin: 1em;" align='center'
 											th:switch="${auc.status}">
-											<span th:case="1">경매대기</span> <span th:case="2">경매중</span>
-											<span th:case="3">낙찰완료</span>
+											<span th:case="1">경매대기</span> <span th:case="2">경매중</span> <span
+												th:case="3">낙찰완료</span>
 										</p>
 									</div>
 								</div>
 							</div>
 						</div>
-					
-						
-						 <div class="p-t-33">
+
+
+						<div class="p-t-33">
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-203 flex-c-m respon6">Seller</div>
 
@@ -139,16 +146,17 @@ box-shadow: 1px 1px solid black;
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="p-t-33">
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-203 flex-c-m respon6">Buy</div>
-								<div class="size-204 respon6-next" th:if="${session.userId == null}">
-								<div class="rs1-select2 bor8 bg0">
+								<div class="size-204 respon6-next"
+									th:if="${session.userId == null}">
+									<div class="rs1-select2 bor8 bg0">
 										<div style="margin: 1em; margin: 10px auto;" align='center'>
-										<p>로그인해야 구매가능합니다 :)</p>
+											<p>로그인해야 구매가능합니다 :)</p>
 										</div>
-								</div>
+									</div>
 								</div>
 
 							</div>
@@ -159,14 +167,14 @@ box-shadow: 1px 1px solid black;
 			</div>
 
 			<div class="bor10 m-t-50 p-t-43 p-b-40">
-	
+
 				<div class="tab01">
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="nav-item p-b-10">Description</li>
 					</ul>
 
 					<div class="tab-content p-t-43">
-						
+
 						<div class="tab-pane fade show active" id="description"
 							role="tabpanel">
 							<div class="how-pos2 p-lr-15-md" align="center">
@@ -178,7 +186,7 @@ box-shadow: 1px 1px solid black;
 			</div>
 			<div>
 				<div class="flex-w flex-c-m m-tb-10">
- 					<button
+					<button
 						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4  submit_btn"
 						style="margin: 3%">
 						<a style="color: black;"
@@ -189,18 +197,41 @@ box-shadow: 1px 1px solid black;
 						style="margin: 3%">
 						<a style="color: black;"
 							th:href='@{/auc/delete(aucId=${auc.aucId})}'>삭제</a>
-					</button> 
+					</button>
 				</div>
+
+				<div class="flex-w flex-c-m m-tb-10" style="margin-top: -5%"
+					th:if="${session.userId != null} and ${session.userId == common.common.userId}">
+					<button
+						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
+						style="margin: 3%">
+						<a style="color: black;"
+							th:href='@{/alarm/create(aucId=${auc.aucId}, flag=2)}'
+							onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;">알람
+							생성</a>
+					</button>
+
+					<button
+						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
+						style="margin: 3%">
+						<a style="color: black;"
+							th:href='@{alarm/list(aucId=${auc.aucId}, flag=2)}'
+							onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;">알람
+							목록</a>
+					</button>
+				</div>
+
+				<!-- 여기서까지 알람  -->
 			</div>
-		</div> 
+		</div>
 	</section>
 
 
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">
-		<span class="symbol-btn-back-to-top">
-			<i class="zmdi zmdi-chevron-up"></i>
+		<span class="symbol-btn-back-to-top"> <i
+			class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
 
@@ -319,7 +350,8 @@ box-shadow: 1px 1px solid black;
 											'click',
 											function() {
 
-												swal(nameProduct,
+												swal(
+														nameProduct,
 														"is canceled shopping !",
 														"success");
 
