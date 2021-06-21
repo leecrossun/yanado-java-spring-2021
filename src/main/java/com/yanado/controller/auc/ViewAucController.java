@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yanado.controller.user.UserSessionUtils;
 import com.yanado.dao.AucDAO;
+import com.yanado.dao.FavoriteDAO;
 import com.yanado.dto.Auc;
 import com.yanado.dto.AucDTO;
 import com.yanado.dto.Common;
@@ -27,6 +28,9 @@ public class ViewAucController {
 	
 	@Autowired
 	AucDAO aucDAO;
+	
+	@Autowired
+	FavoriteDAO favoriteDAO;
 	
 	
 	// 모든 경매
@@ -53,15 +57,20 @@ public class ViewAucController {
 	public ModelAndView viewShoppingDetail( @RequestParam String aucId, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		
-		// 좋아요 기능
-		/*
-		 * if (userId != null) { Favorite favorit = favoriteDAO.findFavorite(new
-		 * Favorite(userId, shopping.getProduct().getProductId(), shoppingId, 2)); int
-		 * fav = (favorit == null ? 0 : 1); mav.addObject("fav", fav); }
-		 */
-		
 		Auc auc = aucDAO.getAuc(aucId);
 		Product product = aucDAO.findProductByAuc(auc.getProductId());
+		
+		// 좋아요 기능
+		UserSessionUtils uSession = new UserSessionUtils();
+		String userId = uSession.getLoginUserId(request.getSession());
+		
+		if (userId != null) {
+			Favorite favorit = favoriteDAO.findFavorite(new Favorite(userId, product.getProductId(), aucId, 4));
+		int fav = (favorit == null ? 0 : 1); mav.addObject("fav", fav); 
+		}
+		
+		
+		
 		
 		mav.setViewName("auc/aucDetail");
 		mav.addObject("auc", auc);
