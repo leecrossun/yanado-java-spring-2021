@@ -27,7 +27,7 @@
 
 		INSERT INTO alarm(
 		<include refid="alarmColumns" />
-		) VALUES ( #{alarmId}, #{userId}, #{commonId, jdbcType=VARCHAR},
+		) VALUES ( #{alarmId}, #{userId, jdbcType=VARCHAR}, #{commonId, jdbcType=VARCHAR},
 		#{aucId, jdbcType=VARCHAR}, #{type}, #{price}, #{message},
 		SYSDATE,
 		#{deadline}
@@ -51,7 +51,7 @@
 	<!-- common alarm 찾기 -->
 	<select id="findAlarmByCommonId" parameterType="String"
 		resultType="com.yanado.dto.Alarm">
-		select * from alarm where commonId = #{commonId}
+		select * from alarm where commonId = #{commonId} and userId is null
 	</select>
 
 	<!-- auction alarm 찾기 -->

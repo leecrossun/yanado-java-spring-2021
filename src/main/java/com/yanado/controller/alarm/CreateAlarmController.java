@@ -72,18 +72,24 @@ public class CreateAlarmController {
 			return "/alarm/alarmForm";
 		}
 
-		status.setComplete();
-
 		if (newalarm.getCommonId() != null) {
+			
 			List<CommonJoin> commonJoin = commonService.findAllCommonJoinByCommonId(newalarm.getCommonId());
+			
+			newalarm.setUserId(null);
+			alarmDao.insertAlarm(newalarm);
+			
+			System.out.println(newalarm.getAlarmId());
+			
 			for (CommonJoin j : commonJoin) {
-
 				newalarm.setUserId(j.getUserId());
 				alarmDao.insertAlarm(newalarm);
 			}
 		} else {
 			// auction
 		}
+		
+		status.setComplete();
 
 		if (newalarm.getCommonId() != null) {
 			red.addAttribute("commonId", newalarm.getCommonId());
