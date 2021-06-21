@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,23 +20,26 @@ import com.yanado.service.UserService;
 //회원 삭제 작업
 @Controller
 @WebServlet("/user/delete")
-public class UserDeleteController extends HttpServlet {
+public class UserDeleteController {
 	
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private UserDAO userDAO;
 	
-	protected void service(HttpServletRequest request, HttpServletResponse response) 
+	@RequestMapping("/user/delete")
+	protected String service(HttpServletRequest request, HttpSession session) 
 			throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
 
-		String id = request.getParameter("userId");
-		int flag = userDAO.deleteUser(id);	//1이면 성공, 0이면 실패
+		UserSessionUtils uSession = new UserSessionUtils();
+		String userId = uSession.getLoginUserId(request.getSession());
+		int flag = userDAO.deleteUser(userId);	//1이면 성공, 0이면 실패
 		System.out.println("res: " + flag);
+		
+		session.invalidate();
 
-		String result = String.format("[{'res':'%d'}, {'id':'%s'}]", flag, id);
-		response.getWriter().println(result);
+		return "redirect:/";
 	}
 }
