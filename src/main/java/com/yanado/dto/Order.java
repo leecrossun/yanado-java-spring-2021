@@ -26,6 +26,11 @@ import org.hibernate.annotations.NamedQuery;
 	(
 			name = "getOrderByOrderId",
 			query = "SELECT o FROM Order o WHERE o.orderId=:id"
+	),
+	@NamedQuery
+	(
+			name = "getOrderByUserId",
+			query = "SELECT o FROM Order o WHERE o.user.userId=:id"
 	)
 	
 })

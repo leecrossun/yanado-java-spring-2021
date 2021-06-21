@@ -1,5 +1,6 @@
 package com.yanado.controller.auc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,25 +15,32 @@ import com.yanado.controller.user.UserSessionUtils;
 import com.yanado.dao.AucDAO;
 import com.yanado.dto.Auc;
 import com.yanado.dto.AucDTO;
+import com.yanado.dto.Common;
+import com.yanado.dto.CommonDTO;
 import com.yanado.dto.Favorite;
 import com.yanado.dto.Product;
 import com.yanado.dto.Shopping;
 
 @Controller
-@RequestMapping("/action/view")
+@RequestMapping("/auc/view")
 public class ViewAucController {
 	
 	@Autowired
 	AucDAO aucDAO;
 	
-	@Autowired
-	AucDTO aucDTO;
 	
 	// 모든 경매
 	@RequestMapping("/all")
 	public ModelAndView viewAucList(){
 		
 		List<Auc> auc = aucDAO.getAllAucList();
+		List<AucDTO> aucList = new ArrayList<AucDTO>();
+		
+		for (Auc a : auc) {
+			Product product = aucDAO.findProductByAuc(a.getaucNo());
+			aucList.add(new AucDTO(a, product));
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("auc/aucList");
 		mav.addObject("aucList", auc);
@@ -71,6 +79,13 @@ public class ViewAucController {
 		String userId = uSession.getLoginUserId(request.getSession());
 		
 		List<Auc> auc = aucDAO.getMyAuc(userId);
+		List<AucDTO> aucList = new ArrayList<AucDTO>();
+		
+		for (Auc a : auc) {
+			Product product = aucDAO.findProductByAuc(a.getaucNo());
+			aucList.add(new AucDTO(a, product));
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("auc/aucList");
 		mav.addObject("aucList", auc);
