@@ -4,39 +4,76 @@
 <mapper namespace="com.yanado.dao.AucDAO">
 	<sql id='aucColumns'>
 		aucNo,
-		userId;
-		status;
-		highestPrice;
-		minimumAmount;
-		highestUserId;
-		participants;
-		payment;
+		userId,
+		status,
+		highestPrice,
+		minimumAmount,
+		highestUserId,
+		participants,
+		payment,
 		regDate,
 		startDate,
 		endDate,
-		deadline
+		deadline,
+		productId
 	</sql>
 	<insert id='createAuc' parameterType='com.yanado.dto.Auc'>
-		<selectKey keyProperty='aucNo'
-			resultType='java.lang.String' order='BEFORE'>
+		<selectKey keyProperty='aucNo' resultType='java.lang.String'
+			order='BEFORE'>
 			SELECT
 			auc_seq.nextval From DUAL
 		</selectKey>
-		
-		insert into auc(<include refid='aucColumns'/>) values(
-			#{aucNo},#{userId},#{status},#{highestPrice},#{minimumAmout},#{highestUserId},0,0,
-			SYSDATE,#{startDate}, #{endDate},#{deadline})
+
+		insert into auc(
+		<include refid='aucColumns' />
+		) values(
+		#{aucNo},#{userId},#{status},#{highestPrice},#{minimumAmout},#{highestUserId},0,0,
+		SYSDATE,#{startDate}, #{endDate},#{deadline}, #{productId})
 	</insert>
-	
+
 	<delete id='deleteAuc' parameterType='string'>
-		delete from auc where aucNo=#{aucNo}
+		delete from auc where
+		aucNo=#{aucNo}
 	</delete>
-	
+
 	<update id="updateAuc" parameterType="com.yanado.dto.Auc">
 		update auc
-		set highestPrice = #{highestPrice}, participants = #{participants}, status = #{status},
+		set highestPrice
+		= #{highestPrice}, participants = #{participants}, status = #{status},
 		startDate = #{startDate}, endDate = #{endDate}, deadline = #{deadline}
 		where aucNo = #{aucNo}
 	</update>
+
+	<!-- 찾기 -->
+	<select id="findAucByAucNo" parameterType="string" resultType="com.yanado.dto.Auc">
+		select * from auc
+		where aucNo = #{aucNo}
+	</select>
+
+	<select id="getAllAucList" resultType="com.yanado.dto.Auc">
+		select * from auc
+	</select>
+
+	<select id="getAuc" parameterType="string" resultType="com.yanado.dto.Auc">
+		select * from auc
+		where aucNo = #{aucNo}
+	</select>
 	
+	<select id="findProductByAuc" parameterType="string" resultType="com.yanado.dto.Auc">
+		select * from product where productId = #{productId}
+	</select>
+	
+	<update id="changeStatus">
+		update auc set status = #{status} where aucId =
+		#{aucId}
+	</update>
+	
+	<select id="getBuyerListByAucNo" parameterType="string" resultType="com.yanado.dto.User">
+		select * from member where userId in (select userId from aucJoin where aucId = #{aucId})
+	</select>
+	
+	<select id="getAucByUserId" parameterType="string" resultType="com.yanado.dto.Auc">
+		select * from auc where userId = #{userId}
+	</select>
+
 </mapper>

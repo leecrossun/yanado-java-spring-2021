@@ -7,6 +7,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import org.hibernate.validator.constraints.Range;
 
+<<<<<<< HEAD
+=======
+@Entity
+@Table(name="Auction")
+>>>>>>> branch 'master' of https://github.com/leecrossun/Yanado.git
 public class Auc {
 	@Id
 	String aucNo;
@@ -19,7 +24,9 @@ public class Auc {
 	
 	int highestPrice;
 	int minimumAmount;
+	
 	String highestUserId;
+	
 	@PositiveOrZero
 	int participants;
 	String payment;

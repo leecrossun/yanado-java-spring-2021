@@ -20,23 +20,32 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yanado.dao.UserDAO;
+import com.yanado.dto.Common;
 import com.yanado.dto.User;
 import com.yanado.service.UserService;
 
 //회원 추가 작업 - 파라미터 받아서 회원 리스트로 넘김
 @Controller
 //@WebServlet("/user/create")
+@SessionAttributes("user")
 public class UserCreateController {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private UserDAO userDAO;
-	
-	@RequestMapping(value="/user/create", method = RequestMethod.POST)
-	protected String service(HttpServletRequest request, HttpServletResponse response) 
+
+	// 공동구매 생성 폼으로 가기
+	@ModelAttribute("user")
+	public User formBacking() {
+		User user = new User();
+		return user;
+	}
+
+	@RequestMapping(value = "/user/create", method = RequestMethod.POST)
+	protected String service(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("user") User user)
 			throws ServletException, IOException {
-		
+
 		request.setCharacterEncoding("utf-8");
 
 		String id = request.getParameter("userId");
@@ -47,19 +56,20 @@ public class UserCreateController {
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phoneNumber");
 		String email = request.getParameter("email");
-		
+
 		User dto = new User(id, pwd, name, gender, birth, address, phone, email);
-		
-		userDAO.createUser(dto);
-		
-		return "redirect:user/loginPage";
-	}
 	
-	@RequestMapping(value="/user/create", method = RequestMethod.GET)
+
+		userDAO.createUser(dto);
+
+		return "redirect:/user/login";
+	}
+
+	@RequestMapping(value = "/user/create", method = RequestMethod.GET)
 	public String form() {
 		return "user/signUp";
 	}
-} 
+}
 
 //@Controller
 //@SessionAttributes("user")

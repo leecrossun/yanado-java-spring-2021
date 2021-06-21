@@ -60,5 +60,23 @@ public class OrderDAO {
 		System.out.println("success getOrder");
 		return result;
 	}
+	
+
+	@Transactional
+	public List<Order> getOrderByUserId(String userId) throws DataAccessException
+	{	
+		List<Order> result;
+		TypedQuery<Order> query;
+		try {
+			query = em.createNamedQuery("getOrderByUserId", Order.class);
+			query.setParameter("id", userId);
+			result = (List<Order>) query.getResultList();
+		} catch (NoResultException ex) {
+			System.out.println("fail getShoppingList");
+			return null;
+		}
+		System.out.println("success getShoppingList");
+		return result;
+	}
 
 }
