@@ -31,9 +31,9 @@ public class GetAlarmListController {
 	}
 
 	// auction에서 알람 리스트
-	@RequestMapping("/auction/alarm/list")
+	@RequestMapping("/auc/alarm/list")
 	public ModelAndView getAuctionList(@RequestParam String aucId) {
-		List<Alarm> alarmList = alarmDao.findAlarmByCommonId(aucId);
+		List<Alarm> alarmList = alarmDao.findAlarmByAucId(aucId);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("alarm/alarmList");
 		mav.addObject("alarmList", alarmList);
