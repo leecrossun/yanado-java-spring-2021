@@ -68,8 +68,8 @@ public class ViewShoppingController {
 	
 	// 내가 올린 쇼핑 리스트
 	@RequestMapping("/search")
-	public ModelAndView searchShoppingByProductName(@RequestParam String productName){
-		List<Shopping> shopping = shoppingDAO.getShoppingByProductName(productName);
+	public ModelAndView searchShoppingByProductName(@RequestParam String p){
+		List<Shopping> shopping = shoppingDAO.getShoppingByProductName("Test");
 		ModelAndView mav = new ModelAndView("shoppingList");
 		mav.setViewName("shopping/myList");
 		mav.addObject("shoppingList", shopping);

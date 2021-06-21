@@ -25,13 +25,14 @@ import com.yanado.service.UserService;
 
 //회원 정보 업데이트
 @Controller
+@RequestMapping("/user")
 public class UserUpdateController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private UserDAO userDAO;
-	
+	@RequestMapping("/updateInfo")
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
