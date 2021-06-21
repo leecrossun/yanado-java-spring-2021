@@ -83,7 +83,7 @@ public class MypageController extends HttpServlet {
 
 		// 3 : common, 5 : alarm
 
-		userId = "admin";
+		// userId = "admin";
 		//int type = Integer.parseInt(request.getParameter("type"));
 
 		if (type == 3) {
