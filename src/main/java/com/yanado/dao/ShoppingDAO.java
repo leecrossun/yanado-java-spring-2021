@@ -123,6 +123,7 @@ public class ShoppingDAO {
 		} catch (NoResultException ex) {
 			return null;
 		}
+		System.out.println("success " + result.get(0).getProduct().getProductName());
 		return result;
 	}
 	

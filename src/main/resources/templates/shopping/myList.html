@@ -60,16 +60,20 @@ background-color:lightgrey;
 	</div>
 	<!-- My Product List -->
 	<div align="center" style="margin:50px;">
+	<div th:if="${shoppingList} != null">
 	<table>
 		<th>제품명</th>
 		<th>상태</th>
 		<th>업로드 날짜</th>
+		
 		<tr class="product_row" th:each="shopping, index : ${shoppingList}" th:onclick="'location.href=\''+ @{/shopping/view/detail(shoppingId=${shopping.shoppingId})} + '\''">
-			<td th:text="${shopping.product.productName}">test</td>
-			<td th:text="${shopping.status}">test</td>
-			<td th:text="${shopping.published}">test</td>
+			<td th:if="${shopping.product.productName} != null" th:text="${shopping.product.productName}">test</td>
+			<td th:if="${shopping.status} != null" th:text="${shopping.status}">test</td>
+			<td th:if="${shopping.published} != null" th:text="${shopping.published}">test</td>
 		</tr>
+		
 	</table>
+	</div>
 	</div>
 
 	<!-- Back to top -->

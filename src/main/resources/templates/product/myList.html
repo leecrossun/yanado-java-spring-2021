@@ -64,10 +64,10 @@ background-color:lightgrey;
 		<th>제품명</th>
 		<th>최고가</th>
 		<th>주문 날짜</th>
-		<tr class="product_row" th:each="shopping index : ${shoppingList}" th:onclick="'location.href=\''+ @{/shopping/view/detail(shoppingId=${shopping.shoppingId})} + '\''">
+		<tr class="product_row" th:each="shopping, index : ${shoppingList}" th:onclick="'location.href=\''+ @{/shopping/view/detail(shoppingId=${shopping.shoppingId})} + '\''">
 			<td th:text="${shopping.product.productName}">test</td>
 			<td th:text="${shopping.product.price}">test</td>
-			<td th:text="${shopping.prouct.content}">test</td>
+			<td th:text="${shopping.product.content}">test</td>
 		</tr>
 	</table>
 	</div>
