@@ -85,7 +85,7 @@
 
 								<div class="how-pos2 p-lr-15-md">
 
-									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" th:if="${user.userId != null}">
+									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;">
 										<div class="size-203 flex-l-m respon6">아이디</div>
 
 										<div class="size-204 respon6-next">
@@ -98,21 +98,9 @@
 										</div>
 									</div>
 
+
 								 	<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" th:if="${user.password != null}">
 										<div class="size-203 flex-l-m respon6">비밀번호</div>
-
-										<div class="size-204 respon6-next">
-											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="password" th:field="*{password}"
-													style="padding: 10px; text-align: center"
-													th:value="${password}">
-											</div>
-
-										</div>
-									</div>
-
-									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" th:if="${user.password != null}">
-										<div class="size-203 flex-l-m respon6">비밀번호 확인</div>
 
 										<div class="size-204 respon6-next">
 											<div class="rs1-select2 bor8 bg0">
@@ -124,7 +112,24 @@
 										</div>
 									</div>
 
+									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" >
+										<div class="size-203 flex-l-m respon6">비밀번호 확인</div>
+
+										<div class="size-204 respon6-next">
+											<div class="rs1-select2 bor8 bg0">
+
+												<input type="text" name="password"
+
+													style="padding: 10px; text-align: center"
+													th:value="${password}">
+											</div>
+
+										</div>
+									</div>
+
+
 									 <div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" th:if="${user.userName != null}">
+
 										<div class="size-203 flex-l-m respon6">이름</div>
 
 										<div class="size-204 respon6-next">
@@ -137,7 +142,7 @@
 										</div>
 									</div>
 
-									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" th:if="${user.phoneNumber != null}">
+									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;">
 										<div class="size-203 flex-l-m respon6">휴대폰 번호</div>
 
 										<div class="size-204 respon6-next">
@@ -150,7 +155,7 @@
 										</div>
 									</div>
 
-									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" th:if="${user.address != null}">
+									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;">
 										<div class="size-203 flex-l-m respon6">주소</div>
 
 										<div class="size-204 respon6-next">
@@ -163,7 +168,7 @@
 										</div>
 									</div>
 
-									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" th:if="${user.email != null}">
+									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" >
 										<div class="size-203 flex-l-m respon6">이메일</div>
 
 										<div class="size-204 respon6-next">

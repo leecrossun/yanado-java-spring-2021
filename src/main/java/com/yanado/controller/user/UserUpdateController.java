@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yanado.dao.UserDAO;
+import com.yanado.dto.Common;
 import com.yanado.dto.User;
 import com.yanado.service.UserService;
 
@@ -33,14 +34,14 @@ public class UserUpdateController extends HttpServlet {
 
 	@Autowired
 	private UserDAO userDAO;
+
 	@RequestMapping("/updateInfo")
 	protected ModelAndView service(HttpServletRequest request)
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("utf-8");
 
-		/*
-		 * String newPwd = request.getParameter("new_password"); String address =
+		/ * String newPwd = request.getParameter("new_password"); String address =
 		 * request.getParameter("address"); String phone =
 		 * request.getParameter("phoneNumber"); String email =
 		 * request.getParameter("email");
@@ -49,6 +50,7 @@ public class UserUpdateController extends HttpServlet {
 		UserSessionUtils uSession = new UserSessionUtils();
 		String userId = uSession.getLoginUserId(request.getSession());
 		User user = userDAO.getUserByUserId(userId);
+
 		userDAO.updateUser(user);
 		mav.setViewName("user/mypageUpdate");
 		mav.addObject("user", user);
@@ -60,5 +62,10 @@ public class UserUpdateController extends HttpServlet {
 		 * disp.forward(request, response);
 		 */
 
+	}
+	
+	@RequestMapping(value="/updateInfo", method=RequestMethod.GET)
+	public String form() {
+		return "user/mypageUpdate";
 	}
 }
