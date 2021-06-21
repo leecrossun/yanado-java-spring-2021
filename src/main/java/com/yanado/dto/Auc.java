@@ -136,7 +136,9 @@ public class Auc {
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
-	
 
+	public void setLowestPrice(int lowestPrice) {
+		this.lowestPrice = lowestPrice;
+	}
 	
 }

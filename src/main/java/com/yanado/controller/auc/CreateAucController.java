@@ -31,7 +31,10 @@ public class CreateAucController {
 	      Auc auc = new Auc();
 		  UserSessionUtils uSession = new UserSessionUtils();
 		  String userId = uSession.getLoginUserId(request.getSession());
-		  auc.setHighestUserId(userId);
+		  if(userId != null) {
+			  auc.setHighestUserId(userId);
+		  }
+		  
 	      return auc;
 	   }
 	   
@@ -43,6 +46,8 @@ public class CreateAucController {
 	   @RequestMapping(value = "auc/create", method = RequestMethod.POST)
 	   public String createShopping(@Valid @ModelAttribute("auc") Auc auc, BindingResult result,
 			   RedirectAttributes red, SessionStatus status) {
+		   
+		   System.out.println(auc.getLowestPrice());
 		   
 	      if (result.hasErrors()) {
 	    	 System.out.println(result.getAllErrors());
@@ -66,7 +71,7 @@ public class CreateAucController {
 	      aucService.createAuc(auc);
 	      red.addAttribute("aucId", auc.getAucId());
 	      
-	      return "redirect:/auc/read";
+	      return "redirect:/auc/view/detail";
 	   }
 
 }
