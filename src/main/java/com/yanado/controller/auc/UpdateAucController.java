@@ -1,5 +1,6 @@
 package com.yanado.controller.auc;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yanado.dto.Auc;
+import com.yanado.dto.Common;
 import com.yanado.service.AucService;
 
 @Controller
@@ -21,11 +23,20 @@ public class UpdateAucController {
 	private AucService aucService;
 	
 	@RequestMapping(value="auc/update",method=RequestMethod.GET)
-	public String form(@ModelAttribute("auc") Auc auc, @RequestParam String aucNo) {
-		aucService.updateAuc(auc);
+	public String form(HttpServletRequest request) {
+		request.setAttribute("type", 2);
 		
 		return "auc/form";
 	}
+	
+	@ModelAttribute("auc")
+	public Auc formBacking(HttpServletRequest request) {
+		String aucId = request.getParameter("aucId");
+		
+		Auc auc = aucService.getAuc(aucId);
+		return auc;
+	}
+	
 	
 	@RequestMapping(value="auc/update",method=RequestMethod.POST)
 	public String update(@Valid @ModelAttribute("auc") Auc auc, BindingResult result,
@@ -39,7 +50,7 @@ public class UpdateAucController {
 	      aucService.updateAuc(auc);
 	      status.setComplete();
 	      
-	     // red.addAttribute("aucNo", auc.getaucNo());
-	      return "redirect:/auc/read";
+	      red.addAttribute("aucId", auc.getAucId());
+	      return "redirect:/auc/view/detail";
 	}
 }

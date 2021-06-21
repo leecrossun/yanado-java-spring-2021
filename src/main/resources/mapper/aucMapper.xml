@@ -36,8 +36,8 @@
 	<update id="updateAuc" parameterType="com.yanado.dto.Auc">
 		update auction
 		set highestPrice
-		= #{highestPrice}, participants = #{participants}, status = #{status},
-		startDate = #{startDate}, endDate = #{endDate}, deadline = #{deadline} where aucId = #{aucId}
+		= #{highestPrice}, highestUserId = #{highestUserId}, participants = #{participants}, status = #{status}, lowestPrice = #{lowestPrice},
+		startDate = #{startDate}, endDate = #{endDate} where aucId = #{aucId}
 	</update>
 
 	<!-- 찾기 -->
