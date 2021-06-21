@@ -45,7 +45,6 @@
 <link rel="stylesheet" type="text/css" href="../../static/css/util.css">
 <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
 <!--===============================================================================================-->
-
 </head>
 <body class="animsition">
 	<div th:replace="/menu :: header"></div>
@@ -74,11 +73,8 @@
 					<!-- Tab panes -->
 					<div class="tab-content p-t-43" align='center'>
 
-						<form th:action="@{/user/mypage}" th:object="${user}"
+						<form th:action="@{/user/updateInfo}" th:object="${user}" id="form"
 							method="post">
-
-							<input type="hidden" name="userId" th:field="*{userId}">
-
 							<!-- - -->
 							<div class="tab-pane fade show active" id="description"
 								role="tabpanel">
@@ -103,8 +99,8 @@
 
 										<div class="size-204 respon6-next">
 											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="password"
-													style="padding: 10px; text-align: center"
+												<input type="password" name="password"
+													style="padding: 10px; text-align: center" id="password"
 													th:value="${password}">
 											</div>
 
@@ -119,8 +115,8 @@
 										<div class="size-204 respon6-next">
 											<div class="rs1-select2 bor8 bg0">
 
-												<input type="text" name="password"
-													style="padding: 10px; text-align: center"
+												<input type="password" name="password"
+													style="padding: 10px; text-align: center" id="passwordcheck"
 													th:value="${password}">
 											</div>
 
@@ -134,7 +130,7 @@
 
 										<div class="size-204 respon6-next">
 											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="name" th:field="*{userName}"
+												<input type="text" name="name" th:field="*{userName}" id="userName"
 													style="padding: 10px; text-align: center"
 													th:value="${name}" readOnly>
 											</div>
@@ -148,7 +144,7 @@
 
 										<div class="size-204 respon6-next">
 											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="phoneNumber"
+												<input type="text" name="phoneNumber" id="phoneNumber"
 													th:field="*{phoneNumber}"
 													style="padding: 10px; text-align: center"
 													th:value="${phoneNumber}">
@@ -163,7 +159,7 @@
 
 										<div class="size-204 respon6-next">
 											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="address" th:field="*{address}"
+												<input type="text" name="address" th:field="*{address}" id="address"
 													style="padding: 10px; text-align: center"
 													th:value="${address}">
 											</div>
@@ -177,7 +173,7 @@
 
 										<div class="size-204 respon6-next">
 											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="email" th:field="*{email}"
+												<input type="text" name="email" th:field="*{email}" id="email"
 													style="padding: 10px; text-align: center"
 													th:value="${email}">
 											</div>
@@ -273,14 +269,65 @@
 		}
 
 		function update(f) {
-			f.action = "/user/update";
-			f.method = "POST";
+			var password = document.getElementById("password").value;
+			var passcheck = document.getElementById("passwordcheck").value;
+			
+			var phoneNum = document.getElementById("phoneNumber").value;
+			var address = document.getElementById("address").value;
+			var email = document.getElementById("email").value;
+		
+			if (password == '') {
+				alert("패스워드를 입력하세요");
+				return;
+			}
+
+			if (passcheck == '') {
+				alert("패스워드 일치여부를 확인하세요.");
+				return;
+			} else {
+				if (passcheck != password) {
+					alert("패스워드가 일치하지 않습니다.");
+					document.getElementById("passwordcheck").value = '';
+					return;
+				}
+			}
+
+			if (userName == '') {
+				alert("이름을 입력하세요.");
+				return;
+			}
+			
+			if (phoneNum == '') {
+				alert('전화번호를 입력하세요.')
+				return;
+			} else {
+				if (phoneNum.length != 11) {
+					alert("전화번호를 잘못 입력하셨습니다. \n다시 입력하세요.");
+					return;
+				}
+			}
+
+			if (address == '') {
+				alert("주소를 입력하세요.");
+				return;
+			}
+
+			if (email == '') {
+				alert("이메일을 입력하세요.");
+				return;
+			} else {
+				var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+				if (!reg_email.test(email)) {
+					alert("이메일을 잘못 입력하셨습니다. \n다시 입력하세요.");
+					return;
+				}
+			}
+
 			f.submit();
 		}
 
 		function deletePage(f) {
 			f.action = "/user/delete";
-			f.method = "POST";
 			f.submit();
 		}
 	</script>

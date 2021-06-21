@@ -2,6 +2,8 @@ package com.yanado.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,7 @@ import com.yanado.dto.User;
 
 @Mapper
 @Service
+@Transactional
 public interface UserDAO {
 	
 	// 회원 목록 조회 시 사용
