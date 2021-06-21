@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.Range;
 >>>>>>> branch 'master' of https://github.com/leecrossun/Yanado.git
 public class Auc {
 	@Id
-	String aucNo;
+	String aucId;
 	
 	@NotNull
 	String userId;
@@ -39,19 +39,22 @@ public class Auc {
 	@NotNull
 	Date deadline;
 	
+	String productId;
+	
 	public Auc() {
 	}
 	
-	public Auc(String aucNo, String userId, int highestPrice, Date startDate, Date endDate, Date deadline) {
-		this.aucNo = aucNo;
+	public Auc(String aucId, String userId, int highestPrice, Date startDate, Date endDate, Date deadline, String productId) {
+		this.productId = productId;
+		this.aucId = aucId;
 		this.userId = userId;
 		this.highestPrice = highestPrice;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
 	
-	public Auc(String aucNo, String userId, int status, int highestPrice, int minimumAmount, String highestUserId, int participants, String payment, Date regDate, Date startDate, Date endDate, Date deadline) {
-		this.aucNo = aucNo;
+	public Auc(String aucId, String userId, int status, int highestPrice, int minimumAmount, String highestUserId, int participants, String payment, Date regDate, Date startDate, Date endDate, Date deadline, String productId) {
+		this.aucId = aucId;
 		this.userId = userId;
 		this.status = status;
 		this.highestPrice = highestPrice;
@@ -63,78 +66,113 @@ public class Auc {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.deadline = deadline;
+		this.productId = productId;
 	}
-	
-	public String getaucNo() {
-		return aucNo;
+
+	public String getAucId() {
+		return aucId;
 	}
-	public void setaucNo(String aucNo) {
-		this.aucNo = aucNo;
+
+	public void setAucId(String aucId) {
+		this.aucId = aucId;
 	}
-	public String getuserId() {
+
+	public String getUserId() {
 		return userId;
 	}
-	public void setuserId(String userId) {
+
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public int getstatus() {
+
+	public int getStatus() {
 		return status;
 	}
-	public void setstatus(int status) {
+
+	public void setStatus(int status) {
 		this.status = status;
 	}
-	public int gethighestPrice() {
+
+	public int getHighestPrice() {
 		return highestPrice;
 	}
-	public void sethighestPrice(int highestPrice) {
+
+	public void setHighestPrice(int highestPrice) {
 		this.highestPrice = highestPrice;
 	}
-	public int getminimumAmount() {
+
+	public int getMinimumAmount() {
 		return minimumAmount;
 	}
-	public void setminimumAmount(int minimumAmount) {
+
+	public void setMinimumAmount(int minimumAmount) {
 		this.minimumAmount = minimumAmount;
 	}
-	public String gethighestUserId() {
+
+	public String getHighestUserId() {
 		return highestUserId;
 	}
-	public void sethighestUserId(String highestUserId) {
+
+	public void setHighestUserId(String highestUserId) {
 		this.highestUserId = highestUserId;
 	}
-	public int getparticipants() {
+
+	public int getParticipants() {
 		return participants;
 	}
-	public void setparticipants(int participants) {
+
+	public void setParticipants(int participants) {
 		this.participants = participants;
 	}
-	public String getpayment() {
+
+	public String getPayment() {
 		return payment;
 	}
-	public void setpayment(String payment) {
+
+	public void setPayment(String payment) {
 		this.payment = payment;
 	}
-	public Date getregDate() {
+
+	public Date getRegDate() {
 		return regDate;
 	}
-	public void setregDate(Date regDate) {
+
+	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	public Date getstartDate() {
+
+	public Date getStartDate() {
 		return startDate;
 	}
-	public void setstartDate(Date startDate) {
+
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-	public Date getendDate() {
+
+	public Date getEndDate() {
 		return endDate;
 	}
-	public void setendDate(Date endDate) {
+
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public Date getdeadline() {
+
+	public Date getDeadline() {
 		return deadline;
 	}
-	public void setdeadline(Date deadline) {
+
+	public void setDeadline(Date deadline) {
 		this.deadline = deadline;
 	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+	
+
+	
 }

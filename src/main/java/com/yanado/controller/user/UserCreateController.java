@@ -43,7 +43,7 @@ public class UserCreateController {
 	}
 
 	@RequestMapping(value = "/user/create", method = RequestMethod.POST)
-	protected String service(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("user") User user)
+	protected String service(HttpServletRequest request, HttpServletResponse response, SessionStatus status, @ModelAttribute("user") User user)
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("utf-8");
@@ -61,6 +61,8 @@ public class UserCreateController {
 	
 
 		userDAO.createUser(dto);
+		
+		status.setComplete();
 
 		return "redirect:/user/login";
 	}

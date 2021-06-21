@@ -39,7 +39,7 @@ public class UpdateAucController {
 	      aucService.updateAuc(auc);
 	      status.setComplete();
 	      
-	      red.addAttribute("aucNo", auc.getaucNo());
+	     // red.addAttribute("aucNo", auc.getaucNo());
 	      return "redirect:/auc/read";
 	}
 }
