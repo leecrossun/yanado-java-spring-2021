@@ -188,7 +188,7 @@ th, td {
 					</div>
 				</div>
 			</div>
-			<div>
+			<div th:if="${session.userId != null} and ${session.userId == product.userId}">
 				<div class="flex-w flex-c-m m-tb-10">
 					<button
 						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4  submit_btn"
@@ -204,8 +204,7 @@ th, td {
 					</button>
 				</div>
 
-				<div class="flex-w flex-c-m m-tb-10" style="margin-top: -5%"
-					th:if="${session.userId != null}">
+				<div class="flex-w flex-c-m m-tb-10" style="margin-top: -5%">
 					<button
 						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
 						style="margin: 3%">
