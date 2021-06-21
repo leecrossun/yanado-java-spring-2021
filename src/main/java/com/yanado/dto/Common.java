@@ -24,7 +24,7 @@ public class Common {
 	@Positive
 	int min; // 공동 구매 최소 인원
 
-	@Range(min = 1, max = 5)
+	@Range(min = 1, max = 6)
 	int status; // 공동구매 진행 현황, 1 : 진행 전, 2 : 정원 미달, 3 : 최소인원 넘음, 4 : 파기, 5: 성공 (및 종료)
 
 	Date regDate; // 등록일

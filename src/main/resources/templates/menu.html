@@ -78,8 +78,8 @@
 
 							<li><a th:href="@{/common/list(page=1)}">Common</a></li>
 
-							<li><a href="">Auction</a></li>
-							<li><a th:href="@{/user/mypageMain}">MyPage</a></li>
+							<li><a th:href="@{/auc/view}">Auction</a></li>
+							<li th:if="${session.userId != null}"><a th:href="@{/user/mypageMain}">MyPage</a></li>
 						</ul>
 					</div>
 					<!-- Icon header -->

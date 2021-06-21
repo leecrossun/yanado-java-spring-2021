@@ -54,8 +54,12 @@ import javax.persistence.NamedNativeQuery;
 	(
 			name = "updateStockByShoppingId",
 			query = "UPDATE Shopping s SET s.stock = s.stock-1 WHERE s.shoppingId=:id AND s.stock > 0"
+	),
+	@NamedQuery
+	(
+			name = "getShoppingByProductName",
+			query = "SELECT s FROM Shopping s WHERE s.product.productName LIKE CONCAT('%',:productName,'%')"
 	)
-	
 })
 public class Shopping implements Serializable {
 	@Id

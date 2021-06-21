@@ -126,6 +126,20 @@ public class ShoppingDAO {
 		return result;
 	}
 	
+	public List<Shopping> getShoppingByProductName (String productName) throws DataAccessException
+	{
+
+		ArrayList<Shopping> result;
+		TypedQuery<Shopping> query = em.createNamedQuery("getShoppingByProductName", Shopping.class);
+		query.setParameter("name", productName);
+		try {
+			result = (ArrayList<Shopping>) query.getResultList();
+		} catch (NoResultException ex) {
+			return null;
+		}
+		return result;
+	}
+	
 	// Stock 수 줄이기
 	@Transactional
 	public void updateStockByShoppingId (String shoppingId) throws DataAccessException 
