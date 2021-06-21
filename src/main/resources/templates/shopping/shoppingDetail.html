@@ -217,13 +217,13 @@ box-shadow: 1px 1px solid black;
 			<div>
 				<div class="flex-w flex-c-m m-tb-10">
 					<!-- th:if="${shopping.userId} == ${session.userId}" -->
-					<button
+					<button th:if="${session.userId != null} and ${session.userId == shopping.product.supplierId}"
 						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4  submit_btn"
 						style="margin: 3%">
 						<a style="color: black;"
 							th:href='@{/shopping/update(shoppingId=${shopping.shoppingId})}'>수정</a>
 					</button>
-					<button
+					<button  th:if="${session.userId != null} and ${session.userId == shopping.product.supplierId}"
 						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4  submit_btn"
 						style="margin: 3%">
 						<a style="color: black;"

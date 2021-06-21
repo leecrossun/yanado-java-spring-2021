@@ -62,10 +62,8 @@
     
         function openChild()
         {
-            // window.name = "부모창 이름"; 
             window.name = "parentForm";
             var keyword = document.getElementById("pInput").value;
-            // window.open("open할 window", "자식창 이름", "팝업창 옵션");
             openWin = window.open("/restapi/result?productName="+keyword, "childForm", "width=900, height=900, resizable = yes, scrollbars = yes");    
         }
  
