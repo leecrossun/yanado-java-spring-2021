@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import org.hibernate.validator.constraints.Range;
 
-@Entity
 public class Auc {
 	@Id
 	String aucNo;

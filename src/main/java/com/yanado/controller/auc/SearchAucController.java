@@ -23,7 +23,7 @@ public class SearchAucController {
 	public ModelAndView viewAuc(@RequestParam String aucNo) {
 		System.out.println(aucNo);
 		
-		ModelAndView mav = new ModelAndView("view/auc/view");
+		ModelAndView mav = new ModelAndView("view/auc");
 		mav.setViewName("auc/view");
 		
 		List<Auc> auc = aucDAO.findAucByAucNo(aucNo);
