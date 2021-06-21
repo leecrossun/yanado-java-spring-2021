@@ -46,7 +46,16 @@ public class RecommmendController {
 		if (userId == null) {
 			List<Favorite> favList = favoriteDao.findFavoriteByTop();
 
+			int i = 0;
 			for (Favorite fav : favList) {
+				if (i == 10) {
+					break;
+				}
+				
+				if(isin(fList, fav.getProductId())) {
+					continue;
+				}
+
 				FavoriteDTO f = new FavoriteDTO(fav, productDao.getProductByProductId(fav.getProductId()));
 
 				String path = f.getProduct().getImage();
@@ -54,6 +63,7 @@ public class RecommmendController {
 				f.getProduct().setImage(path);
 
 				fList.add(f);
+				i++;
 
 			}
 		} else {
