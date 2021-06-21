@@ -2,6 +2,8 @@ package com.yanado.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,6 +13,7 @@ import com.yanado.dto.Product;
 import com.yanado.dto.User;
 
 @Mapper
+@Transactional
 public interface AucDAO {
 	
 	public int createAuc(Auc auc);
@@ -27,7 +30,7 @@ public interface AucDAO {
 	
 	Product findProductByAuc(String aucNo);
 	
-	Auc getAuc(String aucNo); //경매 물품 생성한 것 번호
+	Auc getAuc(String aucId); //경매 물품 생성한 것 번호
 	
 //	void regAuction(Auc auc); // 경매 물품 생성 + createProduct 필요
 
