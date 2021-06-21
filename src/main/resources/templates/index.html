@@ -151,16 +151,16 @@
 
 							<div class="block2-pic hov-img0" >
 								<img th:src="${favorite.product.image}" alt="IMG-PRODUCT" >
-								<a href="#" th:if="${favorite.fav.type} == 1"
+								<a th:href="@{/shopping/view/detail(shoppingId=${favorite.fav.typeId})}" th:if="${favorite.fav.type} == 1"
 									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 									Quick View </a> 
-									<a href="#" th:if="${favorite.fav.type} == 2"
+									<a th:href="@{/shopping/view/detail(shoppingId=${favorite.fav.typeId})}" th:if="${favorite.fav.type} == 2"
 									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 									Quick View </a> 
 									<a th:href="@{/common/read(commonId=${favorite.fav.typeId})}" th:if="${favorite.fav.type} == 3"
 									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 									Quick View </a> 
-									<a href="#" th:if="${favorite.fav.type} == 4"
+									<a th:href="@{/auc/view/detail(aucId=${favorite.fav.typeId})}" th:if="${favorite.fav.type} == 4"
 									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 									Quick View </a>
 							</div>
