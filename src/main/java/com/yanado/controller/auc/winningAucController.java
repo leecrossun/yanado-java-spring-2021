@@ -13,23 +13,23 @@ import com.yanado.dto.AucJoin;
 import com.yanado.service.AucService;
 
 @Controller
-@RequestMapping("/auc/winner")
 public class winningAucController {
 	@Autowired
 	private AucService aucService;
 	
-	public String search(HttpServletRequest request,@RequestParam String aucId) {
+	@RequestMapping("/auc/winner")
+	public String find(HttpServletRequest request,@RequestParam String aucId) {
 		List<AucJoin> list = aucService.getAucJoinByAucId(aucId);
+		
 		int high = 0;
-		int num=0;
 		String name="";
 		for (AucJoin a : list) {
-			 num = a.getBidPrice();
-			if(num>high) {
-				high = num;
+			if(a.getBidPrice()>high) {
+				high = a.getBidPrice();
 				name = a.getUserId();
 			}
 		}
+		
 		return name;
 	}
 }
