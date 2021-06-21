@@ -35,6 +35,8 @@ public class CreateAucController {
 			  auc.setHighestUserId(userId);
 		  }
 		  
+		  auc.setStatus(1);
+		  
 	      return auc;
 	   }
 	   
