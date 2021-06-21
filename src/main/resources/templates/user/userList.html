@@ -81,6 +81,24 @@
 
 			</tbody>
 		</table>
+		
+		<table th:if="${type == 4}">
+			<thead>
+				<tr>
+					<th class="listId">AucId</th>
+					<th class="name">ProductName</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="auc, index : ${list}">
+					<td><a th:href="@{/auc/view/detail(aucId=${auc.auc.aucId})}"
+						 th:text="${auc.auc.aucId}"></a></td>
+					<td ><a th:href="@{/auc/view/detail(aucId=${auc.auc.aucId})}" th:text="${auc.product.productName}"></a></td>
+				</tr>
+
+
+			</tbody>
+		</table>
 
 		<table th:if="${type == 5}">
 			<thead>

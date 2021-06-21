@@ -21,13 +21,17 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yanado.dao.AlarmDAO;
+import com.yanado.dao.AucDAO;
 import com.yanado.dao.ProductDAO;
 import com.yanado.dao.UserDAO;
 import com.yanado.dto.Alarm;
+import com.yanado.dto.Auc;
+import com.yanado.dto.AucDTO;
 import com.yanado.dto.Common;
 import com.yanado.dto.CommonDTO;
 import com.yanado.dto.Product;
 import com.yanado.dto.User;
+import com.yanado.service.AucService;
 import com.yanado.service.CommonService;
 
 // 해당 회원 아이디로 정보 가져와서 마이페이지로 이동
@@ -48,6 +52,9 @@ public class MypageController extends HttpServlet {
 
 	@Autowired
 	private ProductDAO productDao;
+	
+	@Autowired
+	private AucService aucService;
 	
 	@RequestMapping("user/mypageMain")
 	protected ModelAndView service(HttpServletRequest request) throws ServletException, IOException {
@@ -96,6 +103,19 @@ public class MypageController extends HttpServlet {
 			}
 
 			mav.addObject("list", commonList);
+		}
+		
+		if(type == 4) {
+			List<Auc> aucList = aucService.getAucByUserId(userId);
+			
+			List<AucDTO> auctionList = new ArrayList<AucDTO>();
+
+			for (Auc auc : aucList) {
+				Product p = productDao.getProductByProductId(auc.getProductId());
+				auctionList.add(new AucDTO(auc, p));
+			}
+
+			mav.addObject("list", auctionList);
 		}
 
 		if (type == 5) {
