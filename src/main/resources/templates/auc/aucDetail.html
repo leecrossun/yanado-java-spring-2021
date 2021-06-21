@@ -5,48 +5,35 @@
 <title>Auc Detail</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="../../static/images/icons/favicon.png"/>
 <!--===============================================================================================-->
-<link rel="icon" type="image/png"
-	href="../../static/images/icons/favicon.png" />
+	<link rel="stylesheet" type="text/css" href="../../static/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../../static/fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/fonts/linearicons-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../../static/fonts/linearicons-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="../../static/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="../../static/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="../../static/vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/vendor/slick/slick.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/vendor/MagnificPopup/magnific-popup.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="../../static/vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/slick/slick.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/MagnificPopup/magnific-popup.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../../static/vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="../../static/css/util.css">
-<link rel="stylesheet" type="text/css" href="../../static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/main.css">
 <!--===============================================================================================-->
 <style>
 th,
@@ -104,7 +91,7 @@ box-shadow: 1px 1px solid black;
 								th:href="@{/favorite/add(productId = ${product.productId}, typeId = ${auc.aucId}, type = '4')}"
 								th:if="${fav == 0}"> <img class="icon-heart1 dis-block trans-04" src="../../static/images/icons/icon-heart-01.png" alt="ICON">
 
-							</a> <a th:href="@{/favorite/delete(productId = ${shopping.product.productId})}" th:if="${fav == 1}"> <img class="icon-heart2 dis-block trans-04"
+							</a> <a th:href="@{/favorite/delete(productId = ${product.productId})}" th:if="${fav == 1}"> <img class="icon-heart2 dis-block trans-04"
 								src="../../static/images/icons/icon-heart-02.png" alt="ICON">
 							</a>
 						</div>
