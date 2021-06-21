@@ -26,7 +26,6 @@ import com.yanado.service.UserService;
 
 //회원 추가 작업 - 파라미터 받아서 회원 리스트로 넘김
 @Controller
-//@WebServlet("/user/create")
 @SessionAttributes("user")
 public class UserCreateController {
 
@@ -59,7 +58,6 @@ public class UserCreateController {
 
 		User dto = new User(id, pwd, name, gender, birth, address, phone, email);
 	
-
 		userDAO.createUser(dto);
 		
 		status.setComplete();
@@ -72,30 +70,3 @@ public class UserCreateController {
 		return "user/signUp";
 	}
 }
-
-//@Controller
-//@SessionAttributes("user")
-//public class UserCreateController {
-//	
-//	@Autowired
-//	private UserService userService;
-//	
-//	@RequestMapping(value = "/user/create", method = RequestMethod.POST)
-//	public String createUser(@Valid @ModelAttribute("user") User user, BindingResult result,
-//			SessionStatus status, RedirectAttributes red) {
-//		
-//		red.addAttribute("type", 1);
-//		
-//		if (result.hasErrors()) {
-//			System.out.println(result.getAllErrors());
-//			return "user/form";
-//		}
-//		
-//		status.setComplete();
-//		userService.createUser(user);
-//		
-//		red.addAttribute("userId", user.getUserId());
-//		
-//		return "redirect:/user/mainPage";
-//	}
-//}

@@ -25,7 +25,6 @@ import com.yanado.service.UserService;
 
 //회원 정보 업데이트
 @Controller
-//@WebServlet("/user/update")
 public class UserUpdateController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -51,26 +50,3 @@ public class UserUpdateController extends HttpServlet {
 
 	}
 }
-//@WebServlet("/user/update")
-//public class UserUpdateController {
-//	
-//	@Autowired
-//	private UserService userService;
-//	
-//	@RequestMapping(value="/user/update", method=RequestMethod.GET)
-//	public String userUpdate(@Valid @ModelAttribute("user") User user, BindingResult result,
-//			SessionStatus status, RedirectAttributes red) {
-//		
-//		red.addAttribute("type", 2);
-//		
-//		if (result.hasErrors()) {
-//			return "redirect:/user/update?userId="+user.getUserId();
-//		}
-//		
-//		userService.updateUser(user);
-//		status.setComplete();
-//		red.addAttribute("userId", user.getUserId());
-//		
-//		return "redirect:/user/mainPage";
-//	}
-//}

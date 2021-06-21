@@ -39,17 +39,3 @@ public class UserDeleteController extends HttpServlet {
 		response.getWriter().println(result);
 	}
 }
-
-//@Controller
-//public class UserDeleteController {
-//	
-//	@Autowired
-//	private UserService userService;
-//	
-//	@RequestMapping("/user/delete")
-//	public String userDelete(@RequestParam String userId) {
-//		userService.deleteUser(userId);
-//		
-//		return "redirect:/user/mainPage";
-//	}
-//}
