@@ -36,131 +36,46 @@
 	<link rel="stylesheet" type="text/css" href="../../static/css/main.css">
 <!--===============================================================================================-->
 <style>
-	.title {
-		text-align: center;
-		margin:30px;
-	}
+th,
+td{
+font-size:30px;
+border-collapse:collapse;
+border: 1px solid black;
+padding: 20px;
+}
 
-	th,
-	td {
-		font-size: 20px;
-		text-align: center;
-		border-collapse: collapse;
-		border: none;
-		padding: 10px;
-		margin: 10px;
-		box-shadow: 1px 1px solid black;
-	}
-	
-	.submit_btn {
-	margin-top: 3%;
-	background-color: #E2E2E2 !important;
-	color: black !important;
-	}
-	.submit_btn:hover {
-	border:1px solid black !important;
+.product_row:hover{
+background-color:lightgrey;
+}
+.title {
+	margin: 30px;
+	text-align:center;
 	}
 </style>
 </head>
-
 <body class="animsition">
 	<div th:replace="/menu :: header"></div>
-<section class="sec-product-detail bg0 p-t-65 p-b-60">
-		<div class="container">
-			<div class="row">
+	<div class="title">
+	<h1>내 상품</h1>
+	</div>
+	<!-- My Product List -->
+	<div align="center" style="margin:50px;">
+	<div th:if="${shoppingList} != null">
+	<table>
+		<th>제품명</th>
+		<th>상태</th>
+		<th>업로드 날짜</th>
+		
+		<tr class="product_row" th:each="shopping, index : ${shoppingList}" th:onclick="'location.href=\''+ @{/shopping/view/detail(shoppingId=${shopping.shoppingId})} + '\''">
+			<td th:if="${shopping.product.productName} != null" th:text="${shopping.product.productName}">test</td>
+			<td th:if="${shopping.status} != null" th:text="${shopping.status}">test</td>
+			<td th:if="${shopping.published} != null" th:text="${shopping.published}">test</td>
+		</tr>
+		
+	</table>
+	</div>
+	</div>
 
-				<div class="col-md-6 col-lg-5 p-b-30">
-					<div class="p-r-50 p-t-5 p-lr-0-lg">
-
-						<div class="p-t-33"></div>
-
-					</div>
-				</div>
-			</div>
-
-			<div class="bor10 m-t-50 p-t-43 p-b-40">
-				<!-- Tab01 -->
-				<div class="tab01">
-					<!-- Nav tabs -->
-					<ul class="nav nav-tabs" role="tablist">
-						<li class="nav-item p-b-10">Review</li>
-					</ul>
-
-					<!-- Tab panes -->
-					<div class="tab-content p-t-43" align='center'>
-
-						<form th:action="@{/review/create(shoppingId=${shoppingId})}" method="post" th:object="${review}">
-							<!-- - -->
-							<div class="tab-pane fade show active" id="description"
-								role="tabpanel">
-
-								<div class="how-pos2 p-lr-15-md">
-
-									<div class="flex-w flex-r-m p-b-10">
-										<div class="size-203 flex-c-m respon6">Content</div>
-
-										<div class="size-204 respon6-next">
-											<div class="rs1-select2 bor8 bg0">
-												<textarea rows="2" cols="100" style="border:1px solid black" th:field="*{content}"></textarea>
-											</div>
-
-										</div>
-									</div>
-
-									<div class="flex-w flex-r-m p-b-10"
-										th:if="${type} != 2">
-										<div class="size-203 flex-c-m respon6">Rating</div>
-
-										<div class="size-204 respon6-next">
-											<div class="rs1-select2 bor8 bg0">
-												<select th:field="*{rating}">
-													<option th:value="'1'" th:text="1">test</option>
-													<option th:value="'2'" th:text="2">test</option>
-													<option th:value="'3'" th:text="3">test</option>
-													<option th:value="'4'" th:text="4">test</option>
-													<option th:value="'5'" th:text="5">test</option>
-												</select>
-											</div>
-
-										</div>
-									</div>
-									<div class="flex-w flex-r-m p-b-10">
-										<input type="submit"
-											class="submit_btn flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04"
-											style="" />
-									</div>
-									
-									<!-- Review List -->
-									<div class="flex-w flex-r-m p-b-10"
-										th:if="${type} != 2">
-										<div class="size-204 respon6-next">
-											<div class="rs1-select2 bor8 bg0">
-												<table>
-													<tr th:if="${not #lists.isEmpty(reviewList) && reviewList != null }"
-														th:each="review, index : ${reviewList}">
-														<td th:text="${review.user.userId}">test</td>
-														<td th:text="${review.content}">test</td>
-														<td th:text="${review.rating}">test</td>
-														<td th:text="${review.published}">test</td>
-														<td width="50" class="submit_btn flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04" th:text="삭제" th:onclick="'location.href=\''+ @{/review/delete(reviewId=${review.reviewId}, shoppingId=${shoppingId})} + '\''">test</td>
-													</tr>
-												</table>
-										</div>
-									</div>
-								</div>
-								<div class="flex-w flex-r-m p-b-10">
-									<a class="submit_btn flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04"
-									th:href="@{/shopping/view/detail(shoppingId=${shoppingId})}" th:text="상품페이지로"></a>
-								</div>
-								</div>
-							</div>
-						</form>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">
 		<span class="symbol-btn-back-to-top">
