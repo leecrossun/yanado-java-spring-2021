@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.yanado.dao.AucDAO;
 import com.yanado.dto.Auc;
-import com.yanado.dto.AucJoin;
 
 @Service
 public class AucService {
@@ -28,24 +27,9 @@ public class AucService {
 	public List<Auc> findAucByaucNo(String aucNo){
 		return aucDAO.findAucByAucNo(aucNo);
 	}
-	
-	public Auc findAucByuserId(String userId){
-		return aucDAO.findAucByUserId(userId);
-	}
-	
-	public Auc findAuchighestByuserId(String aucNo) {
-		return aucDAO.findAucHighestByAucNo(aucNo);
-	}
-	public int cancelAuc(AucJoin aucJoin) {
-		return aucDAO.cancelAuc(aucJoin);
-	}
-	public int cancelAllAucJoin(String aucNo) {
-		return aucDAO.cancelAllAucJoin(aucNo);
-	}
 
-	public int joinAuc(AucJoin aucJoin) {
-		return aucDAO.AucJoin(aucJoin);
-		
+	public Auc getAuc(String aucId) {
+		return aucDAO.getAuc(aucId);
 	}
 }
 
