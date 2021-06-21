@@ -24,14 +24,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 			#{email}
 			)
 	</insert>
-	
+
 	<delete id="deleteUser" parameterType="string">
 		delete from member where userId=#{userId}
 	</delete>
 	
-	<update id="updateUSer" parameterType="com.yanado.dto.User">
-		update user
-		set password=#{password}, phoneNumber=#{phoneNumber}, email=#{email}
+	<update id="updateUser" parameterType="com.yanado.dto.User">
+		update member
+		set password=#{password}, address=#{address}, phoneNumber=#{phoneNumber}, email=#{email}
 		where userId=#{userId}
 	</update>
+	
 </mapper>
