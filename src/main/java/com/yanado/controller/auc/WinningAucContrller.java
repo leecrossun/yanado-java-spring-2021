@@ -21,17 +21,7 @@ public class WinningAucContrller {
 	
 	@RequestMapping("auc/winning")
 	public String win(HttpServletRequest request, @RequestParam String aucNo) {
-		try {
-			UserSessionUtils uSession = new UserSessionUtils();
-			@SuppressWarnings("static-access")
-			String userId = uSession.getLoginUserId(request.getSession());
-			Auc auc = aucService.findAuchighestByuserId(aucNo);
-			
-			return null;
-		}catch(Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+		return null;
 	}
 	
 }

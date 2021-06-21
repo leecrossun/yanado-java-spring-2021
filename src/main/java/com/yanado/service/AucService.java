@@ -40,6 +40,9 @@ public class AucService {
 	public int cancelAuc(AucJoin aucJoin) {
 		return aucDAO.cancelAuc(aucJoin);
 	}
+	public int cancelAllAucJoin(String aucNo) {
+		return aucDAO.cancelAllAucJoin(aucNo);
+	}
 }
 
 
