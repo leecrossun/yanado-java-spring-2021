@@ -16,10 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.yanado.dao.OrderDAO;
 import com.yanado.dao.ProductDAO;
 import com.yanado.dao.ShoppingDAO;
+import com.yanado.dto.Auc;
 import com.yanado.dto.Common;
 import com.yanado.dto.CommonJoin;
 import com.yanado.dto.Order;
 import com.yanado.dto.Product;
+import com.yanado.service.AucService;
 import com.yanado.service.CommonService;
 
 @Controller
@@ -34,6 +36,9 @@ public class PaymentController {
 
 	@Autowired
 	CommonService commonService;
+	
+	@Autowired
+	AucService aucService;
 
 	@RequestMapping("/main")
 	@ModelAttribute("order")
@@ -66,6 +71,15 @@ public class PaymentController {
 				int res = commonService.updatePayment(join);
 				
 				type = 2;
+			}
+			
+			if(cate.equals("auc")) {
+				Auc auc = aucService.findAucByProductId(p.getProductId());
+				auc.setStatus(4);
+				aucService.updateAuc(auc);
+				
+				type = 3;
+				
 			}
 		}
 

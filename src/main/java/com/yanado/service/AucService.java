@@ -55,6 +55,10 @@ public class AucService {
 	public List<Auc> filterAuc(int key){
 		return aucDAO.filterAuc(key);
 	}
+	
+	public Auc findAucByProductId(String productId) {
+		return aucDAO.findAucByProductId(productId);
+	}
 }
 
 

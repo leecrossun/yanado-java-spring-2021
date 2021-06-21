@@ -85,7 +85,9 @@
 
 								<div class="how-pos2 p-lr-15-md">
 
-									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" th:if="${user.userId != null}">
+									<div class="flex-w flex-r-m p-b-10"
+										style="margin-left: 150px; margin-right: 150px;"
+										th:if="${user.userId != null}">
 										<div class="size-203 flex-l-m respon6">아이디</div>
 
 										<div class="size-204 respon6-next">
@@ -98,7 +100,9 @@
 										</div>
 									</div>
 
-									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" th:if="${user.password != null}">
+									<div class="flex-w flex-r-m p-b-10"
+										style="margin-left: 150px; margin-right: 150px;"
+										th:if="${user.password != null}">
 										<div class="size-203 flex-l-m respon6">비밀번호</div>
 
 										<div class="size-204 respon6-next">
@@ -111,12 +115,14 @@
 										</div>
 									</div>
 
-									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" th:if="${user.password != null}">
+									<div class="flex-w flex-r-m p-b-10"
+										style="margin-left: 150px; margin-right: 150px;"
+										th:if="${user.password != null}">
 										<div class="size-203 flex-l-m respon6">비밀번호 확인</div>
 
 										<div class="size-204 respon6-next">
 											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="password" th:field="*{password}"
+												<input type="text" name="password"
 													style="padding: 10px; text-align: center"
 													th:value="${password}">
 											</div>
@@ -124,7 +130,9 @@
 										</div>
 									</div>
 
-									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" th:if="${user.name != null}">
+									<div class="flex-w flex-r-m p-b-10"
+										style="margin-left: 150px; margin-right: 150px;"
+										th:if="${user.name != null}">
 										<div class="size-203 flex-l-m respon6">이름</div>
 
 										<div class="size-204 respon6-next">
@@ -137,12 +145,15 @@
 										</div>
 									</div>
 
-									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" th:if="${user.phoneNumber != null}">
+									<div class="flex-w flex-r-m p-b-10"
+										style="margin-left: 150px; margin-right: 150px;"
+										th:if="${user.phoneNumber != null}">
 										<div class="size-203 flex-l-m respon6">휴대폰 번호</div>
 
 										<div class="size-204 respon6-next">
 											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="phoneNumber" th:field="*{phoneNumber}"
+												<input type="text" name="phoneNumber"
+													th:field="*{phoneNumber}"
 													style="padding: 10px; text-align: center"
 													th:value="${phoneNumber}">
 											</div>
@@ -150,7 +161,9 @@
 										</div>
 									</div>
 
-									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" th:if="${user.address != null}">
+									<div class="flex-w flex-r-m p-b-10"
+										style="margin-left: 150px; margin-right: 150px;"
+										th:if="${user.address != null}">
 										<div class="size-203 flex-l-m respon6">주소</div>
 
 										<div class="size-204 respon6-next">
@@ -163,7 +176,9 @@
 										</div>
 									</div>
 
-									<div class="flex-w flex-r-m p-b-10" style="margin-left:150px; margin-right:150px;" th:if="${user.email != null}">
+									<div class="flex-w flex-r-m p-b-10"
+										style="margin-left: 150px; margin-right: 150px;"
+										th:if="${user.email != null}">
 										<div class="size-203 flex-l-m respon6">이메일</div>
 
 										<div class="size-204 respon6-next">
@@ -176,20 +191,24 @@
 										</div>
 									</div>
 
-									<div class="w-full" style="margin-top: 70px; margin-left: 20px;">
-										
+									<div class="w-full"
+										style="margin-top: 70px; margin-left: 20px;">
+
 										<div class="header-cart-buttons flex-w w-full flex-c-m p-b-10">
-											<input type="button" value="회원정보수정" onclick="update(this.form)" 
-													style="color: white;" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10" />
-											
-											<input type="button" value="취소" onclick="cancel(this.form)" 
-													style="color: white;" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10" />
+											<input type="button" value="회원정보수정"
+												onclick="update(this.form)" style="color: white;"
+												class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10" />
+
+											<input type="button" value="취소" onclick="cancel(this.form)"
+												style="color: white;"
+												class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10" />
 										</div>
 									</div>
 
 									<div class="flex-w flex-r-m p-b-10">
 
-										<input type="button" value="회원탈퇴" onclick="deletePage(this.form)" 
+										<input type="button" value="회원탈퇴"
+											onclick="deletePage(this.form)"
 											class="flex-c-m stext-101 cl0 size-107 bg1 bor1 hov-btn1 p-lr-15 trans-04"
 											style="margin-top: 3%; background-color: #E2E2E2; color: black;" />
 									</div>
@@ -258,7 +277,7 @@
 			f.method = "POST";
 			f.submit();
 		}
-		
+
 		function update(f) {
 			f.action = "/user/update";
 			f.method = "POST";
