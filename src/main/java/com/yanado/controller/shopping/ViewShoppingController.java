@@ -2,13 +2,19 @@ package com.yanado.controller.shopping;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yanado.controller.user.UserSessionUtils;
+import com.yanado.dao.FavoriteDAO;
 import com.yanado.dao.ReviewDAO;
 import com.yanado.dao.ShoppingDAO;
+import com.yanado.dto.CommonJoin;
+import com.yanado.dto.Favorite;
 import com.yanado.dto.Shopping;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +30,9 @@ public class ViewShoppingController {
 	@Autowired
 	public ReviewDAO reviewDAO;
 	
+	@Autowired
+	public FavoriteDAO favoriteDAO;
+	
 	// 모든 쇼핑 리스트
 	@RequestMapping("/all")
 	public ModelAndView viewShoppingList(){
@@ -38,9 +47,19 @@ public class ViewShoppingController {
 	
 	// 쇼핑 상품 상세보기
 	@RequestMapping("/detail")
-	public ModelAndView viewShoppingDetail(@RequestParam String shoppingId){
+	public ModelAndView viewShoppingDetail(HttpServletRequest request,@RequestParam String shoppingId){
 		ModelAndView mav = new ModelAndView();
 		Shopping shopping = shoppingDAO.getShoppingByshoppingId(shoppingId);
+		
+		UserSessionUtils uSession = new UserSessionUtils();
+		String userId = uSession.getLoginUserId(request.getSession());
+		
+		if (userId != null) {
+			Favorite favorit = favoriteDAO.findFavorite(new Favorite(userId, shopping.getProduct().getProductId(), shoppingId, 2));
+			int fav = (favorit == null ? 0 : 1);
+			mav.addObject("fav", fav);
+		}
+		
 		mav.setViewName("shopping/shoppingDetail");
 		mav.addObject("shopping", shopping);
 		return mav;
