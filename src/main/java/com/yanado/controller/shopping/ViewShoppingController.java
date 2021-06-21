@@ -89,7 +89,9 @@ public class ViewShoppingController {
 	
 	// 내가 올린 쇼핑 리스트
 	@RequestMapping("/my")
-	public ModelAndView viewShoppingByUserId(@RequestParam String userId){
+	public ModelAndView viewShoppingByUserId(HttpServletRequest request){
+		UserSessionUtils uSession = new UserSessionUtils();
+		String userId = uSession.getLoginUserId(request.getSession());
 		List<Shopping> shopping = shoppingDAO.getShoppingByUserId(userId);
 		ModelAndView mav = new ModelAndView("shoppingList");
 		mav.setViewName("shopping/myList");
