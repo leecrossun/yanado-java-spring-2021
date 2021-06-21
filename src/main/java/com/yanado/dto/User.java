@@ -17,25 +17,25 @@ public class User {
 	@Column(name="USERID")
 	private String userId;		//아이디
 	
-	@Column(name="USERPWD")
+	@Column(name="PASSWORD")
 	private String password;	// 비밀번호
 	
 	@Column(name="USERNAME")
 	private String userName;	// 이름
 	
-	@Column(name="USERGENDER")
+	@Column(name="GENDER")
 	private String gender;		// 성별
 	
-	@Column(name="USERBIRTH")
+	@Column(name="BIRTH")
 	private String birth;		// 주민등록 앞번호? 생년월일?
 	
-	@Column(name="USERADDRESS")
+	@Column(name="ADDRESS")
 	private String address;		// 주소
 	
-	@Column(name="USERPHONE")
+	@Column(name="PHONENUMBER")
 	private String phoneNumber;	// 전화번호
 	
-	@Column(name="USEREMAIL")
+	@Column(name="EMAIL")
 	private String email;		// 이메일
 	
 	@Transient

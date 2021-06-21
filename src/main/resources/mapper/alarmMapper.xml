@@ -30,7 +30,7 @@
 		) VALUES ( #{alarmId}, #{userId, jdbcType=VARCHAR}, #{commonId, jdbcType=VARCHAR},
 		#{aucId, jdbcType=VARCHAR}, #{type}, #{price}, #{message},
 		SYSDATE,
-		#{deadline}
+		#{deadline, jdbcType=DATE}
 		)
 	</insert>
 	
@@ -55,9 +55,9 @@
 	</select>
 
 	<!-- auction alarm 찾기 -->
-	<select id="findAlarmByAuctionId" parameterType="String"
+	<select id="findAlarmByAucId" parameterType="String"
 		resultType="com.yanado.dto.Alarm">
-		select * from alarm where alarmId = #{alarmId}
+		select * from alarm where aucId = #{aucId}
 	</select>
 
 	<!-- MyPage 관련 alarm -->

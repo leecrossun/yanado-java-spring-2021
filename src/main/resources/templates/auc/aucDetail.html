@@ -184,7 +184,7 @@ th, td {
 				</div>
 
 				<div class="flex-w flex-c-m m-tb-10" style="margin-top: -5%"
-					th:if="${session.userId != null} and ${session.userId == common.common.userId}">
+					th:if="${session.userId != null}">
 					<button
 						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
 						style="margin: 3%">
@@ -198,7 +198,7 @@ th, td {
 						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
 						style="margin: 3%">
 						<a style="color: black;"
-							th:href='@{alarm/list(aucId=${auc.aucId}, flag=2)}'
+							th:href='@{/auc/alarm/list(aucId=${auc.aucId}, flag=2)}'
 							onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;">알람
 							목록</a>
 					</button>
