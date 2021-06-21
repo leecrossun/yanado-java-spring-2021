@@ -27,7 +27,7 @@ public interface AucDAO {
 	
 	void findProductByAuc(String aucNo);
 	
-	Auc getAuc(int aucNo); //경매 물품 생성한 것 번호
+	Auc getAuc(String aucNo); //경매 물품 생성한 것 번호
 	
 	void regAuction(Auc auc); // 경매 물품 생성 + createProduct 필요
 	

@@ -9,7 +9,7 @@ import javax.validation.constraints.PositiveOrZero;
 import org.hibernate.validator.constraints.Range;
 
 @Entity
-@Table(name="Action")
+@Table(name="Auction")
 public class Auc {
 	@Id
 	String aucNo;
