@@ -27,11 +27,3 @@ public class LoginToMainController extends HttpServlet {
 		disp.forward(request, response);
 	}
 }
-//@Controller	
-//public class LoginToMainController {
-//	
-//	@RequestMapping(value="/user/mainPage", method=RequestMethod.GET)
-//	public String LoginToMain( ) {
-//		return "/user/mainPage";
-//	}
-//}

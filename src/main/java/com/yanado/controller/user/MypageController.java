@@ -32,7 +32,6 @@ import com.yanado.service.CommonService;
 
 // 해당 회원 아이디로 정보 가져와서 마이페이지로 이동
 @Controller
-//@WebServlet("/user/mypageMain")
 public class MypageController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -60,12 +59,6 @@ public class MypageController extends HttpServlet {
 		User dto = userDAO.getUserByUserId(userId);
 		
 		request.setAttribute("dto", dto);
-		
-		/*
-		 * RequestDispatcher disp =
-		 * request.getRequestDispatcher("/resources/templates/user/mypageMain.html");
-		 * disp.forward(request, response);
-		 */
 		
 		mav.setViewName("user/mypageMain");
 		mav.addObject("user", dto);
