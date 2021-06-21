@@ -22,7 +22,9 @@ public class Auc {
 	
 	int highestPrice;
 	int minimumAmount;
+	
 	String highestUserId;
+	
 	@PositiveOrZero
 	int participants;
 	String payment;
