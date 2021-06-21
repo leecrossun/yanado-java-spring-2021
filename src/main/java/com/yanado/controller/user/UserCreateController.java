@@ -58,10 +58,11 @@ public class UserCreateController {
 		String email = request.getParameter("email");
 
 		User dto = new User(id, pwd, name, gender, birth, address, phone, email);
+	
 
 		userDAO.createUser(dto);
 
-		return "redirect:user/loginPage";
+		return "redirect:/user/login";
 	}
 
 	@RequestMapping(value = "/user/create", method = RequestMethod.GET)

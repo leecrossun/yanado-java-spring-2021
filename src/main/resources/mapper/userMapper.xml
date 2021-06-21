@@ -4,17 +4,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 <mapper namespace="com.yanado.dao.UserDAO">
 	
 	<select id="user_list" parameterType="String" resultType="com.yanado.dto.User">
-		select USERID as userId, USERPWD as password, USERNAME as userName, USERGENDER as gender, USERBIRTH as birth, USERADDRESS as address, USERPHONE as phoneNumber, USEREMAIL as email  from member order by userIndex DESC
+		select * from member
 	</select>
 	
 	<select id="getUserByUserId" parameterType="String" resultType="com.yanado.dto.User">
-		select USERID as userId, USERPWD as password, USERNAME as userName, USERGENDER as gender, USERBIRTH as birth, USERADDRESS as address, USERPHONE as phoneNumber, USEREMAIL as email from member where userId=#{userId}
+		select * from member where userId=#{userId}
 	</select>
 	
-	<insert id="user_insert" parameterType="com.yanado.dto.User">
-		insert into user (userIndex, userId, password, userName, 
+	<insert id="createUser" parameterType="com.yanado.dto.User">
+		insert into member (userId, password, userName, 
 			gender, birth, address, phoneNumber, email) values(
-			seq_userIndex.nextVal,
 			#{userId},
 			#{password},
 			#{userName},
@@ -26,24 +25,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 			)
 	</insert>
 	
-	<delete id="user_delete" parameterType="string">
-		delete from user where userId=#{userId}
+	<delete id="deleteUser" parameterType="string">
+		delete from member where userId=#{userId}
 	</delete>
 	
-	<delete id="user_withdraw" parameterType="string">
-		delete from user where userId=#{userId}
-	</delete>
-	
-	<update id="user_update" parameterType="com.yanado.dto.User">
+	<update id="updateUSer" parameterType="com.yanado.dto.User">
 		update user
 		set password=#{password}, phoneNumber=#{phoneNumber}, email=#{email}
 		where userId=#{userId}
 	</update>
-	
-	<update id="user_update_manager" parameterType="com.yanado.dto.User">
-		update user
-		set userMembership=#{inputStr}
-		where userId=#{userId}
-	</update>
-
 </mapper>

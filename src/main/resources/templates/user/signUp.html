@@ -46,6 +46,22 @@
 <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
 <!--===============================================================================================-->
 
+<script type="text/javascript">
+	function msg() {
+		var params = location.search.substr(location.search.indexOf("?") + 1);
+		param = params.split("?")
+		
+		alert(parmas)
+
+		if (param == 'type=0') {
+			alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+		} else {
+			return;
+		}
+
+	}
+</script>
+
 </head>
 <body class="animsition">
 	<div th:replace="/menu :: header"></div>
@@ -74,7 +90,7 @@
 					<!-- Tab panes -->
 					<div class="tab-content p-t-43" align='center'>
 
-						<form th:action="@{/user/mypage}" th:object="${user}"
+						<form th:action="@{/user/create}" th:object="${user}"
 							method="post">
 
 							<!-- - -->
@@ -94,7 +110,7 @@
 													th:value="${userId}">
 											</div>
 										</div>
-										<input type="button" value="중복체크" onclick="checkId()"
+										<input type="button" value="중복체크" onclick="checkId();"
 											class="flex-c-m stext-101 cl0 size-107 bg1 bor1 hov-btn1 p-lr-15 trans-04"
 											style="margin-top: 3%; background-color: #E2E2E2; color: black;" />
 									</div>
@@ -105,7 +121,7 @@
 
 										<div class="size-204 respon6-next">
 											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="password" th:field="*{password}"
+												<input type="password" name="password" th:field="*{password}"
 													style="padding: 10px; text-align: center"
 													th:value="${password}">
 											</div>
@@ -119,7 +135,7 @@
 
 										<div class="size-204 respon6-next">
 											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="password" th:field="*{password}"
+												<input type="password" name="password"
 													style="padding: 10px; text-align: center"
 													th:value="${password}">
 											</div>
@@ -191,9 +207,23 @@
 
 										<div class="size-204 respon6-next">
 											<div class="rs1-select2 bor8 bg0">
-												<input type="text" name="email" th:field="*{email}"
+												<input type="email" name="email" th:field="*{email}"
 													style="padding: 10px; text-align: center"
 													th:value="${email}">
+											</div>
+
+										</div>
+									</div>
+									
+									<div class="flex-w flex-r-m p-b-10"
+										style="margin-left: 150px; margin-right: 150px;">
+										<div class="size-203 flex-l-m respon6">이메일</div>
+
+										<div class="size-204 respon6-next">
+											<div class="rs1-select2 bor8 bg0">
+												<input type="String" name="birth" th:field="*{birth}" placeholder="6자리를 입력해주세요"
+													style="padding: 10px; text-align: center"
+													th:value="${birth}">
 											</div>
 
 										</div>
@@ -203,7 +233,7 @@
 										style="margin-top: 70px; margin-left: 20px;">
 
 										<div class="header-cart-buttons flex-w w-full flex-c-m p-b-10">
-											<input type="button" value="회원가입" onclick="send(this.form);"
+											<input type="submit" value="회원가입"
 												style="color: white;"
 												class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10" />
 
@@ -274,7 +304,7 @@
 	<script>
 		var b_idCheck = true;
 
-		function send(f) {
+		/* function send(f) {
 			var id = f.id.value.trim();
 			var pwd = f.password.value.trim();
 			var userName = f.userName.value.trim();
@@ -293,9 +323,9 @@
 			f.submit();
 
 		}
-
+ */
 		function checkId() {
-			var id = document.getElementById("id").value.trim();
+			var id = document.getElementById("userId").value;
 
 			if (id == '') {
 				alert("아이디를 입력하세요.");
@@ -305,9 +335,11 @@
 			var url = "/user/checkId";
 
 			//특수 문자 인코딩
-			var param = "id=" + encodeURIComponent(id);
+	//		var param = "id=" + encodeURIComponent(id);
 
-			sendRequest(url, param, resultFn, "GET");
+		//	sendRequest(url, param, resultFn, "GET");
+		
+		location.href="/user/checkId?userId=" + id;
 
 		}
 
@@ -320,6 +352,7 @@
 					alert(json[1].id + "은 이미 사용중인 아이디 입니다.");
 					return;
 				}
+				
 				alert(json[1].id + "는 사용 가능한 아이디 입니다.");
 				b_idCheck = true;
 			}

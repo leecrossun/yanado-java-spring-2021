@@ -10,34 +10,34 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yanado.dao.UserDAO;
 import com.yanado.dto.User;
 
 @Controller
 @WebServlet("/user/checkId")
-public class UserIdCheckController extends HttpServlet {
+public class UserIdCheckController{
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
 	private UserDAO userDAO;
 
-	protected void service(HttpServletRequest request, HttpServletResponse response)
+	protected String service(HttpServletRequest request, HttpServletResponse response, RedirectAttributes red)
 			throws ServletException, IOException {
 
-		String id = request.getParameter("id");
+		String id = request.getParameter("userId");
 		User dto = userDAO.getUserByUserId(id); 
 		
-		String exist = "no";
+		int exist = 1;
 
 		if (dto == null) {
-			exist = "yes";
+			exist = 0;
 		}
-
-		response.setContentType("text/plain;charset=utf-8"); 
 		
-		String resultStr = String.format("[{'result':'%s'},{'id':'%s'}]", exist, id);
-		response.getWriter().println(resultStr);
+		red.addAttribute("exist", exist);
+		red.addAttribute("checked", true);
+		return "redirect:/user/create";
 	}
 }
