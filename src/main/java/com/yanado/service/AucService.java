@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.yanado.dao.AucDAO;
 import com.yanado.dto.Auc;
 import com.yanado.dto.AucJoin;
-import com.yanado.dto.CommonJoin;
 
 @Service
 public class AucService {
@@ -42,6 +41,11 @@ public class AucService {
 	}
 	public int cancelAllAucJoin(String aucNo) {
 		return aucDAO.cancelAllAucJoin(aucNo);
+	}
+
+	public int joinAuc(AucJoin aucJoin) {
+		return aucDAO.AucJoin(aucJoin);
+		
 	}
 }
 

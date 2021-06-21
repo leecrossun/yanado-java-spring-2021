@@ -25,4 +25,5 @@ public interface AucDAO {
 	
 	public int cancelAuc(AucJoin aucJoin);
 	public int cancelAllAucJoin(String aucNo);
+	public int AucJoin(AucJoin aucJoin);
 }

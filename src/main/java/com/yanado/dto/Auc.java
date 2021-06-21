@@ -3,13 +3,11 @@ package com.yanado.dto;
 import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import org.hibernate.validator.constraints.Range;
 
 @Entity
-@Table(name="Action")
 public class Auc {
 	@Id
 	String aucNo;
@@ -18,7 +16,7 @@ public class Auc {
 	String userId;
 	
 	@Range(min=0,max=4)
-	int status; 
+	int status; //1:등록 2:경매진행 3:경매종료 4:경매삭제
 	
 	int highestPrice;
 	int minimumAmount;
