@@ -29,9 +29,14 @@ public class FindUserProductController {
 		List<Shopping> shopping = shoppingDAO.getShoppingByUserId(userId);
 		ModelAndView mav = new ModelAndView();
 		
+		if (shopping.size() > 0) {
 		mav.setViewName("product/myList");
 		mav.addObject("shoppingList", shopping);
 		return mav;
+		}
+		else {
+			return null;
+		}
 		
 	}
 
