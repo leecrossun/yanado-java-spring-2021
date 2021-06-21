@@ -51,6 +51,10 @@ public class AucService {
 	public int joinAuc(AucJoin aucJoin) {
 		return aucDAO.joinAuc(aucJoin);
 	}
+	
+	public List<Auc> filterAuc(int key){
+		return aucDAO.filterAuc(key);
+	}
 }
 
 
