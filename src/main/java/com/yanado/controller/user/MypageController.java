@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -73,7 +74,7 @@ public class MypageController extends HttpServlet {
 	}
 
 	@RequestMapping("/user/list/my")
-	public ModelAndView myList(HttpServletRequest request) {
+	public ModelAndView myList(HttpServletRequest request, @RequestParam int type) {
 		UserSessionUtils uSession = new UserSessionUtils();
 		String userId = uSession.getLoginUserId(request.getSession());
 
@@ -83,7 +84,7 @@ public class MypageController extends HttpServlet {
 		// 3 : common, 5 : alarm
 
 		userId = "admin";
-		int type = Integer.parseInt(request.getParameter("type"));
+		//int type = Integer.parseInt(request.getParameter("type"));
 
 		if (type == 3) {
 			List<Common> comList = commonService.findCommonByUserId(userId);
