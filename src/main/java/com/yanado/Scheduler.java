@@ -11,9 +11,11 @@ import org.springframework.stereotype.Component;
 import com.yanado.dao.AlarmDAO;
 import com.yanado.dao.ProductDAO;
 import com.yanado.dto.Alarm;
+import com.yanado.dto.Auc;
 import com.yanado.dto.Common;
 import com.yanado.dto.CommonJoin;
 import com.yanado.dto.Product;
+import com.yanado.service.AucService;
 import com.yanado.service.CommonService;
 
 @Component
@@ -27,6 +29,9 @@ public class Scheduler {
 
 	@Autowired
 	private AlarmDAO alarmDao;
+	
+	@Autowired
+	private AucService aucService;
 
 	@Scheduled(cron = "0 1 0 * * *")
 	public void changeCommonStatus() {
@@ -103,6 +108,45 @@ public class Scheduler {
 							"결제를 진행하지 않아 공동구매에서 제외되셨습니다.", today, c.getDeadline());
 					alarmDao.insertAlarm(alarm);
 				}
+			}
+		}
+	}
+	
+	@Scheduled(cron = "0 1 0 * * *")
+	public void changeAucStatus() {
+		List<Auc> list = aucService.getAllAucList();
+		
+		Date today = new Date(System.currentTimeMillis());
+		Date yesterday = new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24 * -1));
+
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		String to = transFormat.format(today);
+		String yes = transFormat.format(yesterday);
+
+		for (Auc a : list) {
+
+			String start = transFormat.format(a.getStartDate());
+			String end = transFormat.format(a.getEndDate());
+			
+			if (start.equals(to)) {
+				Auc auc = aucService.getAuc(a.getAucId());
+				auc.setStatus(2);
+				aucService.updateAuc(auc);
+			}
+
+			if (end.equals(yes)) {
+				Auc auc = aucService.getAuc(a.getAucId());
+				auc.setStatus(3);
+				aucService.updateAuc(auc);
+				
+				Alarm alarm = new Alarm(null, a.getAucId(), null, 1, a.getHighestPrice(),
+						"경매가 종료되었습니다.", today, null);
+				alarmDao.insertAlarm(alarm);
+				
+				alarm = new Alarm(a.getHighestUserId(), a.getAucId(), null, 1, a.getHighestPrice(),
+						"경매에 낙찰되었습니다.", today, null);
+				alarmDao.insertAlarm(alarm);
 			}
 		}
 	}

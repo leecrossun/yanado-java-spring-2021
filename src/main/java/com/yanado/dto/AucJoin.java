@@ -1,7 +1,7 @@
 package com.yanado.dto;
 
 public class AucJoin {
-	String aucNo;
+	String aucId;
 	String userId;
 	
 	int bidPrice;
@@ -10,43 +10,50 @@ public class AucJoin {
 	public AucJoin() {
 	}
 	
-	public AucJoin(String aucNo, String userId, int bidPrice) {
-		this.aucNo = aucNo;
+	public AucJoin(String aucId, String userId, int bidPrice) {
+		this.aucId = aucId;
 		this.userId = userId;
 		this.bidPrice = bidPrice;
 	}
 	
-	public AucJoin(String aucNo, String userId, int bidPrice, int bidCount) {
-		this.aucNo = aucNo;
+	public AucJoin(String aucId, String userId, int bidPrice, int bidCount) {
+		this.aucId = aucId;
 		this.userId = userId;
 		this.bidPrice = bidPrice;
 		this.bidCount = bidCount;
 	}
-	
-	public String getaucNo() {
-		return aucNo;
+
+	public String getAucId() {
+		return aucId;
 	}
-	public void setaucNo(String aucNo) {
-		this.aucNo = aucNo;
+
+	public void setAucId(String aucId) {
+		this.aucId = aucId;
 	}
-	
-	public String getuserId() {
+
+	public String getUserId() {
 		return userId;
 	}
-	public void setuserId(String userId) {
+
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
-	public int getbidPrice() {
+
+	public int getBidPrice() {
 		return bidPrice;
 	}
-	public void setbidPrice(int bidPrice) {
+
+	public void setBidPrice(int bidPrice) {
 		this.bidPrice = bidPrice;
 	}
-	public int getbidCount() {
-		return bidPrice;
+
+	public int getBidCount() {
+		return bidCount;
 	}
-	public void setbidCount(int bidCount) {
+
+	public void setBidCount(int bidCount) {
 		this.bidCount = bidCount;
 	}
 }
+	
+

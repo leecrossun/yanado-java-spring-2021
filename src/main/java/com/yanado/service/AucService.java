@@ -2,13 +2,17 @@ package com.yanado.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yanado.dao.AucDAO;
 import com.yanado.dto.Auc;
+import com.yanado.dto.AucJoin;
 
 @Service
+@Transactional
 public class AucService {
 	@Autowired
 	private AucDAO aucDAO;
@@ -30,6 +34,14 @@ public class AucService {
 	
 	public Auc getAuc(String aucId) {
 		return aucDAO.getAuc(aucId);
+	}
+	
+	public List<AucJoin> getAucJoinByAucId(String aucId){
+		return aucDAO.getAucJoinByAucId(aucId);
+	}
+	
+	public List<Auc> getAllAucList(){
+		return aucDAO.getAllAucList();
 	}
 }
 
