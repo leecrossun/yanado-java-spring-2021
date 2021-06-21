@@ -20,6 +20,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yanado.dao.UserDAO;
+import com.yanado.dto.Common;
 import com.yanado.dto.User;
 import com.yanado.service.UserService;
 
@@ -32,7 +33,18 @@ public class UserUpdateController extends HttpServlet {
 
 	@Autowired
 	private UserDAO userDAO;
-	@RequestMapping("/updateInfo")
+	
+	@ModelAttribute("user")
+	public User formBacking(HttpServletRequest request) {
+		UserSessionUtils uSession = new UserSessionUtils();
+		String userId = uSession.getLoginUserId(request.getSession());
+		User user = userDAO.getUserByUserId(userId);
+		
+		return user;
+	}
+	
+	
+	@RequestMapping(value="/updateInfo", method=RequestMethod.POST)
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -42,6 +54,11 @@ public class UserUpdateController extends HttpServlet {
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phoneNumber");
 		String email = request.getParameter("email");
+		
+		System.out.println(newPwd);
+		System.out.println(address);
+		System.out.println(phone);
+		System.out.println(email);
 
 		User user = new User(newPwd, address, phone, email);
 		userDAO.updateUser(user);
@@ -49,5 +66,10 @@ public class UserUpdateController extends HttpServlet {
 		RequestDispatcher disp = request.getRequestDispatcher("/resources/templates/mypage/loginPage.html");
 		disp.forward(request, response);
 
+	}
+	
+	@RequestMapping(value="/updateInfo", method=RequestMethod.GET)
+	public String form() {
+		return "user/mypageUpdate";
 	}
 }
