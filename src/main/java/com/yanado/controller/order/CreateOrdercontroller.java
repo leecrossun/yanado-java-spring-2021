@@ -51,8 +51,6 @@ public class CreateOrdercontroller {
 	@Autowired
 	private ProductDAO productDAO;
 	
-	@Autowired
-	private CommonService commonService;
 
 	@ModelAttribute("order")
 	public Order formBacking(HttpServletRequest request) {

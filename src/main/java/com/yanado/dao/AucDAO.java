@@ -48,4 +48,5 @@ public interface AucDAO {
 	
 	public int joinAuc(AucJoin aucJoin);
 	public List<Auc> filterAuc(int key);
+	public Auc findAucByProductId(String productId);
 }

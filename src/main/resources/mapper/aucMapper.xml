@@ -82,5 +82,11 @@
 	<select id="filterAuc"  parameterType="int" resultType="com.yanado.dto.Auc">
 		select * from auction where status = #{key}
 	</select>
-
+	
+	<select id="findAucByProductId"  parameterType="String" resultType="com.yanado.dto.Auc">
+		select * from auction where productId = #{productId}
+	</select>
+	
+	<select id="findHighest">
+	</select>
 </mapper>
