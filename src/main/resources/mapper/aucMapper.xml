@@ -67,7 +67,8 @@
 	</select>
 	
 	<select id="getAucByUserId" parameterType="string" resultType="com.yanado.dto.Auc">
-		select * from auction where userId = #{userId}
+		select a.* from auction a, aucJoin j where
+		a.aucId=a.aucId and j.userId = #{userId}
 	</select>
 	
 	<select id="getAucJoinByAucId" parameterType="string" resultType="com.yanado.dto.AucJoin">

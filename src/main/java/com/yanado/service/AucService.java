@@ -43,6 +43,10 @@ public class AucService {
 	public List<Auc> getAllAucList(){
 		return aucDAO.getAllAucList();
 	}
+	
+	public List<Auc> getAucByUserId(String userId){
+		return aucDAO.getAucByUserId(userId);
+	}
 }
 
 
