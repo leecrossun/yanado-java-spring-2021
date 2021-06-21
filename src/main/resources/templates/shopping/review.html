@@ -142,7 +142,7 @@
 														<td th:text="${review.content}">test</td>
 														<td th:text="${review.rating}">test</td>
 														<td th:text="${review.published}">test</td>
-														<td width="50" class="submit_btn flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04" th:text="삭제" th:onclick="'location.href=\''+ @{/review/delete(reviewId=${review.reviewId}, shoppingId=${shoppingId})} + '\''">test</td>
+														<td  th:if="${session.userId != null} and ${session.userId == review.user.userId}" width="50" class="submit_btn flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04" th:text="삭제" th:onclick="'location.href=\''+ @{/review/delete(reviewId=${review.reviewId}, shoppingId=${shoppingId})} + '\''">test</td>
 													</tr>
 												</table>
 										</div>

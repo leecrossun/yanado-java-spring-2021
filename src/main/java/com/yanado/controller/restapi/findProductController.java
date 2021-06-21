@@ -33,19 +33,10 @@ public class findProductController {
 		
 		HttpEntity<String> request = new HttpEntity<>(headers);
 		
-		/*String result = template.exchange(url, HttpMethod.GET,
-		request,
-		String.class
-		).getBody();
-		System.out.println(result);*/
-		
 		ResponseEntity<ListProduct> response = template.exchange(url, 
 		        HttpMethod.GET, request, new ParameterizedTypeReference<ListProduct>(){});
 		List<ProductNaver> list = Arrays.asList(response.getBody().getProductNaver());
 		System.out.println("success controller" + list.get(0).getTitle());
-
-		//ObjectMapper mapper = new ObjectMapper();
-
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("restapi/result");
