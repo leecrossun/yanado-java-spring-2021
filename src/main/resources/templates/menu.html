@@ -100,15 +100,17 @@
 							th:if="${session.userId != null}">
 							<a th:href="@{/user/logout}" style="color: black">LogOut</a>
 						</div>
-						
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
-							<i class="zmdi zmdi-shopping-cart"></i>
-						</div>
+						<div
+							class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
+							th:if="${session.userId != null}" style="margin:10px;">
 
-						<a href=""
-							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
-							<i class="zmdi zmdi-favorite-outline"></i>
-						</a>
+							<a th:href="@{/cart/view}" style="color: black">Cart</a>
+						</div>
+						
+<!-- 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+							<a th:href="@{/cart/view}"><i class="zmdi zmdi-shopping-cart"></i></a>
+						</div> -->
+
 
 					</div>
 				</nav>
@@ -196,14 +198,14 @@
 
 		/*---------------------------------------------*/
 
-		$('.js-addcart-detail').each(
+/* 		$('.js-addcart-detail').each(
 				function() {
 					var nameProduct = $(this).parent().parent().parent()
 							.parent().find('.js-name-detail').html();
 					$(this).on('click', function() {
 						swal(nameProduct, "is added to cart !", "success");
 					});
-				});
+				}); */
 	</script>
 	<!--===============================================================================================-->
 	<script
