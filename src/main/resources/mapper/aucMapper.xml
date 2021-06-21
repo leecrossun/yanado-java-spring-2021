@@ -3,22 +3,19 @@
 
 <mapper namespace="com.yanado.dao.AucDAO">
 	<sql id='aucColumns'>
-		aucNo,
-		userId,
+		aucId,
 		status,
 		highestPrice,
-		minimumAmount,
+		lowestPrice,
 		highestUserId,
 		participants,
-		payment,
 		regDate,
 		startDate,
 		endDate,
-		deadline,
 		productId
 	</sql>
 	<insert id='createAuc' parameterType='com.yanado.dto.Auc'>
-		<selectKey keyProperty='aucNo' resultType='java.lang.String'
+		<selectKey keyProperty='aucId' resultType='java.lang.String'
 			order='BEFORE'>
 			SELECT
 			auc_seq.nextval From DUAL
@@ -27,26 +24,25 @@
 		insert into auction(
 		<include refid='aucColumns' />
 		) values(
-		#{aucNo},#{userId},#{status},#{highestPrice},#{minimumAmout},#{highestUserId},0,0,
-		SYSDATE,#{startDate}, #{endDate},#{deadline}, #{productId})
+		#{aucId},#{status},#{highestPrice},#{lowestPrice},#{highestUserId},0,
+		SYSDATE, #{startDate}, #{endDate}, #{productId})
 	</insert>
 
 	<delete id='deleteAuc' parameterType='string'>
 		delete from auction where
-		aucNo=#{aucNo}
+		aucId=#{aucId}
 	</delete>
 
 	<update id="updateAuc" parameterType="com.yanado.dto.Auc">
 		update auction
 		set highestPrice
 		= #{highestPrice}, participants = #{participants}, status = #{status},
-		startDate = #{startDate}, endDate = #{endDate}, deadline = #{deadline}
-		where aucNo = #{aucNo}
+		startDate = #{startDate}, endDate = #{endDate}, deadline = #{deadline} where aucId = #{aucId}
 	</update>
 
 	<!-- 찾기 -->
 	<select id="findAucByAucNo" parameterType="string" resultType="com.yanado.dto.Auc">
-		select * from auction where aucId = #{aucNo}
+		select * from auction where aucId = #{aucId}
 	</select>
 
 	<select id="getAllAucList" resultType="com.yanado.dto.Auc">
@@ -55,7 +51,7 @@
 
 	<select id="getAuc" parameterType="string" resultType="com.yanado.dto.Auc">
 		select * from auction
-		where aucId = #{aucNo}
+		where aucId = #{aucId}
 	</select>
 	
 	<select id="findProductByAuc" parameterType="string" resultType="com.yanado.dto.Product">

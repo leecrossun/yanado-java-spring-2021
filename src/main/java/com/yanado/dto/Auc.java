@@ -14,56 +14,46 @@ public class Auc {
 	@Id
 	String aucId;
 	
-	@NotNull
-	String userId;
-	
 	@Range(min=0,max=4)
 	int status; 
 	
 	int highestPrice;
-	int minimumAmount;
+	int lowestPrice;
 	
 	String highestUserId;
 	
 	@PositiveOrZero
 	int participants;
-	String payment;
 
 	Date regDate;
 	@NotNull
 	Date startDate;
 	@NotNull
 	Date endDate;
-	@NotNull
-	Date deadline;
 	
 	String productId;
 	
 	public Auc() {
 	}
 	
-	public Auc(String aucId, String userId, int highestPrice, Date startDate, Date endDate, Date deadline, String productId) {
+	public Auc(String aucId, int highestPrice, Date startDate, Date endDate, String productId) {
 		this.productId = productId;
 		this.aucId = aucId;
-		this.userId = userId;
 		this.highestPrice = highestPrice;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
 	
-	public Auc(String aucId, String userId, int status, int highestPrice, int minimumAmount, String highestUserId, int participants, String payment, Date regDate, Date startDate, Date endDate, Date deadline, String productId) {
+	public Auc(String aucId, int status, int highestPrice, int lowestPrice, String highestUserId, int participants, Date regDate, Date startDate, Date endDate, String productId) {
 		this.aucId = aucId;
-		this.userId = userId;
 		this.status = status;
 		this.highestPrice = highestPrice;
-		this.minimumAmount = minimumAmount;
+		this.lowestPrice= lowestPrice;
 		this.highestUserId = highestUserId;
 		this.participants = participants;
-		this.payment = payment;
 		this.regDate = regDate;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.deadline = deadline;
 		this.productId = productId;
 	}
 
@@ -73,14 +63,6 @@ public class Auc {
 
 	public void setAucId(String aucId) {
 		this.aucId = aucId;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 
 	public int getStatus() {
@@ -99,12 +81,12 @@ public class Auc {
 		this.highestPrice = highestPrice;
 	}
 
-	public int getMinimumAmount() {
-		return minimumAmount;
+	public int getLowestPrice() {
+		return lowestPrice;
 	}
 
-	public void setMinimumAmount(int minimumAmount) {
-		this.minimumAmount = minimumAmount;
+	public void setMinimumAmount(int lowestPrice) {
+		this.lowestPrice = lowestPrice;
 	}
 
 	public String getHighestUserId() {
@@ -122,15 +104,7 @@ public class Auc {
 	public void setParticipants(int participants) {
 		this.participants = participants;
 	}
-
-	public String getPayment() {
-		return payment;
-	}
-
-	public void setPayment(String payment) {
-		this.payment = payment;
-	}
-
+	
 	public Date getRegDate() {
 		return regDate;
 	}
@@ -153,14 +127,6 @@ public class Auc {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
-	}
-
-	public Date getDeadline() {
-		return deadline;
-	}
-
-	public void setDeadline(Date deadline) {
-		this.deadline = deadline;
 	}
 
 	public String getProductId() {
