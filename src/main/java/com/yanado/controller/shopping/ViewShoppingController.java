@@ -47,6 +47,16 @@ public class ViewShoppingController {
 		
 	}
 	
+	// 내가 올린 쇼핑 리스트
+	@RequestMapping("/search")
+	public ModelAndView searchShoppingByProductName(@RequestParam String productName){
+		List<Shopping> shopping = shoppingDAO.getShoppingByProductName(productName);
+		ModelAndView mav = new ModelAndView("shoppingList");
+		mav.setViewName("shopping/myList");
+		mav.addObject("shoppingList", shopping);
+		return mav;
+	}
+	
 	// 세부 카테고리에 맞는 쇼핑 리스트 (신발, 가방 등)
 	@RequestMapping("/category")
 	public ModelAndView viewShoppingByCategory(@RequestParam("category") String category){
