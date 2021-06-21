@@ -37,20 +37,20 @@ public class ViewAucController {
 		List<AucDTO> aucList = new ArrayList<AucDTO>();
 		
 		for (Auc a : auc) {
-			Product product = aucDAO.findProductByAuc(a.getaucNo());
+			Product product = aucDAO.findProductByAuc(a.getProductId());
 			aucList.add(new AucDTO(a, product));
 		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("auc/aucList");
-		mav.addObject("aucList", auc);
+		mav.addObject("aucList", aucList);
 		return mav;
 		
 	}
 	
 	// 쇼핑 상품 상세보기
 	@RequestMapping("/detail")
-	public ModelAndView viewShoppingDetail(HttpServletRequest request,@RequestParam String aucId){
+	public ModelAndView viewShoppingDetail( @RequestParam String aucId, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		
 		UserSessionUtils uSession = new UserSessionUtils();
@@ -64,10 +64,11 @@ public class ViewAucController {
 		 */
 		
 		Auc auc = aucDAO.getAuc(aucId);
-		Product product = aucDAO.findProductByAuc(aucId);
+		Product product = aucDAO.findProductByAuc(auc.getProductId());
 		
 		mav.setViewName("auc/aucDetail");
 		mav.addObject("auc", auc);
+		mav.addObject("product", product);
 		return mav;
 		
 	}
@@ -82,7 +83,7 @@ public class ViewAucController {
 		List<AucDTO> aucList = new ArrayList<AucDTO>();
 		
 		for (Auc a : auc) {
-			Product product = aucDAO.findProductByAuc(a.getaucNo());
+			Product product = aucDAO.findProductByAuc(a.getProductId());
 			aucList.add(new AucDTO(a, product));
 		}
 		

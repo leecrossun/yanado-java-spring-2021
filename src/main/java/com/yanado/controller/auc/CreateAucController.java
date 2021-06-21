@@ -33,8 +33,9 @@ public class CreateAucController {
 		  @SuppressWarnings("static-access")
 		  String userId = uSession.getLoginUserId(request.getSession());
 	      //userId = "admin";
-	      auc.setuserId(userId);
-	      auc.setstatus(1);
+			/*
+			 * auc.setuserId(userId); auc.setstatus(1);
+			 */
 
 	      return auc;
 	   }
@@ -58,14 +59,14 @@ public class CreateAucController {
 	      Date date = new Date(System.currentTimeMillis());
 	      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	      String reg = formatter.format(date);
-	      String start = formatter.format(auc.getstartDate());
+	      /*String start = formatter.format(auc.getstartDate());
 	      
 	      if (reg.equals(start)) {
 	    	  auc.setstatus(2);
 	      }
 	      
 	      aucService.createAuc(auc);
-	      red.addAttribute("aucNo", auc.getaucNo());
+	      red.addAttribute("aucNo", auc.getaucNo());*/
 	      return "redirect:/auc/read";
 	   }
 
