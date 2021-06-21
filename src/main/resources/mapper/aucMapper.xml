@@ -60,7 +60,7 @@
 	</select>
 	
 	<select id="findProductByAuc" parameterType="string" resultType="com.yanado.dto.Auc">
-		select * from auc where productId = #{productId}
+		select * from product where productId = #{productId}
 	</select>
 	
 	<update id="changeStatus">
