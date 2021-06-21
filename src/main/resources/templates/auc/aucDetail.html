@@ -97,7 +97,7 @@ th, td {
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14"
 							th:text="${product.productName}"></h4>
 
-						<span class="mtext-106 cl2" th:text="|${product.price} 원|">
+						<span class="mtext-106 cl2" th:text="|${auc.highestPrice} 원|">
 						</span>
 
 						<div class="block2-txt-child2 flex-r p-t-3"
@@ -147,9 +147,8 @@ th, td {
 							</div>
 						</div>
 
-						<div class="flex-w flex-r-m p-b-10"
-						th:if="(${auc.status} == 2) and ${session.userId != null}"
-							style='padding-left: 20%; margin-top: 3%'>
+<!--	th:if="(${auc.status} == 2) and ${session.userId != null}"  -->
+						<div th:if="${auc.status} == 2" class="flex-w flex-r-m p-b-10" style='padding-left: 20%; margin-top: 3%'>
 							<div class="size-204 flex-w flex-m respon6-next">
 								<a th:href='@{/auc/join/price(aucId=${auc.aucId})}'
 									onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;"
