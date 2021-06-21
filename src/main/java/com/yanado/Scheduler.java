@@ -94,7 +94,7 @@ public class Scheduler {
 				
 			}
 
-			if (dead.equals(yes)) {
+			if (dead.equals(yes) && c.getStatus() == 5) {
 				service.changeStatus(c.getCommonId(), 6);
 
 				List<CommonJoin> notpayList = service.notPayment(c.getCommonId());
