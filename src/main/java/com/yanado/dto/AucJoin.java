@@ -3,9 +3,7 @@ package com.yanado.dto;
 public class AucJoin {
 	String aucId;
 	String userId;
-	
 	int bidPrice;
-	int bidCount;
 	
 	public AucJoin() {
 	}
@@ -16,12 +14,6 @@ public class AucJoin {
 		this.bidPrice = bidPrice;
 	}
 	
-	public AucJoin(String aucId, String userId, int bidPrice, int bidCount) {
-		this.aucId = aucId;
-		this.userId = userId;
-		this.bidPrice = bidPrice;
-		this.bidCount = bidCount;
-	}
 
 	public String getAucId() {
 		return aucId;
@@ -45,14 +37,6 @@ public class AucJoin {
 
 	public void setBidPrice(int bidPrice) {
 		this.bidPrice = bidPrice;
-	}
-
-	public int getBidCount() {
-		return bidCount;
-	}
-
-	public void setBidCount(int bidCount) {
-		this.bidCount = bidCount;
 	}
 }
 	

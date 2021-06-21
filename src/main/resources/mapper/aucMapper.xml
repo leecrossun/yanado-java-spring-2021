@@ -74,5 +74,9 @@
 	<select id="getAucJoinByAucId" parameterType="string" resultType="com.yanado.dto.AucJoin">
 		select * from aucJoin where aucId = #{aucId}
 	</select>
+	
+	<insert id="joinAuc" parameterType="com.yanado.dto.AucJoin">
+		insert into aucJoin (aucId, userId, bidPrice) values (#{aucId}, #{userId}, #{bidPrice})
+	</insert>
 
 </mapper>

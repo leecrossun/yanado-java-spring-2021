@@ -47,6 +47,10 @@ public class AucService {
 	public List<Auc> getAucByUserId(String userId){
 		return aucDAO.getAucByUserId(userId);
 	}
+	
+	public int joinAuc(AucJoin aucJoin) {
+		return aucDAO.joinAuc(aucJoin);
+	}
 }
 
 
