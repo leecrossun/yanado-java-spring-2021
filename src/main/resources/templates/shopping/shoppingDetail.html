@@ -98,7 +98,7 @@ box-shadow: 1px 1px solid black;
 						<span class="mtext-106 cl2" th:text="${shopping.product.price} + ' 원'">
 						</span>
 						
-												<!-- 좋아요 기능!!! -->
+						<!-- 좋아요 기능!!! -->
 						<div class="block2-txt-child2 flex-r p-t-3" th:if="${session.userId != null}">
 							<a
 								th:href="@{/favorite/add(productId = ${shopping.product.productId}, typeId = ${shopping.shoppingId}, type = '2')}"
