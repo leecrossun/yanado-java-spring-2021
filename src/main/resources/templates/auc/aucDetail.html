@@ -5,35 +5,48 @@
 <title>Auc Detail</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="../../static/images/icons/favicon.png"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../static/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="icon" type="image/png"
+	href="../../static/images/icons/favicon.png" />
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../../static/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../static/fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../static/fonts/linearicons-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../../static/fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../static/vendor/animate/animate.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="../../static/vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../../static/fonts/linearicons-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../static/vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../../static/vendor/animate/animate.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../static/vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="../../static/vendor/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" type="text/css"
+	href="../../static/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../static/vendor/slick/slick.css">
+<link rel="stylesheet" type="text/css"
+	href="../../static/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../static/vendor/MagnificPopup/magnific-popup.css">
+<link rel="stylesheet" type="text/css"
+	href="../../static/vendor/select2/select2.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../static/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<link rel="stylesheet" type="text/css"
+	href="../../static/vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../../static/css/util.css">
-	<link rel="stylesheet" type="text/css" href="../../static/css/main.css">
+<link rel="stylesheet" type="text/css"
+	href="../../static/vendor/slick/slick.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="../../static/vendor/MagnificPopup/magnific-popup.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="../../static/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="../../static/css/util.css">
+<link rel="stylesheet" type="text/css" href="../../static/css/main.css">
 <!--===============================================================================================-->
 <style>
 th, td {
@@ -91,10 +104,14 @@ th, td {
 							th:if="${session.userId != null}">
 							<a
 								th:href="@{/favorite/add(productId = ${product.productId}, typeId = ${auc.aucId}, type = '4')}"
+								th:if="${fav == 0}"> <img
+								class="icon-heart1 dis-block trans-04"
+								src="../../static/images/icons/icon-heart-01.png" alt="ICON">
 
-								th:if="${fav == 0}"> <img class="icon-heart1 dis-block trans-04" src="../../static/images/icons/icon-heart-01.png" alt="ICON">
-
-							</a> <a th:href="@{/favorite/delete(productId = ${product.productId})}" th:if="${fav == 1}"> <img class="icon-heart2 dis-block trans-04"
+							</a> <a
+								th:href="@{/favorite/delete(productId = ${product.productId})}"
+								th:if="${fav == 1}"> <img
+								class="icon-heart2 dis-block trans-04"
 								src="../../static/images/icons/icon-heart-02.png" alt="ICON">
 							</a>
 						</div>
@@ -130,17 +147,14 @@ th, td {
 							</div>
 						</div>
 
-						<div class="p-t-33">
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-203 flex-c-m respon6">Buy</div>
-								<div class="size-204 respon6-next"
-									th:if="${session.userId == null}">
-									<div class="rs1-select2 bor8 bg0">
-										<div style="margin: 1em; margin: 10px auto;" align='center'>
-											<p>로그인해야 구매가능합니다 :)</p>
-										</div>
-									</div>
-								</div>
+<!--	th:if="(${auc.status} == 2) and ${session.userId != null}"  -->
+						<div class="flex-w flex-r-m p-b-10"
+						
+							style='padding-left: 20%; margin-top: 3%'>
+							<div class="size-204 flex-w flex-m respon6-next">
+								<a th:href='@{/auc/join/price(aucId=${auc.aucId})}'
+									onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;"
+									class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-pay-common"> Join</a>
 
 							</div>
 						</div>
@@ -265,84 +279,6 @@ th, td {
 	<script src="../../static/vendor/isotope/isotope.pkgd.min.js"></script>
 	<!--===============================================================================================-->
 	<script src="../../static/vendor/sweetalert/sweetalert.min.js"></script>
-	<script>
-		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e) {
-			e.preventDefault();
-		});
-
-		$('.js-addwish-b2').each(
-				function() {
-					var nameProduct = $(this).parent().parent().find(
-							'.js-name-b2').html();
-					$(this).on('click', function() {
-						swal(nameProduct, "is added to wishlist !", "success");
-
-						$(this).addClass('js-addedwish-b2');
-						$(this).off('click');
-					});
-				});
-
-		$('.js-addwish-detail').each(
-				function() {
-					var nameProduct = $(this).parent().parent().parent().find(
-							'.js-name-detail').html();
-
-					$(this).on('click', function() {
-
-						swal(nameProduct, "is added to wishlist !", "success");
-
-						if (swal.close()) {
-							$(this).addClass('js-addedwish-detail');
-							$(this).off('click');
-						}
-					});
-				});
-
-		/*---------------------------------------------*/
-
-		$('.js-join-shopping')
-				.each(
-						function() {
-
-							var nameProduct = $(this).parent().parent()
-									.parent().parent().find('.js-name-detail')
-									.html();
-							$(this)
-									.on(
-											'click',
-											function() {
-
-												swal(nameProduct,
-														"is joined shopping !",
-														"success");
-
-												location.href = "[[@{/shopping/join(shoppingId=${shopping.shoppingId})}]]";
-
-											});
-						});
-
-		$('.js-cancel-shopping')
-				.each(
-						function() {
-
-							var nameProduct = $(this).parent().parent()
-									.parent().parent().find('.js-name-detail')
-									.html();
-							$(this)
-									.on(
-											'click',
-											function() {
-
-												swal(
-														nameProduct,
-														"is canceled shopping !",
-														"success");
-
-												location.href = "[[@{/shopping/cancel(shoppingId=${shopping.shoppingId})}]]";
-
-											});
-						});
-	</script>
 	<!--===============================================================================================-->
 	<script
 		src="../../static/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>

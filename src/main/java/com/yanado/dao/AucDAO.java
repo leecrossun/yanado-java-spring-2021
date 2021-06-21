@@ -45,4 +45,6 @@ public interface AucDAO {
 	List<Auc> getAucByUserId(String userId);
 	
 	List<AucJoin> getAucJoinByAucId(String aucId);
+	
+	public int joinAuc(AucJoin aucJoin);
 }
