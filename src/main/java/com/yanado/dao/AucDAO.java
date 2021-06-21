@@ -38,6 +38,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.yanado.dto.Alarm;
 import com.yanado.dto.Auc;
+import com.yanado.dto.AucJoin;
 import com.yanado.dto.Product;
 import com.yanado.dto.User;
 
@@ -71,5 +72,7 @@ public interface AucDAO {
 	List<User> getBuyerListByAucNo(int userId); // 경매 참여한 사람들 리스트
 	
 	List<Auc> getAucByUserId(String userId);
+	
+	List<AucJoin> getAucJoinByAucId(String aucId);
 }
 >>>>>>> branch 'master' of https://github.com/leecrossun/Yanado.git

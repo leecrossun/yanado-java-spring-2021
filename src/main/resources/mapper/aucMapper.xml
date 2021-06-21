@@ -69,5 +69,9 @@
 	<select id="getAucByUserId" parameterType="string" resultType="com.yanado.dto.Auc">
 		select * from auction where userId = #{userId}
 	</select>
+	
+	<select id="getAucJoinByAucId" parameterType="string" resultType="com.yanado.dto.AucJoin">
+		select * from aucJoin where aucId = #{aucId}
+	</select>
 
 </mapper>

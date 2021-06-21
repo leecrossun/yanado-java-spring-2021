@@ -18,9 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.yanado.dao.AlarmDAO;
 import com.yanado.dao.ProductDAO;
 import com.yanado.dto.Alarm;
+import com.yanado.dto.Auc;
+import com.yanado.dto.AucJoin;
 import com.yanado.dto.Common;
 import com.yanado.dto.CommonJoin;
 import com.yanado.dto.Product;
+import com.yanado.service.AucService;
 import com.yanado.service.CommonService;
 
 @Controller
@@ -31,9 +34,12 @@ public class CreateAlarmController {
 
 	@Autowired
 	private CommonService commonService;
-	
+
 	@Autowired
 	private ProductDAO productDao;
+
+	@Autowired
+	private AucService aucService;
 
 	// 알람 생성 폼으로 가기
 	@ModelAttribute("alarm")
@@ -53,6 +59,13 @@ public class CreateAlarmController {
 
 		} else {
 			// 옥션일 때 채우기
+			String aucId = request.getParameter("aucId");
+			Auc auc = aucService.getAuc(aucId);
+			Product product = productDao.getProductByProductId(auc.getProductId()); // 나중에 수정
+
+			alarm.setPrice(auc.getHighestPrice());
+			alarm.setCommonId(null);
+			alarm.setAucId(aucId);
 		}
 
 		return alarm;
@@ -73,22 +86,33 @@ public class CreateAlarmController {
 		}
 
 		if (newalarm.getCommonId() != null) {
-			
+
 			List<CommonJoin> commonJoin = commonService.findAllCommonJoinByCommonId(newalarm.getCommonId());
-			
+
 			newalarm.setUserId(null);
 			alarmDao.insertAlarm(newalarm);
-			
+
 			System.out.println(newalarm.getAlarmId());
-			
+
 			for (CommonJoin j : commonJoin) {
 				newalarm.setUserId(j.getUserId());
 				alarmDao.insertAlarm(newalarm);
 			}
 		} else {
 			// auction
+
+			List<AucJoin> aucJoin = aucService.getAucJoinByAucId(newalarm.getAucId());
+			newalarm.setUserId(null);
+			alarmDao.insertAlarm(newalarm);
+
+			System.out.println(newalarm.getAlarmId());
+
+			for (AucJoin j : aucJoin) {
+				newalarm.setUserId(j.getUserId());
+				alarmDao.insertAlarm(newalarm);
+			}
 		}
-		
+
 		status.setComplete();
 
 		if (newalarm.getCommonId() != null) {
@@ -96,7 +120,8 @@ public class CreateAlarmController {
 			return "redirect:/common/alarm/list";
 		} else {
 			red.addAttribute("aucId", newalarm.getAucId());
-			return "redirect:/auction/alarm/list";
+			return "redirect:/auc/alarm/list";
 		}
+
 	}
 }
