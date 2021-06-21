@@ -34,4 +34,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		set password=#{password}, address=#{address}, phoneNumber=#{phoneNumber}, email=#{email}
 		where userId=#{userId}
 	</update>
+	
 </mapper>
