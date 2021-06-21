@@ -104,7 +104,7 @@
 						}
 						
 						if(flag == 1){
-							p =  [[ ${s.page} ]] + 1;
+							p = Number('[[ ${s.page} ]]') + 1;
 						} 
 						
 						var url = "/common/search?page="+p+"&searchKey="+searchKey;
