@@ -18,6 +18,8 @@ public interface AlarmDAO {
 	Alarm findAlarmByAlarmId(String alarmId);
 	
 	List<Alarm> findAlarmByCommonId(String commonId);
+	
+	List<Alarm> findAlarmByAucId(String aucId);
 
 	List<Alarm> findAlarmByAuctionId(String aucId);
 	
