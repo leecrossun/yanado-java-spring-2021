@@ -30,6 +30,7 @@ public interface AucDAO {
 	Auc getAuc(String aucNo); //경매 물품 생성한 것 번호
 	
 //	void regAuction(Auc auc); // 경매 물품 생성 + createProduct 필요
+
 	
 //	boolean isParticipate(String userId);  // 경매 참여 자격이 있나 검사 - 로그인?  
 	
