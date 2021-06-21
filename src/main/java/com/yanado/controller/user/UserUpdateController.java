@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yanado.dao.UserDAO;
@@ -33,38 +34,33 @@ public class UserUpdateController extends HttpServlet {
 
 	@Autowired
 	private UserDAO userDAO;
-	
-	@ModelAttribute("user")
-	public User formBacking(HttpServletRequest request) {
-		UserSessionUtils uSession = new UserSessionUtils();
-		String userId = uSession.getLoginUserId(request.getSession());
-		User user = userDAO.getUserByUserId(userId);
-		
-		return user;
-	}
-	
-	
-	@RequestMapping(value="/updateInfo", method=RequestMethod.POST)
-	protected void service(HttpServletRequest request, HttpServletResponse response)
+
+	@RequestMapping("/updateInfo")
+	protected ModelAndView service(HttpServletRequest request)
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("utf-8");
 
-		String newPwd = request.getParameter("new_password");
-		String address = request.getParameter("address");
-		String phone = request.getParameter("phoneNumber");
-		String email = request.getParameter("email");
-		
-		System.out.println(newPwd);
-		System.out.println(address);
-		System.out.println(phone);
-		System.out.println(email);
+		/ * String newPwd = request.getParameter("new_password"); String address =
+		 * request.getParameter("address"); String phone =
+		 * request.getParameter("phoneNumber"); String email =
+		 * request.getParameter("email");
+		 */
+		ModelAndView mav = new ModelAndView();
+		UserSessionUtils uSession = new UserSessionUtils();
+		String userId = uSession.getLoginUserId(request.getSession());
+		User user = userDAO.getUserByUserId(userId);
 
-		User user = new User(newPwd, address, phone, email);
 		userDAO.updateUser(user);
+		mav.setViewName("user/mypageUpdate");
+		mav.addObject("user", user);
+		return mav;
 
-		RequestDispatcher disp = request.getRequestDispatcher("/resources/templates/mypage/loginPage.html");
-		disp.forward(request, response);
+		/*
+		 * RequestDispatcher disp =
+		 * request.getRequestDispatcher("/resources/templates/user/mypageUpdate.html");
+		 * disp.forward(request, response);
+		 */
 
 	}
 	
