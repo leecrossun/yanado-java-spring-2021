@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.yanado.dto.Alarm;
 import com.yanado.dto.Auc;
+import com.yanado.dto.AucJoin;
+import com.yanado.dto.CommonJoin;
 import com.yanado.dto.User;
 
 @Mapper
@@ -40,4 +42,6 @@ public interface AucDAO {
 	void changeStatus(String aucNo);
 	
 	void sendAlarm(Alarm alarm);
+	
+	public int cancelAuc(AucJoin aucJoin);
 }
