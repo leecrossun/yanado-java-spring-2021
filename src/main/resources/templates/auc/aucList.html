@@ -58,7 +58,7 @@
 						Search
 					</div>
 					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4" th:if="${session.userId != null}">
-						<a th:href="@{/auc/create}">판매하기</a>
+						<!-- <a th:href="@{/auc/create}">판매하기</a> -->
 					</div>
 				</div>
 				
@@ -265,16 +265,17 @@
 			</div>
 			
 			<!-- Product_list -->
+			<!-- th:classappend="${aucList.product.detailCategory}" -->
 			<div class="row isotope-grid">
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item"
-				th:classappend="${aucList.product.detailCategory}"
+				
 				th:if="${not #lists.isEmpty(aucList) && aucList != null }"
-				th:each="auc, index : ${aucList}">
+				th:each="a, index : ${aucList}">
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="../../static/images/product-01.jpg" alt="IMG-PRODUCT"
-							th:src="@{../{img}(img=${auc.product.image})}">
-							<a th:href="@{/auc/view/detail(aucId=${auc.auc.aucNo})}"
+							th:src="@{../{img}(img=${a.product.image})}">
+							<a th:href="@{/auc/view/detail(aucId=${a.auc.aucId})}"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 								Quick View
 							</a>
@@ -283,12 +284,12 @@
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
 								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"
-								th:text="${auc.product.productName}"
-								th:href="@{/auc/view/detail(aucId=${auc.auc.aucNo})}">
+								th:text="${a.product.productName}"
+								th:href="@{/auc/view/detail(aucId=${a.auc.aucId})}">
 									Esprit Ruffle Shirt
 								</a>
 
-								<span class="stext-105 cl3" th:text="${auc.product.price}">
+								<span class="stext-105 cl3" th:text="${a.product.price}">
 									$16.64
 								</span>
 							</div>
