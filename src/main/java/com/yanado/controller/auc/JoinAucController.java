@@ -25,10 +25,10 @@ public class JoinAucController {
 		  String userId = uSession.getLoginUserId(request.getSession());
 		  AucJoin aucJoin = new AucJoin(aucNo,userId,bidprice);
 		  Auc auc = aucService.findAucByuserId(userId);
-		  auc.setparticipants(auc.getparticipants()+1);
+		  auc.setParticipants(auc.getParticipants()+1);
 		  aucService.joinAuc(aucJoin);
 		  
-		  red.addAttribute("aucNo", auc.getaucNo());
+		  red.addAttribute("aucNo", auc.getAucId());
 		  
 		  return "redirect:/auc/read";
 	}

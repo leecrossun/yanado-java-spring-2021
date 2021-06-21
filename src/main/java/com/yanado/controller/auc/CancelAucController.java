@@ -26,10 +26,10 @@ public class CancelAucController {
 			Auc auc = aucService.findAucByuserId(userId);
 			AucJoin aucJoin = new AucJoin(aucNo,userId,0);
 			
-			auc.setparticipants(auc.getparticipants()-1);
+			auc.setParticipants(auc.getParticipants()-1);
 			aucService.cancelAuc(aucJoin);
 			
-			red.addAttribute("aucNo", auc.getaucNo());
+			red.addAttribute("aucNo", auc.getAucId());
 			
 			return "redirect:/auc/read";
 		}catch (Exception e) {

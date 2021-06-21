@@ -2,10 +2,10 @@ package com.yanado.dto;
 
 import java.sql.Date;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.data.relational.core.mapping.Table;
 
 <<<<<<< HEAD
 =======
