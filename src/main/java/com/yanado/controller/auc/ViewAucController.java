@@ -53,9 +53,6 @@ public class ViewAucController {
 	public ModelAndView viewShoppingDetail( @RequestParam String aucId, HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		
-		UserSessionUtils uSession = new UserSessionUtils();
-		String userId = uSession.getLoginUserId(request.getSession());
-		
 		// 좋아요 기능
 		/*
 		 * if (userId != null) { Favorite favorit = favoriteDAO.findFavorite(new
