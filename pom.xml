@@ -9,6 +9,7 @@
 		<version>2.4.5</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
+	<packaging>war</packaging>
 	<groupId>com</groupId>
 	<artifactId>team</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -93,18 +94,19 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>jstl</artifactId>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
 		</dependency>
 		<!-- To compile JSP files -->
 		<dependency>
-		    <groupId>org.apache.tomcat.embed</groupId>
-		    <artifactId>tomcat-embed-jasper</artifactId>
-		    <scope>provided</scope>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
 	<build>
+	<finalName>${artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -119,12 +121,14 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		
 	</build>
 
 	<profiles>
 		<profile>
 			<id>production</id>
 			<build>
+			<finalName>${artifactId}</finalName>
 				<plugins>
 					<plugin>
 						<groupId>com.vaadin</groupId>
